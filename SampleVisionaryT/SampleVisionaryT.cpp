@@ -108,25 +108,25 @@ bool runStreamingDemo(char* ipAddress, unsigned short port)
   // Stop image acquisition (works always, also when already stopped)
   control.stopAcquisition();
 
-  //-----------------------------------------------
-  // Capture a single image
-  control.stepAcquisition();
-  if (dataStream.getNextFrame())
-  {
-    printf("Frame received through step called, frame #%d, timestamp: %I64u \n", pDataHandler->getFrameNum(), pDataHandler->getTimestampMS());
+  ////-----------------------------------------------
+  //// Capture a single image
+  //control.stepAcquisition();
+  //if (dataStream.getNextFrame())
+  //{
+    //printf("Frame received through step called, frame #%d, timestamp: %I64u \n", pDataHandler->getFrameNum(), pDataHandler->getTimestampMS());
 
-    //-----------------------------------------------
-    // Convert data to a point cloud
-    std::vector<PointXYZ> pointCloud;
-    pDataHandler->generatePointCloud(pointCloud);
+    ////-----------------------------------------------
+    //// Convert data to a point cloud
+    //std::vector<PointXYZ> pointCloud;
+    //pDataHandler->generatePointCloud(pointCloud);
 
-    //-----------------------------------------------
-    // Write point cloud to PLY
-    char* plyFilePath = "VisionaryT.ply";
-    printf("Writing frame to %s\n", plyFilePath);
-    PointCloudPlyWriter::WriteFormatPLY(plyFilePath, pointCloud, pDataHandler->getIntensityMap(), true);
-    printf("Finished writing frame to %s\n", plyFilePath);
-  }
+    ////-----------------------------------------------
+    //// Write point cloud to PLY
+    //char* plyFilePath = "VisionaryT.ply";
+    //printf("Writing frame to %s\n", plyFilePath);
+    //PointCloudPlyWriter::WriteFormatPLY(plyFilePath, pointCloud, pDataHandler->getIntensityMap(), true);
+    //printf("Finished writing frame to %s\n", plyFilePath);
+  //}
 
   //-----------------------------------------------
   // Start image acquisiton and receive continously the pictures
@@ -148,12 +148,12 @@ bool runStreamingDemo(char* ipAddress, unsigned short port)
       printf("X: %g, Y: %g, Z: %g, C: %g \n", it->x, it->y, it->z, it->c);
     }
 
-    // Polar data
-    std::vector<float> scanPoints = pDataHandler->getPolarDistanceData();
-    for (std::vector<float>::iterator it = scanPoints.begin(); it != scanPoints.end(); ++it)
-    {
-        printf("Scan Point: %g \n", *it);
-    }
+    //// Polar data
+    //std::vector<float> scanPoints = pDataHandler->getPolarDistanceData();
+    //for (std::vector<float>::iterator it = scanPoints.begin(); it != scanPoints.end(); ++it)
+    //{
+        //printf("Scan Point: %g \n", *it);
+    //}
 
     std::vector<uint16_t> intensityMap = pDataHandler->getIntensityMap();
   }
