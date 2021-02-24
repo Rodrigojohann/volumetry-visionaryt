@@ -32,6 +32,6 @@ add_subdirectory(VisionaryCommon)
 ## Visionary-S sample ##
 
 ## Visionary-T sample ##
-add_executable(SampleVisionaryT.exe SampleVisionaryT/SampleVisionaryT.cpp)
-target_link_libraries(SampleVisionaryT.exe sick_visionary_common)
+add_executable(SampleVisionaryTrun SampleVisionaryT/SampleVisionaryT.cpp)
+target_link_libraries(SampleVisionaryTrun sick_visionary_common)
 
