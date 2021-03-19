@@ -9,6 +9,8 @@
 /home/rodrigo/Volumetry/volumetry-visionaryt/SampleVisionaryT/SampleVisionaryT.cpp
 stdio.h
 -
+iostream
+-
 boost/shared_ptr.hpp
 -
 boost/make_shared.hpp
