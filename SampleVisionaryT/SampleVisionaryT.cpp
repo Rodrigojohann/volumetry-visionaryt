@@ -24,16 +24,17 @@
 #include "PointCloudPlyWriter.h"
 #include "CoLaBCommandBuilder.h"
 #include "CoLaBCommandReader.h"
+#include <vector>
 
-void calculatevolume(std::vector<PointXYZ> pointcloud)
+void calculatevolume(std::vector<PointXYZ> pointCloud)
 {
- // PointXYZ point = pointcloud.at(1);
- // int value = point[1];
-  //std::cout << "size: " << value << "\n";
-//  for (int i = 0; i < pointcloud.size(); i++) {
-//        std::cout << pointcloud[i][i][i] << ' ';   
-//	}
-
+	//std::cout << 'rows: ' << distanceMap.size << '\n\n';
+	printf("hi! \n\n");
+	//printf("columns: %d \n\n", pointCloud[100]);
+	for(int i=0; i < pointCloud.size(); i++) printf("%d \n", pointCloud[i].z);
+	
+	
+	//for (std::vector<uint16_t>::const_iterator i = distanceMap.begin(); i != distanceMap.end(); ++i) std::cout << *i << ' ';
 }
 
 
@@ -131,22 +132,22 @@ bool runStreamingDemo(char* ipAddress, unsigned short port)
 
     //-----------------------------------------------
     // Convert data to a point cloud
-//    std::vector<PointXYZ> pointCloud;
-//    pDataHandler->generatePointCloud(pointCloud);
-//	calculatevolume(pointCloud);
-    std::vector<PointXYZC> cartesian = pDataHandler->getCartesianData();
-    for (std::vector<PointXYZC>::iterator it = cartesian.begin(); it != cartesian.end(); ++it)
-    {
-      printf("X: %g, Y: %g, Z: %g, C: %g \n", it->x, it->y, it->z, it->c);
-    }
+    std::vector<PointXYZ> pointCloud;
+    pDataHandler->generatePointCloud(pointCloud);
+    
+	calculatevolume(pointCloud);
+
+	char* plyFilePath = "/home/rodrigo/Volumetry/volumetry-visionaryt/testcloud.ply";
+    printf("Writing frame to %s\n", plyFilePath);
+    PointCloudPlyWriter::WriteFormatPLY(plyFilePath, pointCloud, true);
+    printf("Finished writing frame to %s\n", plyFilePath);
 
 
-
-  }
-
+  control.stopAcquisition();
   control.closeConnection();
   dataStream.closeConnection();
   return true;
+  }
 }
 
 

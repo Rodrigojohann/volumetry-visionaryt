@@ -29,6 +29,8 @@ CoLaBCommandBuilder.h
 /home/rodrigo/Volumetry/volumetry-visionaryt/SampleVisionaryT/CoLaBCommandBuilder.h
 CoLaBCommandReader.h
 /home/rodrigo/Volumetry/volumetry-visionaryt/SampleVisionaryT/CoLaBCommandReader.h
+vector
+-
 
 VisionaryCommon/CoLaBCommand.h
 stdint.h

@@ -4,7 +4,7 @@ import numpy as np
 from plyfile import PlyData, PlyElement
 import scipy
 from scipy import spatial
-infile = '/home/rodrigo/Volumetry/volumetry-visionaryt/VisionaryT_test.ply'
+infile = '/home/rodrigo/Volumetry/volumetry-visionaryt/testcloud.ply'
 plydata = PlyData.read(infile)
 elements = plydata.elements[0]
 datalist = list()
@@ -27,8 +27,8 @@ x,y,z = dataarray[:,0], dataarray[:,1], dataarray[:,2] #returns X,Y,Z points ski
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
 
-for i in convexhull.simplices:
-    plt.plot(dataarray[i,0], dataarray[i,1], dataarray[i,2], 'r-')
+#for i in convexhull.simplices:
+#    plt.plot(dataarray[i,0], dataarray[i,1], dataarray[i,2], 'r-')
 
 ax.scatter(x, y, z, c='r', marker='o')
 ax.set_xlabel('X Label')
