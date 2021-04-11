@@ -35,7 +35,7 @@
 	
 	
 	////for (std::vector<uint16_t>::const_iterator i = distanceMap.begin(); i != distanceMap.end(); ++i) std::cout << *i << ' ';
-}
+//}
 
 
 
