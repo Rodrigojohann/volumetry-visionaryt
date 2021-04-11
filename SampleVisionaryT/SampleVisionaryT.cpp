@@ -14,6 +14,7 @@
 //
 
 #include <stdio.h>
+#include <iostream>
 #include <boost/shared_ptr.hpp>
 #include <boost/make_shared.hpp>
 #include "VisionaryTData.h"    // Header specific for the Time of Flight data
@@ -23,6 +24,20 @@
 #include "PointCloudPlyWriter.h"
 #include "CoLaBCommandBuilder.h"
 #include "CoLaBCommandReader.h"
+#include <vector>
+
+//void calculatevolume(std::vector<PointXYZ> pointCloud)
+//{
+	////std::cout << 'rows: ' << distanceMap.size << '\n\n';
+	//printf("hi! \n\n");
+	////printf("columns: %d \n\n", pointCloud[100]);
+	//for(int i=0; i < pointCloud.size(); i++) printf("%d \n", pointCloud[i].z);
+	
+	
+	////for (std::vector<uint16_t>::const_iterator i = distanceMap.begin(); i != distanceMap.end(); ++i) std::cout << *i << ' ';
+}
+
+
 
 bool runStreamingDemo(char* ipAddress, unsigned short port)
 {
@@ -119,49 +134,22 @@ bool runStreamingDemo(char* ipAddress, unsigned short port)
     // Convert data to a point cloud
     std::vector<PointXYZ> pointCloud;
     pDataHandler->generatePointCloud(pointCloud);
+    
+	//calculatevolume(pointCloud);
 
-    //-----------------------------------------------
-    // Write point cloud to PLY
-    char* plyFilePath = "VisionaryT.ply";
+	char* plyFilePath = "/home/rodrigo/Volumetry/volumetry-visionaryt/testcloud.ply";
     printf("Writing frame to %s\n", plyFilePath);
-    PointCloudPlyWriter::WriteFormatPLY(plyFilePath, pointCloud, pDataHandler->getIntensityMap(), true);
+    PointCloudPlyWriter::WriteFormatPLY(plyFilePath, pointCloud, true);
     printf("Finished writing frame to %s\n", plyFilePath);
-  }
 
-  //-----------------------------------------------
-  // Start image acquisiton and receive continously the pictures
-  control.startAcquisition();
-  for (int i = 0; i < 100; i++)
-  {
-    if (!dataStream.getNextFrame())
-    {
-      continue;     // No valid frame received
-    }
-    printf("Frame received in continuous mode, frame #%d \n", pDataHandler->getFrameNum());
 
-    // Get data cartesian/ polar data if available, otherwise pointers are NULL and size is zero. If the camera should send this data, please check the option in SOPAS ET. (Configuration->API data channels)
-    //-----------------------------------------------
-    // Cartesian data, also used for the Detection grid
-    std::vector<PointXYZC> cartesian = pDataHandler->getCartesianData();
-    for (std::vector<PointXYZC>::iterator it = cartesian.begin(); it != cartesian.end(); ++it)
-    {
-      printf("X: %g, Y: %g, Z: %g, C: %g \n", it->x, it->y, it->z, it->c);
-    }
-
-    // Polar data
-    std::vector<float> scanPoints = pDataHandler->getPolarDistanceData();
-    for (std::vector<float>::iterator it = scanPoints.begin(); it != scanPoints.end(); ++it)
-    {
-        printf("Scan Point: %g \n", *it);
-    }
-
-    std::vector<uint16_t> intensityMap = pDataHandler->getIntensityMap();
-  }
-
+  control.stopAcquisition();
   control.closeConnection();
   dataStream.closeConnection();
   return true;
+  }
 }
+
 
 int main()
 {
