@@ -4,7 +4,8 @@ import numpy as np
 from plyfile import PlyData, PlyElement
 import scipy
 from scipy import spatial
-infile = '/home/rodrigo/Volumetry/volumetry-visionaryt/testcloud.ply'
+infile = 'VisionaryT_test.ply'
+#infile = '/home/rodrigo/Volumetry/volumetry-visionaryt/VisionaryT_test.ply'
 plydata = PlyData.read(infile)
 elements = plydata.elements[0]
 datalist = list()

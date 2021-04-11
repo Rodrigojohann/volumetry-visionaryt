@@ -26,15 +26,15 @@
 #include "CoLaBCommandReader.h"
 #include <vector>
 
-void calculatevolume(std::vector<PointXYZ> pointCloud)
-{
-	//std::cout << 'rows: ' << distanceMap.size << '\n\n';
-	printf("hi! \n\n");
-	//printf("columns: %d \n\n", pointCloud[100]);
-	for(int i=0; i < pointCloud.size(); i++) printf("%d \n", pointCloud[i].z);
+//void calculatevolume(std::vector<PointXYZ> pointCloud)
+//{
+	////std::cout << 'rows: ' << distanceMap.size << '\n\n';
+	//printf("hi! \n\n");
+	////printf("columns: %d \n\n", pointCloud[100]);
+	//for(int i=0; i < pointCloud.size(); i++) printf("%d \n", pointCloud[i].z);
 	
 	
-	//for (std::vector<uint16_t>::const_iterator i = distanceMap.begin(); i != distanceMap.end(); ++i) std::cout << *i << ' ';
+	////for (std::vector<uint16_t>::const_iterator i = distanceMap.begin(); i != distanceMap.end(); ++i) std::cout << *i << ' ';
 }
 
 
@@ -135,7 +135,7 @@ bool runStreamingDemo(char* ipAddress, unsigned short port)
     std::vector<PointXYZ> pointCloud;
     pDataHandler->generatePointCloud(pointCloud);
     
-	calculatevolume(pointCloud);
+	//calculatevolume(pointCloud);
 
 	char* plyFilePath = "/home/rodrigo/Volumetry/volumetry-visionaryt/testcloud.ply";
     printf("Writing frame to %s\n", plyFilePath);
