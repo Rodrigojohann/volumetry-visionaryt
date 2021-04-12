@@ -25,6 +25,12 @@
 #include "CoLaBCommandBuilder.h"
 #include "CoLaBCommandReader.h"
 #include <vector>
+#include <pcl/point_types.h>
+#include <pcl/ModelCoefficients.h>
+#include <pcl/sample_consensus/method_types.h>
+#include <pcl/sample_consensus/model_types.h>
+#include <pcl/filters/passthrough.h>
+#include <pcl/surface/convex_hull.h>
 
 //void calculatevolume(std::vector<PointXYZ> pointCloud)
 //{

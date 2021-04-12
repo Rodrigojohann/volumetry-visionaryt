@@ -28,6 +28,26 @@ VisionaryCommon/CMakeFiles/sick_visionary_common.dir/MD5.cpp.o
 VisionaryCommon/CMakeFiles/sick_visionary_common.dir/Network.cpp.o
  /home/rodrigo/Volumetry/volumetry-visionaryt/VisionaryCommon/Network.cpp
  /home/rodrigo/Volumetry/volumetry-visionaryt/VisionaryCommon/Network.h
+ /usr/include/x86_64-linux-gnu/asm/socket.h
+ /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h
+ /usr/include/x86_64-linux-gnu/bits/select.h
+ /usr/include/x86_64-linux-gnu/bits/select2.h
+ /usr/include/x86_64-linux-gnu/bits/sigset.h
+ /usr/include/x86_64-linux-gnu/bits/sockaddr.h
+ /usr/include/x86_64-linux-gnu/bits/socket.h
+ /usr/include/x86_64-linux-gnu/bits/socket2.h
+ /usr/include/x86_64-linux-gnu/bits/socket_type.h
+ /usr/include/x86_64-linux-gnu/bits/time.h
+ /usr/include/x86_64-linux-gnu/bits/timex.h
+ /usr/include/x86_64-linux-gnu/bits/types.h
+ /usr/include/x86_64-linux-gnu/bits/typesizes.h
+ /usr/include/x86_64-linux-gnu/bits/uio.h
+ /usr/include/x86_64-linux-gnu/bits/wordsize.h
+ /usr/include/x86_64-linux-gnu/sys/select.h
+ /usr/include/x86_64-linux-gnu/sys/socket.h
+ /usr/include/x86_64-linux-gnu/sys/sysmacros.h
+ /usr/include/x86_64-linux-gnu/sys/types.h
+ /usr/include/x86_64-linux-gnu/sys/uio.h
 VisionaryCommon/CMakeFiles/sick_visionary_common.dir/PointCloudPlyWriter.cpp.o
  /home/rodrigo/Volumetry/volumetry-visionaryt/VisionaryCommon/PointCloudPlyWriter.cpp
  /home/rodrigo/Volumetry/volumetry-visionaryt/VisionaryCommon/PointCloudPlyWriter.h
@@ -37,6 +57,29 @@ VisionaryCommon/CMakeFiles/sick_visionary_common.dir/VisionaryAutoIPScan.cpp.o
  /home/rodrigo/Volumetry/volumetry-visionaryt/VisionaryCommon/Network.h
  /home/rodrigo/Volumetry/volumetry-visionaryt/VisionaryCommon/VisionaryAutoIPScan.cpp
  /home/rodrigo/Volumetry/volumetry-visionaryt/VisionaryCommon/VisionaryAutoIPScan.h
+ /usr/include/x86_64-linux-gnu/asm/socket.h
+ /usr/include/x86_64-linux-gnu/bits/param.h
+ /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h
+ /usr/include/x86_64-linux-gnu/bits/select.h
+ /usr/include/x86_64-linux-gnu/bits/select2.h
+ /usr/include/x86_64-linux-gnu/bits/sigset.h
+ /usr/include/x86_64-linux-gnu/bits/sockaddr.h
+ /usr/include/x86_64-linux-gnu/bits/socket.h
+ /usr/include/x86_64-linux-gnu/bits/socket2.h
+ /usr/include/x86_64-linux-gnu/bits/socket_type.h
+ /usr/include/x86_64-linux-gnu/bits/time.h
+ /usr/include/x86_64-linux-gnu/bits/timex.h
+ /usr/include/x86_64-linux-gnu/bits/types.h
+ /usr/include/x86_64-linux-gnu/bits/typesizes.h
+ /usr/include/x86_64-linux-gnu/bits/uio.h
+ /usr/include/x86_64-linux-gnu/bits/wordsize.h
+ /usr/include/x86_64-linux-gnu/sys/param.h
+ /usr/include/x86_64-linux-gnu/sys/select.h
+ /usr/include/x86_64-linux-gnu/sys/socket.h
+ /usr/include/x86_64-linux-gnu/sys/sysmacros.h
+ /usr/include/x86_64-linux-gnu/sys/time.h
+ /usr/include/x86_64-linux-gnu/sys/types.h
+ /usr/include/x86_64-linux-gnu/sys/uio.h
  VisionaryCommon/include/boost/align/align.hpp
  VisionaryCommon/include/boost/align/detail/align.hpp
  VisionaryCommon/include/boost/align/detail/align_cxx11.hpp
@@ -918,6 +961,26 @@ VisionaryCommon/CMakeFiles/sick_visionary_common.dir/VisionaryControl.cpp.o
  /home/rodrigo/Volumetry/volumetry-visionaryt/VisionaryCommon/VisionaryControl.cpp
  /home/rodrigo/Volumetry/volumetry-visionaryt/VisionaryCommon/VisionaryControl.h
  /home/rodrigo/Volumetry/volumetry-visionaryt/VisionaryCommon/VisionaryEndian.h
+ /usr/include/x86_64-linux-gnu/asm/socket.h
+ /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h
+ /usr/include/x86_64-linux-gnu/bits/select.h
+ /usr/include/x86_64-linux-gnu/bits/select2.h
+ /usr/include/x86_64-linux-gnu/bits/sigset.h
+ /usr/include/x86_64-linux-gnu/bits/sockaddr.h
+ /usr/include/x86_64-linux-gnu/bits/socket.h
+ /usr/include/x86_64-linux-gnu/bits/socket2.h
+ /usr/include/x86_64-linux-gnu/bits/socket_type.h
+ /usr/include/x86_64-linux-gnu/bits/time.h
+ /usr/include/x86_64-linux-gnu/bits/timex.h
+ /usr/include/x86_64-linux-gnu/bits/types.h
+ /usr/include/x86_64-linux-gnu/bits/typesizes.h
+ /usr/include/x86_64-linux-gnu/bits/uio.h
+ /usr/include/x86_64-linux-gnu/bits/wordsize.h
+ /usr/include/x86_64-linux-gnu/sys/select.h
+ /usr/include/x86_64-linux-gnu/sys/socket.h
+ /usr/include/x86_64-linux-gnu/sys/sysmacros.h
+ /usr/include/x86_64-linux-gnu/sys/types.h
+ /usr/include/x86_64-linux-gnu/sys/uio.h
 VisionaryCommon/CMakeFiles/sick_visionary_common.dir/VisionaryData.cpp.o
  /home/rodrigo/Volumetry/volumetry-visionaryt/VisionaryCommon/PointXYZ.h
  /home/rodrigo/Volumetry/volumetry-visionaryt/VisionaryCommon/VisionaryData.cpp
@@ -929,6 +992,29 @@ VisionaryCommon/CMakeFiles/sick_visionary_common.dir/VisionaryDataStream.cpp.o
  /home/rodrigo/Volumetry/volumetry-visionaryt/VisionaryCommon/VisionaryDataStream.cpp
  /home/rodrigo/Volumetry/volumetry-visionaryt/VisionaryCommon/VisionaryDataStream.h
  /home/rodrigo/Volumetry/volumetry-visionaryt/VisionaryCommon/VisionaryEndian.h
+ /usr/include/x86_64-linux-gnu/asm/socket.h
+ /usr/include/x86_64-linux-gnu/bits/param.h
+ /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h
+ /usr/include/x86_64-linux-gnu/bits/select.h
+ /usr/include/x86_64-linux-gnu/bits/select2.h
+ /usr/include/x86_64-linux-gnu/bits/sigset.h
+ /usr/include/x86_64-linux-gnu/bits/sockaddr.h
+ /usr/include/x86_64-linux-gnu/bits/socket.h
+ /usr/include/x86_64-linux-gnu/bits/socket2.h
+ /usr/include/x86_64-linux-gnu/bits/socket_type.h
+ /usr/include/x86_64-linux-gnu/bits/time.h
+ /usr/include/x86_64-linux-gnu/bits/timex.h
+ /usr/include/x86_64-linux-gnu/bits/types.h
+ /usr/include/x86_64-linux-gnu/bits/typesizes.h
+ /usr/include/x86_64-linux-gnu/bits/uio.h
+ /usr/include/x86_64-linux-gnu/bits/wordsize.h
+ /usr/include/x86_64-linux-gnu/sys/param.h
+ /usr/include/x86_64-linux-gnu/sys/select.h
+ /usr/include/x86_64-linux-gnu/sys/socket.h
+ /usr/include/x86_64-linux-gnu/sys/sysmacros.h
+ /usr/include/x86_64-linux-gnu/sys/time.h
+ /usr/include/x86_64-linux-gnu/sys/types.h
+ /usr/include/x86_64-linux-gnu/sys/uio.h
  VisionaryCommon/include/boost/assert.hpp
  VisionaryCommon/include/boost/checked_delete.hpp
  VisionaryCommon/include/boost/config.hpp
@@ -1215,6 +1301,21 @@ VisionaryCommon/CMakeFiles/sick_visionary_common.dir/VisionaryTData.cpp.o
  /home/rodrigo/Volumetry/volumetry-visionaryt/VisionaryCommon/VisionaryEndian.h
  /home/rodrigo/Volumetry/volumetry-visionaryt/VisionaryCommon/VisionaryTData.cpp
  /home/rodrigo/Volumetry/volumetry-visionaryt/VisionaryCommon/VisionaryTData.h
+ /usr/include/x86_64-linux-gnu/bits/param.h
+ /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h
+ /usr/include/x86_64-linux-gnu/bits/select.h
+ /usr/include/x86_64-linux-gnu/bits/select2.h
+ /usr/include/x86_64-linux-gnu/bits/sigset.h
+ /usr/include/x86_64-linux-gnu/bits/time.h
+ /usr/include/x86_64-linux-gnu/bits/timex.h
+ /usr/include/x86_64-linux-gnu/bits/types.h
+ /usr/include/x86_64-linux-gnu/bits/typesizes.h
+ /usr/include/x86_64-linux-gnu/bits/wordsize.h
+ /usr/include/x86_64-linux-gnu/sys/param.h
+ /usr/include/x86_64-linux-gnu/sys/select.h
+ /usr/include/x86_64-linux-gnu/sys/sysmacros.h
+ /usr/include/x86_64-linux-gnu/sys/time.h
+ /usr/include/x86_64-linux-gnu/sys/types.h
  VisionaryCommon/include/boost/aligned_storage.hpp
  VisionaryCommon/include/boost/any.hpp
  VisionaryCommon/include/boost/archive/archive_exception.hpp

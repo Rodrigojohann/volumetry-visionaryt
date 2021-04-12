@@ -111,17 +111,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named SampleVisionaryTrun
+# Target rules for targets named volumetry-run
 
 # Build rule for target.
-SampleVisionaryTrun: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 SampleVisionaryTrun
-.PHONY : SampleVisionaryTrun
+volumetry-run: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 volumetry-run
+.PHONY : volumetry-run
 
 # fast build rule for target.
-SampleVisionaryTrun/fast:
-	$(MAKE) -f CMakeFiles/SampleVisionaryTrun.dir/build.make CMakeFiles/SampleVisionaryTrun.dir/build
-.PHONY : SampleVisionaryTrun/fast
+volumetry-run/fast:
+	$(MAKE) -f CMakeFiles/volumetry-run.dir/build.make CMakeFiles/volumetry-run.dir/build
+.PHONY : volumetry-run/fast
 
 #=============================================================================
 # Target rules for targets named sick_visionary_common
@@ -142,7 +142,7 @@ SampleVisionaryT/SampleVisionaryT.o: SampleVisionaryT/SampleVisionaryT.cpp.o
 
 # target to build an object file
 SampleVisionaryT/SampleVisionaryT.cpp.o:
-	$(MAKE) -f CMakeFiles/SampleVisionaryTrun.dir/build.make CMakeFiles/SampleVisionaryTrun.dir/SampleVisionaryT/SampleVisionaryT.cpp.o
+	$(MAKE) -f CMakeFiles/volumetry-run.dir/build.make CMakeFiles/volumetry-run.dir/SampleVisionaryT/SampleVisionaryT.cpp.o
 .PHONY : SampleVisionaryT/SampleVisionaryT.cpp.o
 
 SampleVisionaryT/SampleVisionaryT.i: SampleVisionaryT/SampleVisionaryT.cpp.i
@@ -151,7 +151,7 @@ SampleVisionaryT/SampleVisionaryT.i: SampleVisionaryT/SampleVisionaryT.cpp.i
 
 # target to preprocess a source file
 SampleVisionaryT/SampleVisionaryT.cpp.i:
-	$(MAKE) -f CMakeFiles/SampleVisionaryTrun.dir/build.make CMakeFiles/SampleVisionaryTrun.dir/SampleVisionaryT/SampleVisionaryT.cpp.i
+	$(MAKE) -f CMakeFiles/volumetry-run.dir/build.make CMakeFiles/volumetry-run.dir/SampleVisionaryT/SampleVisionaryT.cpp.i
 .PHONY : SampleVisionaryT/SampleVisionaryT.cpp.i
 
 SampleVisionaryT/SampleVisionaryT.s: SampleVisionaryT/SampleVisionaryT.cpp.s
@@ -160,7 +160,7 @@ SampleVisionaryT/SampleVisionaryT.s: SampleVisionaryT/SampleVisionaryT.cpp.s
 
 # target to generate assembly for a file
 SampleVisionaryT/SampleVisionaryT.cpp.s:
-	$(MAKE) -f CMakeFiles/SampleVisionaryTrun.dir/build.make CMakeFiles/SampleVisionaryTrun.dir/SampleVisionaryT/SampleVisionaryT.cpp.s
+	$(MAKE) -f CMakeFiles/volumetry-run.dir/build.make CMakeFiles/volumetry-run.dir/SampleVisionaryT/SampleVisionaryT.cpp.s
 .PHONY : SampleVisionaryT/SampleVisionaryT.cpp.s
 
 # Help Target
@@ -171,7 +171,7 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... SampleVisionaryTrun"
+	@echo "... volumetry-run"
 	@echo "... sick_visionary_common"
 	@echo "... SampleVisionaryT/SampleVisionaryT.o"
 	@echo "... SampleVisionaryT/SampleVisionaryT.i"

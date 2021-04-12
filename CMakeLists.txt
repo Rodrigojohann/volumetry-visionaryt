@@ -13,8 +13,9 @@
 # Version "$Revision: 22992 $"
 #
 
-project(SampleVisionary)
+project(VolumetryVisionaryT)
 cmake_minimum_required(VERSION 2.8)
+find_package(PCL 1.2 REQUIRED)
 
 ### COMPILER FLAGS ###
 if(NOT CMAKE_BUILD_TYPE)
@@ -29,9 +30,13 @@ set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 include_directories(VisionaryCommon VisionaryCommon/include)
 add_subdirectory(VisionaryCommon)
 
+include_directories(${PCL_INCLUDE_DIRS})
+link_directories(${PCL_LIBRARY_DIRS})
+add_definitions(${PCL_DEFINITIONS})
+
 ## Visionary-S sample ##
 
 ## Visionary-T sample ##
-add_executable(SampleVisionaryTrun SampleVisionaryT/SampleVisionaryT.cpp)
-target_link_libraries(SampleVisionaryTrun sick_visionary_common)
+add_executable(volumetry-run SampleVisionaryT/SampleVisionaryT.cpp)
+target_link_libraries(volumetry-run sick_visionary_common ${PCL_LIBRARIES})
 

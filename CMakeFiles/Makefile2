@@ -60,39 +60,39 @@ CMAKE_SOURCE_DIR = /home/rodrigo/Volumetry/volumetry-visionaryt
 CMAKE_BINARY_DIR = /home/rodrigo/Volumetry/volumetry-visionaryt
 
 #=============================================================================
-# Target rules for target CMakeFiles/SampleVisionaryTrun.dir
+# Target rules for target CMakeFiles/volumetry-run.dir
 
 # All Build rule for target.
-CMakeFiles/SampleVisionaryTrun.dir/all: VisionaryCommon/CMakeFiles/sick_visionary_common.dir/all
-	$(MAKE) -f CMakeFiles/SampleVisionaryTrun.dir/build.make CMakeFiles/SampleVisionaryTrun.dir/depend
-	$(MAKE) -f CMakeFiles/SampleVisionaryTrun.dir/build.make CMakeFiles/SampleVisionaryTrun.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/rodrigo/Volumetry/volumetry-visionaryt/CMakeFiles --progress-num=1,2 "Built target SampleVisionaryTrun"
-.PHONY : CMakeFiles/SampleVisionaryTrun.dir/all
+CMakeFiles/volumetry-run.dir/all: VisionaryCommon/CMakeFiles/sick_visionary_common.dir/all
+	$(MAKE) -f CMakeFiles/volumetry-run.dir/build.make CMakeFiles/volumetry-run.dir/depend
+	$(MAKE) -f CMakeFiles/volumetry-run.dir/build.make CMakeFiles/volumetry-run.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/rodrigo/Volumetry/volumetry-visionaryt/CMakeFiles --progress-num=13,14 "Built target volumetry-run"
+.PHONY : CMakeFiles/volumetry-run.dir/all
 
 # Include target in all.
-all: CMakeFiles/SampleVisionaryTrun.dir/all
+all: CMakeFiles/volumetry-run.dir/all
 
 .PHONY : all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/SampleVisionaryTrun.dir/rule: cmake_check_build_system
+CMakeFiles/volumetry-run.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/rodrigo/Volumetry/volumetry-visionaryt/CMakeFiles 14
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/SampleVisionaryTrun.dir/all
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/volumetry-run.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/rodrigo/Volumetry/volumetry-visionaryt/CMakeFiles 0
-.PHONY : CMakeFiles/SampleVisionaryTrun.dir/rule
+.PHONY : CMakeFiles/volumetry-run.dir/rule
 
 # Convenience name for target.
-SampleVisionaryTrun: CMakeFiles/SampleVisionaryTrun.dir/rule
+volumetry-run: CMakeFiles/volumetry-run.dir/rule
 
-.PHONY : SampleVisionaryTrun
-
-# clean rule for target.
-CMakeFiles/SampleVisionaryTrun.dir/clean:
-	$(MAKE) -f CMakeFiles/SampleVisionaryTrun.dir/build.make CMakeFiles/SampleVisionaryTrun.dir/clean
-.PHONY : CMakeFiles/SampleVisionaryTrun.dir/clean
+.PHONY : volumetry-run
 
 # clean rule for target.
-clean: CMakeFiles/SampleVisionaryTrun.dir/clean
+CMakeFiles/volumetry-run.dir/clean:
+	$(MAKE) -f CMakeFiles/volumetry-run.dir/build.make CMakeFiles/volumetry-run.dir/clean
+.PHONY : CMakeFiles/volumetry-run.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/volumetry-run.dir/clean
 
 .PHONY : clean
 
@@ -121,7 +121,7 @@ VisionaryCommon/preinstall:
 VisionaryCommon/CMakeFiles/sick_visionary_common.dir/all:
 	$(MAKE) -f VisionaryCommon/CMakeFiles/sick_visionary_common.dir/build.make VisionaryCommon/CMakeFiles/sick_visionary_common.dir/depend
 	$(MAKE) -f VisionaryCommon/CMakeFiles/sick_visionary_common.dir/build.make VisionaryCommon/CMakeFiles/sick_visionary_common.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/rodrigo/Volumetry/volumetry-visionaryt/CMakeFiles --progress-num=3,4,5,6,7,8,9,10,11,12,13,14 "Built target sick_visionary_common"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/rodrigo/Volumetry/volumetry-visionaryt/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12 "Built target sick_visionary_common"
 .PHONY : VisionaryCommon/CMakeFiles/sick_visionary_common.dir/all
 
 # Include target in all.
