@@ -4,7 +4,7 @@ import numpy as np
 from plyfile import PlyData, PlyElement
 import scipy
 from scipy import spatial
-infile = 'VisionaryT_test.ply'
+infile = 'testcloud_pcl.ply'
 #infile = '/home/rodrigo/Volumetry/volumetry-visionaryt/VisionaryT_test.ply'
 plydata = PlyData.read(infile)
 elements = plydata.elements[0]

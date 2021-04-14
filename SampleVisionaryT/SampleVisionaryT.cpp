@@ -32,6 +32,8 @@
 #include <pcl/filters/passthrough.h>
 #include <pcl/surface/convex_hull.h>
 
+#include <pcl/io/ply_io.h>
+
 void calculatevolume(std::vector<PointXYZ> inputcloud)
 {
 //maybe I have to convert input point cloud into a pcl format
@@ -47,6 +49,7 @@ for(size_t i=0;i<cloud->points.size();++i)
 	cloud->points[i].z = inputcloud[i].z;
 }
 
+//pcl::io::savePLYFileASCII ("testcloud_pcl.ply", *cloud);
 
 size_t original_size = cloud->size();
 printf("original size: %d \n", original_size);
@@ -71,7 +74,7 @@ pcl::PointCloud<pcl::PointXYZ>::Ptr surface_hull(new pcl::PointCloud<pcl::PointX
 chull.reconstruct(*surface_hull, polygons);
 
 double volume= chull.getTotalVolume();
-
+printf("volume: %f \n\n", volume);
 }
 
 
@@ -172,12 +175,12 @@ bool runStreamingDemo(char* ipAddress, unsigned short port)
     std::vector<PointXYZ> pointCloud;
     pDataHandler->generatePointCloud(pointCloud);
     
-	//calculatevolume(pointCloud);
+	calculatevolume(pointCloud);
 
-	char* plyFilePath = "/home/rodrigo/Volumetry/volumetry-visionaryt/testcloud_1.ply";
-    printf("Writing frame to %s\n", plyFilePath);
-    PointCloudPlyWriter::WriteFormatPLY(plyFilePath, pointCloud, true);
-    printf("Finished writing frame to %s\n", plyFilePath);
+	//char* plyFilePath = "/home/rodrigo/Volumetry/volumetry-visionaryt/testcloud_original.ply";
+    //printf("Writing frame to %s\n", plyFilePath);
+    //PointCloudPlyWriter::WriteFormatPLY(plyFilePath, pointCloud, true);
+    //printf("Finished writing frame to %s\n", plyFilePath);
 
 
   control.stopAcquisition();
