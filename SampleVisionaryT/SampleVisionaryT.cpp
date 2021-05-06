@@ -47,23 +47,35 @@ void calculatevolume(std::vector<PointXYZ> inputcloud)
 		cloud->points[i].z = inputcloud[i].z;
 	}
 
-	//pcl::io::savePLYFileASCII ("testcloud_pcl.ply", *cloud);
-
 	size_t original_size = cloud->size();
 	printf("original size: %d \n", original_size);
 
-	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_filtered (new pcl::PointCloud<pcl::PointXYZ>);
+	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_filtered_x (new pcl::PointCloud<pcl::PointXYZ>);
+	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_filtered_y (new pcl::PointCloud<pcl::PointXYZ>);
+	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_filtered_z (new pcl::PointCloud<pcl::PointXYZ>);
 
-	pcl::PassThrough<pcl::PointXYZ> pass;
-	pass.setInputCloud (cloud);
-	pass.setFilterFieldName ("z");
-	pass.setFilterLimits (-5000, 5000);
-	pass.filter (*cloud_filtered);
-	size_t filtered_size = cloud_filtered->size();
+	pcl::PassThrough<pcl::PointXYZ> passx;
+	passx.setInputCloud (cloud);
+	passx.setFilterFieldName ("x");
+	passx.setFilterLimits (-0.250, 0.250);
+	passx.filter (*cloud_filtered_x);
+	
+	pcl::PassThrough<pcl::PointXYZ> passy;
+	passy.setInputCloud (cloud_filtered_x);
+	passy.setFilterFieldName ("y");
+	passy.setFilterLimits (0, 0.819);
+	passy.filter (*cloud_filtered_y);
+	
+	pcl::PassThrough<pcl::PointXYZ> passz;
+	passz.setInputCloud (cloud_filtered_y);
+	passz.setFilterFieldName ("z");
+	passz.setFilterLimits (-0.810, -0.400);
+	passz.filter (*cloud_filtered_z);
+	size_t filtered_size = cloud_filtered_z->size();
 	printf("pointcloud after filtering size: %d \n", filtered_size);
 
 	pcl::ConvexHull<pcl::PointXYZ> chull;
-	chull.setInputCloud(cloud_filtered);
+	chull.setInputCloud(cloud_filtered_z);
 	chull.setDimension(3);
 	chull.setComputeAreaVolume(true);
 
@@ -101,91 +113,40 @@ bool runStreamingDemo(char* ipAddress, unsigned short port)
 	}
 
 	//-----------------------------------------------
-	// Login as authorized client
-	if (control.login(CoLaUserLevel::AUTHORIZED_CLIENT, "CLIENT"))
-	{
-		//-----------------------------------------------
-		// An example of reading an writing device parameters is shown here.
-		// Use the "SOPAS Communication Interface Description" PDF to determine data types for other variables
-
-		//-----------------------------------------------
-		// Set integrationTimeUs parameter to 150000
-		printf("Setting integrationTimeUs to 3800\n");
-		CoLaBCommand setIngrationTimeCommand = CoLaBCommandBuilder(CoLaCommandType::WRITE_VARIABLE, "integrationTimeUs").parameterUDInt(3800).build();
-		CoLaBCommand setIngrationTimeResponse = control.sendCommand(setIngrationTimeCommand);
-
-		//-----------------------------------------------
-		// Read integrationTimeUs parameter
-		CoLaBCommand getIntegrationTimeCommand = CoLaBCommandBuilder(CoLaCommandType::READ_VARIABLE, "integrationTimeUs").build();
-		CoLaBCommand integrationTimeResponse = control.sendCommand(getIntegrationTimeCommand);
-		uint32_t integrationTimeUs = CoLaBCommandReader(integrationTimeResponse).readUDInt();
-		printf("Read integrationTimeUs = %d\n", integrationTimeUs);
-
-		//-----------------------------------------------
-		// Read info messages variable
-		CoLaBCommand getMessagesCommand = CoLaBCommandBuilder(CoLaCommandType::READ_VARIABLE, "MSinfo").build();
-		CoLaBCommand messagesResponse = control.sendCommand(getMessagesCommand);
-
-		//-----------------------------------------------
-		// Read message array, length of array is always 25 items (see PDF).
-		CoLaBCommandReader reader(messagesResponse);
-		for (int i = 0; i < 25; i++)
-		{
-			uint32_t errorId = reader.readUDInt();
-			uint32_t errorState = reader.readUDInt();
-			uint16_t firstTimePwrOnCount = reader.readUInt();
-			uint32_t firstTimeOpSecs = reader.readUDInt();
-			uint32_t firstTimeTimeOccur = reader.readUDInt();
-			uint16_t lastTimePwrOnCount = reader.readUInt();
-			uint32_t lastTimeOpSecs = reader.readUDInt();
-			uint32_t lastTimeTimeOccur = reader.readUDInt();
-			uint16_t numberOccurance = reader.readUInt();
-			uint16_t errReserved = reader.readUInt();
-			std::string extInfo = reader.readFlexString();
-
-			if (errorId != 0)
-			{
-				printf("Info message [0x%032x], extInfo: %s, numberOccurance: %d\n", errorId, extInfo.c_str(), numberOccurance);
-			}
-		}
-	}
-
-	//-----------------------------------------------
-	// Logout from device after reading variables.
-	if (!control.logout())
-	{
-		printf("Failed to logout\n");
-	}
-
-	//-----------------------------------------------
 	// Stop image acquisition (works always, also when already stopped)
 	control.stopAcquisition();
 
 	//-----------------------------------------------
 	// Capture a single image
-	control.stepAcquisition();
-	if (dataStream.getNextFrame())
+	//control.stepAcquisition();
+	control.startAcquisition();
+	for (int i = 0; i < 10; i++)
 	{
-		printf("Frame received through step called, frame #%d, timestamp: %I64u \n", pDataHandler->getFrameNum(), pDataHandler->getTimestampMS());
+		if (dataStream.getNextFrame())
+		{
+			printf("Frame received through step called, frame #%d, timestamp: %I64u \n", pDataHandler->getFrameNum(), pDataHandler->getTimestampMS());
 
-		//-----------------------------------------------
-		// Convert data to a point cloud
-		std::vector<PointXYZ> pointCloud;
-		pDataHandler->generatePointCloud(pointCloud);
+			//-----------------------------------------------
+			// Convert data to a point cloud
+			std::vector<PointXYZ> pointCloud;
+			pDataHandler->generatePointCloud(pointCloud);
 
-		calculatevolume(pointCloud);
-
-		//char* plyFilePath = "/home/rodrigo/Volumetry/volumetry-visionaryt/testcloud_original.ply";
-		//printf("Writing frame to %s\n", plyFilePath);
-		//PointCloudPlyWriter::WriteFormatPLY(plyFilePath, pointCloud, true);
-		//printf("Finished writing frame to %s\n", plyFilePath);
-
-
-		  control.stopAcquisition();
-		  control.closeConnection();
-		  dataStream.closeConnection();
-		  return true;
+			calculatevolume(pointCloud);
+			
+			if (i == 9)
+			{
+				char* plyFilePath = "/home/rodrigo/Volumetry/volumetry-visionaryt/testcloud_original.ply";
+				printf("Writing frame to %s\n", plyFilePath);
+				PointCloudPlyWriter::WriteFormatPLY(plyFilePath, pointCloud, true);
+				printf("Finished writing frame to %s\n", plyFilePath);
+			}
+		}
 	}
+
+	control.stopAcquisition();
+	control.closeConnection();
+	dataStream.closeConnection();
+	return true;
 }
 
 
