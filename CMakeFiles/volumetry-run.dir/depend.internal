@@ -224,7 +224,6 @@ CMakeFiles/volumetry-run.dir/SampleVisionaryT/SampleVisionaryT.cpp.o
  /usr/include/pcl-1.8/pcl/PCLPointField.h
  /usr/include/pcl-1.8/pcl/PointIndices.h
  /usr/include/pcl-1.8/pcl/PolygonMesh.h
- /usr/include/pcl-1.8/pcl/TextureMesh.h
  /usr/include/pcl-1.8/pcl/Vertices.h
  /usr/include/pcl-1.8/pcl/cloud_iterator.h
  /usr/include/pcl-1.8/pcl/common/centroid.h
@@ -260,13 +259,6 @@ CMakeFiles/volumetry-run.dir/SampleVisionaryT/SampleVisionaryT.cpp.o
  /usr/include/pcl-1.8/pcl/impl/cloud_iterator.hpp
  /usr/include/pcl-1.8/pcl/impl/pcl_base.hpp
  /usr/include/pcl-1.8/pcl/impl/point_types.hpp
- /usr/include/pcl-1.8/pcl/io/boost.h
- /usr/include/pcl-1.8/pcl/io/file_io.h
- /usr/include/pcl-1.8/pcl/io/ply/byte_order.h
- /usr/include/pcl-1.8/pcl/io/ply/io_operators.h
- /usr/include/pcl-1.8/pcl/io/ply/ply.h
- /usr/include/pcl-1.8/pcl/io/ply/ply_parser.h
- /usr/include/pcl-1.8/pcl/io/ply_io.h
  /usr/include/pcl-1.8/pcl/kdtree/flann.h
  /usr/include/pcl-1.8/pcl/kdtree/impl/kdtree_flann.hpp
  /usr/include/pcl-1.8/pcl/kdtree/kdtree.h
@@ -329,8 +321,6 @@ CMakeFiles/volumetry-run.dir/SampleVisionaryT/SampleVisionaryT.cpp.o
  /usr/include/x86_64-linux-gnu/sys/types.h
  /usr/include/x86_64-linux-gnu/sys/uio.h
  VisionaryCommon/CoLaBCommand.h
- VisionaryCommon/CoLaBCommandBuilder.h
- VisionaryCommon/CoLaBCommandReader.h
  VisionaryCommon/CoLaCommandType.h
  VisionaryCommon/CoLaError.h
  VisionaryCommon/CoLaUserLevel.h
@@ -467,8 +457,6 @@ CMakeFiles/volumetry-run.dir/SampleVisionaryT/SampleVisionaryT.cpp.o
  VisionaryCommon/include/boost/move/utility_core.hpp
  VisionaryCommon/include/boost/mpl/O1_size.hpp
  VisionaryCommon/include/boost/mpl/O1_size_fwd.hpp
- VisionaryCommon/include/boost/mpl/advance.hpp
- VisionaryCommon/include/boost/mpl/advance_fwd.hpp
  VisionaryCommon/include/boost/mpl/always.hpp
  VisionaryCommon/include/boost/mpl/and.hpp
  VisionaryCommon/include/boost/mpl/apply.hpp
@@ -479,15 +467,11 @@ CMakeFiles/volumetry-run.dir/SampleVisionaryT/SampleVisionaryT.cpp.o
  VisionaryCommon/include/boost/mpl/assert.hpp
  VisionaryCommon/include/boost/mpl/aux_/O1_size_impl.hpp
  VisionaryCommon/include/boost/mpl/aux_/adl_barrier.hpp
- VisionaryCommon/include/boost/mpl/aux_/advance_backward.hpp
- VisionaryCommon/include/boost/mpl/aux_/advance_forward.hpp
  VisionaryCommon/include/boost/mpl/aux_/arg_typedef.hpp
  VisionaryCommon/include/boost/mpl/aux_/arity.hpp
  VisionaryCommon/include/boost/mpl/aux_/arity_spec.hpp
  VisionaryCommon/include/boost/mpl/aux_/begin_end_impl.hpp
- VisionaryCommon/include/boost/mpl/aux_/clear_impl.hpp
  VisionaryCommon/include/boost/mpl/aux_/common_name_wknd.hpp
- VisionaryCommon/include/boost/mpl/aux_/comparison_op.hpp
  VisionaryCommon/include/boost/mpl/aux_/config/adl.hpp
  VisionaryCommon/include/boost/mpl/aux_/config/arrays.hpp
  VisionaryCommon/include/boost/mpl/aux_/config/bcc.hpp
@@ -528,7 +512,6 @@ CMakeFiles/volumetry-run.dir/SampleVisionaryT/SampleVisionaryT.cpp.o
  VisionaryCommon/include/boost/mpl/aux_/has_tag.hpp
  VisionaryCommon/include/boost/mpl/aux_/has_type.hpp
  VisionaryCommon/include/boost/mpl/aux_/include_preprocessed.hpp
- VisionaryCommon/include/boost/mpl/aux_/inserter_algorithm.hpp
  VisionaryCommon/include/boost/mpl/aux_/integral_wrapper.hpp
  VisionaryCommon/include/boost/mpl/aux_/is_msvc_eti_arg.hpp
  VisionaryCommon/include/boost/mpl/aux_/iter_apply.hpp
@@ -550,8 +533,6 @@ CMakeFiles/volumetry-run.dir/SampleVisionaryT/SampleVisionaryT.cpp.o
  VisionaryCommon/include/boost/mpl/aux_/na_spec.hpp
  VisionaryCommon/include/boost/mpl/aux_/nested_type_wknd.hpp
  VisionaryCommon/include/boost/mpl/aux_/nttp_decl.hpp
- VisionaryCommon/include/boost/mpl/aux_/numeric_cast_utils.hpp
- VisionaryCommon/include/boost/mpl/aux_/numeric_op.hpp
  VisionaryCommon/include/boost/mpl/aux_/preprocessor/add.hpp
  VisionaryCommon/include/boost/mpl/aux_/preprocessor/def_params_tail.hpp
  VisionaryCommon/include/boost/mpl/aux_/preprocessor/default_params.hpp
@@ -564,10 +545,6 @@ CMakeFiles/volumetry-run.dir/SampleVisionaryT/SampleVisionaryT.cpp.o
  VisionaryCommon/include/boost/mpl/aux_/preprocessor/repeat.hpp
  VisionaryCommon/include/boost/mpl/aux_/preprocessor/sub.hpp
  VisionaryCommon/include/boost/mpl/aux_/preprocessor/tuple.hpp
- VisionaryCommon/include/boost/mpl/aux_/push_back_impl.hpp
- VisionaryCommon/include/boost/mpl/aux_/push_front_impl.hpp
- VisionaryCommon/include/boost/mpl/aux_/reverse_fold_impl.hpp
- VisionaryCommon/include/boost/mpl/aux_/reverse_fold_impl_body.hpp
  VisionaryCommon/include/boost/mpl/aux_/sequence_wrapper.hpp
  VisionaryCommon/include/boost/mpl/aux_/size_impl.hpp
  VisionaryCommon/include/boost/mpl/aux_/static_cast.hpp
@@ -577,15 +554,12 @@ CMakeFiles/volumetry-run.dir/SampleVisionaryT/SampleVisionaryT.cpp.o
  VisionaryCommon/include/boost/mpl/aux_/type_wrapper.hpp
  VisionaryCommon/include/boost/mpl/aux_/value_wknd.hpp
  VisionaryCommon/include/boost/mpl/aux_/yes_no.hpp
- VisionaryCommon/include/boost/mpl/back_inserter.hpp
  VisionaryCommon/include/boost/mpl/begin_end.hpp
  VisionaryCommon/include/boost/mpl/begin_end_fwd.hpp
  VisionaryCommon/include/boost/mpl/bind.hpp
  VisionaryCommon/include/boost/mpl/bind_fwd.hpp
  VisionaryCommon/include/boost/mpl/bool.hpp
  VisionaryCommon/include/boost/mpl/bool_fwd.hpp
- VisionaryCommon/include/boost/mpl/clear.hpp
- VisionaryCommon/include/boost/mpl/clear_fwd.hpp
  VisionaryCommon/include/boost/mpl/contains.hpp
  VisionaryCommon/include/boost/mpl/contains_fwd.hpp
  VisionaryCommon/include/boost/mpl/deref.hpp
@@ -595,57 +569,39 @@ CMakeFiles/volumetry-run.dir/SampleVisionaryT/SampleVisionaryT.cpp.o
  VisionaryCommon/include/boost/mpl/find.hpp
  VisionaryCommon/include/boost/mpl/find_if.hpp
  VisionaryCommon/include/boost/mpl/fold.hpp
- VisionaryCommon/include/boost/mpl/front_inserter.hpp
  VisionaryCommon/include/boost/mpl/has_xxx.hpp
  VisionaryCommon/include/boost/mpl/identity.hpp
  VisionaryCommon/include/boost/mpl/if.hpp
- VisionaryCommon/include/boost/mpl/inserter.hpp
  VisionaryCommon/include/boost/mpl/int.hpp
  VisionaryCommon/include/boost/mpl/int_fwd.hpp
- VisionaryCommon/include/boost/mpl/integral_c.hpp
- VisionaryCommon/include/boost/mpl/integral_c_fwd.hpp
  VisionaryCommon/include/boost/mpl/integral_c_tag.hpp
  VisionaryCommon/include/boost/mpl/is_placeholder.hpp
  VisionaryCommon/include/boost/mpl/is_sequence.hpp
  VisionaryCommon/include/boost/mpl/iter_fold.hpp
  VisionaryCommon/include/boost/mpl/iter_fold_if.hpp
- VisionaryCommon/include/boost/mpl/iterator_category.hpp
  VisionaryCommon/include/boost/mpl/iterator_range.hpp
- VisionaryCommon/include/boost/mpl/iterator_tags.hpp
  VisionaryCommon/include/boost/mpl/lambda.hpp
  VisionaryCommon/include/boost/mpl/lambda_fwd.hpp
- VisionaryCommon/include/boost/mpl/less.hpp
  VisionaryCommon/include/boost/mpl/limits/arity.hpp
  VisionaryCommon/include/boost/mpl/limits/unrolling.hpp
  VisionaryCommon/include/boost/mpl/limits/vector.hpp
  VisionaryCommon/include/boost/mpl/logical.hpp
  VisionaryCommon/include/boost/mpl/long.hpp
  VisionaryCommon/include/boost/mpl/long_fwd.hpp
- VisionaryCommon/include/boost/mpl/min_max.hpp
- VisionaryCommon/include/boost/mpl/negate.hpp
  VisionaryCommon/include/boost/mpl/next.hpp
  VisionaryCommon/include/boost/mpl/next_prior.hpp
  VisionaryCommon/include/boost/mpl/not.hpp
- VisionaryCommon/include/boost/mpl/numeric_cast.hpp
  VisionaryCommon/include/boost/mpl/or.hpp
  VisionaryCommon/include/boost/mpl/pair.hpp
- VisionaryCommon/include/boost/mpl/pair_view.hpp
  VisionaryCommon/include/boost/mpl/placeholders.hpp
- VisionaryCommon/include/boost/mpl/prior.hpp
  VisionaryCommon/include/boost/mpl/protect.hpp
- VisionaryCommon/include/boost/mpl/push_back.hpp
- VisionaryCommon/include/boost/mpl/push_back_fwd.hpp
- VisionaryCommon/include/boost/mpl/push_front.hpp
- VisionaryCommon/include/boost/mpl/push_front_fwd.hpp
  VisionaryCommon/include/boost/mpl/quote.hpp
- VisionaryCommon/include/boost/mpl/reverse_fold.hpp
  VisionaryCommon/include/boost/mpl/same_as.hpp
  VisionaryCommon/include/boost/mpl/sequence_tag.hpp
  VisionaryCommon/include/boost/mpl/sequence_tag_fwd.hpp
  VisionaryCommon/include/boost/mpl/size.hpp
  VisionaryCommon/include/boost/mpl/size_fwd.hpp
  VisionaryCommon/include/boost/mpl/tag.hpp
- VisionaryCommon/include/boost/mpl/transform.hpp
  VisionaryCommon/include/boost/mpl/vector.hpp
  VisionaryCommon/include/boost/mpl/void.hpp
  VisionaryCommon/include/boost/mpl/void_fwd.hpp
@@ -959,11 +915,8 @@ CMakeFiles/volumetry-run.dir/SampleVisionaryT/SampleVisionaryT.cpp.o
  VisionaryCommon/include/boost/smart_ptr/shared_ptr.hpp
  VisionaryCommon/include/boost/static_assert.hpp
  VisionaryCommon/include/boost/throw_exception.hpp
- VisionaryCommon/include/boost/tuple/detail/tuple_basic.hpp
- VisionaryCommon/include/boost/tuple/tuple.hpp
  VisionaryCommon/include/boost/type.hpp
  VisionaryCommon/include/boost/type_traits/add_const.hpp
- VisionaryCommon/include/boost/type_traits/add_cv.hpp
  VisionaryCommon/include/boost/type_traits/add_lvalue_reference.hpp
  VisionaryCommon/include/boost/type_traits/add_pointer.hpp
  VisionaryCommon/include/boost/type_traits/add_reference.hpp
@@ -972,7 +925,6 @@ CMakeFiles/volumetry-run.dir/SampleVisionaryT/SampleVisionaryT.cpp.o
  VisionaryCommon/include/boost/type_traits/aligned_storage.hpp
  VisionaryCommon/include/boost/type_traits/alignment_of.hpp
  VisionaryCommon/include/boost/type_traits/conditional.hpp
- VisionaryCommon/include/boost/type_traits/cv_traits.hpp
  VisionaryCommon/include/boost/type_traits/decay.hpp
  VisionaryCommon/include/boost/type_traits/declval.hpp
  VisionaryCommon/include/boost/type_traits/detail/config.hpp
@@ -982,7 +934,6 @@ CMakeFiles/volumetry-run.dir/SampleVisionaryT/SampleVisionaryT.cpp.o
  VisionaryCommon/include/boost/type_traits/detail/is_mem_fun_pointer_impl.hpp
  VisionaryCommon/include/boost/type_traits/detail/is_mem_fun_pointer_tester.hpp
  VisionaryCommon/include/boost/type_traits/detail/yes_no_type.hpp
- VisionaryCommon/include/boost/type_traits/function_traits.hpp
  VisionaryCommon/include/boost/type_traits/has_minus.hpp
  VisionaryCommon/include/boost/type_traits/has_minus_assign.hpp
  VisionaryCommon/include/boost/type_traits/has_nothrow_assign.hpp
@@ -1042,11 +993,9 @@ CMakeFiles/volumetry-run.dir/SampleVisionaryT/SampleVisionaryT.cpp.o
  VisionaryCommon/include/boost/type_traits/remove_extent.hpp
  VisionaryCommon/include/boost/type_traits/remove_pointer.hpp
  VisionaryCommon/include/boost/type_traits/remove_reference.hpp
- VisionaryCommon/include/boost/type_traits/remove_volatile.hpp
  VisionaryCommon/include/boost/type_traits/type_with_alignment.hpp
  VisionaryCommon/include/boost/utility/addressof.hpp
  VisionaryCommon/include/boost/utility/compare_pointees.hpp
  VisionaryCommon/include/boost/utility/enable_if.hpp
- VisionaryCommon/include/boost/utility/swap.hpp
  VisionaryCommon/include/boost/version.hpp
  VisionaryCommon/include/boost/visit_each.hpp
