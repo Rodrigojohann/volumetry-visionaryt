@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <boost/shared_ptr.hpp>
 #include <boost/make_shared.hpp>
-#include "VisionaryTData.h"    // Header specific for the Time of Flight data
+#include "VisionaryTData.h"
 #include "VisionaryDataStream.h"
 #include "VisionaryControl.h"
 #include "PointXYZ.h"
@@ -10,8 +10,8 @@
 #include <pcl/ModelCoefficients.h>
 #include <pcl/sample_consensus/method_types.h>
 #include <pcl/sample_consensus/model_types.h>
-#include <pcl/filters/passthrough.h>
 #include <pcl/surface/convex_hull.h>
+#include <pcl/filters/passthrough.h>
 
 void calculatevolume(std::vector<PointXYZ> inputcloud)
 {
@@ -35,7 +35,7 @@ void calculatevolume(std::vector<PointXYZ> inputcloud)
 	passx.setFilterFieldName ("x");
 	passx.setFilterLimits (-5000, 5000);
 	passx.filter (*cloud_filtered);
-	
+
 	pcl::ConvexHull<pcl::PointXYZ> chull;
 	chull.setInputCloud(cloud_filtered);
 	chull.setDimension(3);
@@ -100,7 +100,6 @@ bool runStreamingDemo(char* ipAddress, unsigned short port)
 	control.stopAcquisition();
 	control.closeConnection();
 	dataStream.closeConnection();
-	return true;
 }
 
 int main()
