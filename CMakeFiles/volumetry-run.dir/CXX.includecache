@@ -23,6 +23,8 @@ PointXYZ.h
 /home/rodrigo/Volumetry/volumetry-visionaryt/SampleVisionaryT/PointXYZ.h
 PointCloudPlyWriter.h
 /home/rodrigo/Volumetry/volumetry-visionaryt/SampleVisionaryT/PointCloudPlyWriter.h
+VisionaryAutoIPScan.h
+/home/rodrigo/Volumetry/volumetry-visionaryt/SampleVisionaryT/VisionaryAutoIPScan.h
 pcl/point_types.h
 -
 pcl/ModelCoefficients.h
@@ -31,9 +33,9 @@ pcl/sample_consensus/method_types.h
 -
 pcl/sample_consensus/model_types.h
 -
-pcl/filters/passthrough.h
--
 pcl/surface/convex_hull.h
+-
+pcl/filters/passthrough.h
 -
 
 /usr/include/eigen3/Eigen/Cholesky
@@ -2179,6 +2181,14 @@ PointXYZ.h
 VisionaryCommon/PointXYZ.h
 
 VisionaryCommon/PointXYZ.h
+
+VisionaryCommon/VisionaryAutoIPScan.h
+cstring
+-
+string
+-
+Network.h
+VisionaryCommon/Network.h
 
 VisionaryCommon/VisionaryControl.h
 cstring

@@ -326,6 +326,7 @@ CMakeFiles/volumetry-run.dir/SampleVisionaryT/SampleVisionaryT.cpp.o: VisionaryC
 CMakeFiles/volumetry-run.dir/SampleVisionaryT/SampleVisionaryT.cpp.o: VisionaryCommon/Network.h
 CMakeFiles/volumetry-run.dir/SampleVisionaryT/SampleVisionaryT.cpp.o: VisionaryCommon/PointCloudPlyWriter.h
 CMakeFiles/volumetry-run.dir/SampleVisionaryT/SampleVisionaryT.cpp.o: VisionaryCommon/PointXYZ.h
+CMakeFiles/volumetry-run.dir/SampleVisionaryT/SampleVisionaryT.cpp.o: VisionaryCommon/VisionaryAutoIPScan.h
 CMakeFiles/volumetry-run.dir/SampleVisionaryT/SampleVisionaryT.cpp.o: VisionaryCommon/VisionaryControl.h
 CMakeFiles/volumetry-run.dir/SampleVisionaryT/SampleVisionaryT.cpp.o: VisionaryCommon/VisionaryData.h
 CMakeFiles/volumetry-run.dir/SampleVisionaryT/SampleVisionaryT.cpp.o: VisionaryCommon/VisionaryDataStream.h

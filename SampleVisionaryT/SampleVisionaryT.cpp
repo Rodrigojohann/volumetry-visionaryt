@@ -6,6 +6,7 @@
 #include "VisionaryControl.h"
 #include "PointXYZ.h"
 #include "PointCloudPlyWriter.h"
+#include "VisionaryAutoIPScan.h"
 #include <pcl/point_types.h>
 #include <pcl/ModelCoefficients.h>
 #include <pcl/sample_consensus/method_types.h>
@@ -24,6 +25,7 @@ double volume;
 double volumecm;
 std::vector<PointXYZ> pointCloud;
 boost::shared_ptr<VisionaryTData> pDataHandler;
+
 
 void calculatevolume(std::vector<PointXYZ> inputcloud)
 {
@@ -98,9 +100,16 @@ bool runStreamingDemo(char* ipAddress, unsigned short port)
 
 int main()
 {
-	// Insert IP of your camera and the API port
-	/// Default values:
-	/// IP:        "192.168.1.10"
-	/// API-port:  2114
+	//unsigned int timeout = 5000;
+	//VisionaryAutoIPScan ipScan;
+	//std::vector<VisionaryAutoIPScan::DeviceInfo> deviceList = ipScan.doScan(timeout);
+	//for(auto it : deviceList)
+	//{
+		//printf("DT: %s \n", it.DeviceName.c_str());
+		//printf("MAC Address: %s \n", it.MacAddress.c_str());
+		//printf("IP Address: %s \n", it.IpAddress.c_str());
+		//printf("Subnet: %s \n", it.SubNet.c_str());
+		//printf("Port %s \n", it.Port.c_str());
+	//}
 	runStreamingDemo((char*)"192.168.15.40", 2114);
 }
