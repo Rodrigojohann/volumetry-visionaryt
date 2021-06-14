@@ -71,8 +71,6 @@ void calculatevolume(std::vector<PointXYZ> inputcloud)
 		{
 			viewer->spinOnce(100);
 		}
-
-	return (0);
 }
 
 bool runStreamingDemo(char* ipAddress, unsigned short port)
