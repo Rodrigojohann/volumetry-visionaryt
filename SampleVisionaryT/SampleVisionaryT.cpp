@@ -79,8 +79,8 @@ bool runStreamingDemo(char* ipAddress, unsigned short port)
 	}
 	control.stopAcquisition();
 	control.startAcquisition();
-	while (true)
-	{
+//	while (true)
+//	{
 		if (dataStream.getNextFrame())
 		{
 			// Convert data to a point cloud
@@ -88,28 +88,18 @@ bool runStreamingDemo(char* ipAddress, unsigned short port)
 			// Calculate volume
 			calculatevolume(pointCloud);
 		}
-		if (getchar() == 'q')
-		{
-			break;
-		}	
-	}
+//		if (getchar() == 'q')/
+//		{
+//			break;
+//		}	
+//	}
 	control.stopAcquisition();
 	control.closeConnection();
 	dataStream.closeConnection();
 }
 
+
 int main()
 {
-	//unsigned int timeout = 5000;
-	//VisionaryAutoIPScan ipScan;
-	//std::vector<VisionaryAutoIPScan::DeviceInfo> deviceList = ipScan.doScan(timeout);
-	//for(auto it : deviceList)
-	//{
-		//printf("DT: %s \n", it.DeviceName.c_str());
-		//printf("MAC Address: %s \n", it.MacAddress.c_str());
-		//printf("IP Address: %s \n", it.IpAddress.c_str());
-		//printf("Subnet: %s \n", it.SubNet.c_str());
-		//printf("Port %s \n", it.Port.c_str());
-	//}
 	runStreamingDemo((char*)"192.168.15.40", 2114);
 }

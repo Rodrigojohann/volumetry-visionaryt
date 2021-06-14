@@ -1,6 +1,0 @@
-/home/rodrigo/Volumetry/volumetry-visionaryt/CMakeFiles/rebuild_cache.dir
-/home/rodrigo/Volumetry/volumetry-visionaryt/CMakeFiles/edit_cache.dir
-/home/rodrigo/Volumetry/volumetry-visionaryt/CMakeFiles/volumetry-run.dir
-/home/rodrigo/Volumetry/volumetry-visionaryt/VisionaryCommon/CMakeFiles/rebuild_cache.dir
-/home/rodrigo/Volumetry/volumetry-visionaryt/VisionaryCommon/CMakeFiles/edit_cache.dir
-/home/rodrigo/Volumetry/volumetry-visionaryt/VisionaryCommon/CMakeFiles/sick_visionary_common.dir

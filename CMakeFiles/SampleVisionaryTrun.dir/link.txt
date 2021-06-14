@@ -1,1 +1,0 @@
-/usr/bin/c++   -O3   CMakeFiles/SampleVisionaryTrun.dir/SampleVisionaryT/SampleVisionaryT.cpp.o  -o SampleVisionaryTrun -rdynamic VisionaryCommon/libsick_visionary_common.a 
