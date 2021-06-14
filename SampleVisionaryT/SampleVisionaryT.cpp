@@ -13,11 +13,14 @@
 #include <pcl/sample_consensus/model_types.h>
 #include <pcl/surface/convex_hull.h>
 #include <pcl/filters/passthrough.h>
+#include <pcl/visualization/pcl_visualizer.h>
 
 pcl::PointCloud<pcl::PointXYZ>::Ptr cloud (new pcl::PointCloud<pcl::PointXYZ>);
 pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_filtered (new pcl::PointCloud<pcl::PointXYZ>);
 size_t original_size;
 pcl::PassThrough<pcl::PointXYZ> passx;
+pcl::PassThrough<pcl::PointXYZ> passy;
+pcl::PassThrough<pcl::PointXYZ> passz;
 pcl::ConvexHull<pcl::PointXYZ> chull;
 std::vector<pcl::Vertices> polygons;
 pcl::PointCloud<pcl::PointXYZ>::Ptr surface_hull(new pcl::PointCloud<pcl::PointXYZ>);
@@ -45,16 +48,31 @@ void calculatevolume(std::vector<PointXYZ> inputcloud)
 	passx.setFilterFieldName ("x");
 	passx.setFilterLimits (-5000, 5000);
 	passx.filter (*cloud_filtered);
+	
+	passy.setInputCloud (cloud_filtered);
+	passy.setFilterFieldName ("y");
+	passy.setFilterLimits (-5000, 5000);
+	passy.filter (*cloud_filtered);
+	
+	passz.setInputCloud (cloud_filtered);
+	passz.setFilterFieldName ("z");
+	passz.setFilterLimits (-5000, 5000);
+	passz.filter (*cloud_filtered);
+	
 
-	chull.setInputCloud(cloud_filtered);
-	chull.setDimension(3);
-	chull.setComputeAreaVolume(true);
-	chull.reconstruct(*surface_hull, polygons);
+	// ---------------------- Visualizer -------------------------------------------
+	boost::shared_ptr<pcl::visualization::PCLVisualizer> viewer(new pcl::visualization::PCLVisualizer);
+	viewer->setBackgroundColor(255, 255, 255);
 
-	volume = chull.getTotalVolume();
-	volumecm = volume*1000000;
-	printf("volume: %f m³\n\n", volume);
-	printf("volume: %f cm³\n\n", volumecm);
+	pcl::visualization::PointCloudColorHandlerCustom<pcl::PointXYZ> color_handler(cloud, 255, 255, 0);
+	viewer->addPointCloud(cloud_filtered, color_handler, "sample cloud");
+	viewer->setPointCloudRenderingProperties(pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 6, "sample cloud");
+	while (!viewer->wasStopped())
+		{
+			viewer->spinOnce(100);
+		}
+
+	return (0);
 }
 
 bool runStreamingDemo(char* ipAddress, unsigned short port)
@@ -79,20 +97,14 @@ bool runStreamingDemo(char* ipAddress, unsigned short port)
 	}
 	control.stopAcquisition();
 	control.startAcquisition();
-//	while (true)
-//	{
-		if (dataStream.getNextFrame())
+
+	if (dataStream.getNextFrame())
 		{
 			// Convert data to a point cloud
 			pDataHandler->generatePointCloud(pointCloud);
 			// Calculate volume
 			calculatevolume(pointCloud);
 		}
-//		if (getchar() == 'q')/
-//		{
-//			break;
-//		}	
-//	}
 	control.stopAcquisition();
 	control.closeConnection();
 	dataStream.closeConnection();
