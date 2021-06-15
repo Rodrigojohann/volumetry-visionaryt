@@ -18,6 +18,8 @@ pcl::PointCloud<pcl::PointXYZ>::Ptr cloud (new pcl::PointCloud<pcl::PointXYZ>);
 pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_filtered (new pcl::PointCloud<pcl::PointXYZ>);
 size_t original_size;
 pcl::PassThrough<pcl::PointXYZ> passx;
+pcl::PassThrough<pcl::PointXYZ> passy;
+pcl::PassThrough<pcl::PointXYZ> passz;
 pcl::ConvexHull<pcl::PointXYZ> chull;
 std::vector<pcl::Vertices> polygons;
 pcl::PointCloud<pcl::PointXYZ>::Ptr surface_hull(new pcl::PointCloud<pcl::PointXYZ>);
@@ -43,8 +45,18 @@ void calculatevolume(std::vector<PointXYZ> inputcloud)
 
 	passx.setInputCloud (cloud);
 	passx.setFilterFieldName ("x");
-	passx.setFilterLimits (-5000, 5000);
+	passx.setFilterLimits (-0.24, 0.2);
 	passx.filter (*cloud_filtered);
+	
+	passy.setInputCloud (cloud_filtered);
+	passy.setFilterFieldName ("y");
+	passy.setFilterLimits (-0.220, 0.220);
+	passy.filter (*cloud_filtered);
+	
+	passz.setInputCloud (cloud_filtered);
+	passz.setFilterFieldName ("z");
+	passz.setFilterLimits (-5000, 0.80);
+	passz.filter (*cloud_filtered);
 
 	chull.setInputCloud(cloud_filtered);
 	chull.setDimension(3);
