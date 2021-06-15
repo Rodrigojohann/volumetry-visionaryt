@@ -1,4 +1,8 @@
 #include <stdio.h>
+#include <stdbool.h>
+#include <string.h>
+#include <termio.h>
+#include <unistd.h>
 #include <boost/shared_ptr.hpp>
 #include <boost/make_shared.hpp>
 #include "VisionaryTData.h"
@@ -14,6 +18,7 @@
 #include <pcl/surface/convex_hull.h>
 #include <pcl/filters/passthrough.h>
 
+
 pcl::PointCloud<pcl::PointXYZ>::Ptr cloud (new pcl::PointCloud<pcl::PointXYZ>);
 pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_filtered (new pcl::PointCloud<pcl::PointXYZ>);
 size_t original_size;
@@ -28,6 +33,20 @@ double volumecm;
 std::vector<PointXYZ> pointCloud;
 boost::shared_ptr<VisionaryTData> pDataHandler;
 
+bool kbhit(void)
+{
+    struct termios original;
+    tcgetattr(STDIN_FILENO, &original);
+    struct termios term;
+    memcpy(&term, &original, sizeof(term));
+    term.c_lflag &= ~ICANON;
+    tcsetattr(STDIN_FILENO, TCSANOW, &term);
+    int characters_buffered = 0;
+    ioctl(STDIN_FILENO, FIONREAD, &characters_buffered);
+    tcsetattr(STDIN_FILENO, TCSANOW, &original);
+    bool pressed = (characters_buffered != 0);
+    return pressed;
+}
 
 void calculatevolume(std::vector<PointXYZ> inputcloud)
 {
@@ -55,7 +74,7 @@ void calculatevolume(std::vector<PointXYZ> inputcloud)
 	
 	passz.setInputCloud (cloud_filtered);
 	passz.setFilterFieldName ("z");
-	passz.setFilterLimits (-5000, 0.80);
+	passz.setFilterLimits (0, 0.80);
 	passz.filter (*cloud_filtered);
 
 	chull.setInputCloud(cloud_filtered);
@@ -91,8 +110,9 @@ bool runStreamingDemo(char* ipAddress, unsigned short port)
 	}
 	control.stopAcquisition();
 	control.startAcquisition();
-//	while (true)
-//	{
+	
+	while (!kbhit())
+	{
 		if (dataStream.getNextFrame())
 		{
 			// Convert data to a point cloud
@@ -100,11 +120,7 @@ bool runStreamingDemo(char* ipAddress, unsigned short port)
 			// Calculate volume
 			calculatevolume(pointCloud);
 		}
-//		if (getchar() == 'q')/
-//		{
-//			break;
-//		}	
-//	}
+	}
 	control.stopAcquisition();
 	control.closeConnection();
 	dataStream.closeConnection();
