@@ -46,25 +46,25 @@ void calculatevolume(std::vector<PointXYZ> inputcloud)
 
 	passx.setInputCloud (cloud);
 	passx.setFilterFieldName ("x");
-	passx.setFilterLimits (-5000, 5000);
+	passx.setFilterLimits (-0.24, 0.2);
 	passx.filter (*cloud_filtered);
 	
 	passy.setInputCloud (cloud_filtered);
 	passy.setFilterFieldName ("y");
-	passy.setFilterLimits (-5000, 5000);
+	passy.setFilterLimits (-0.220, 0.220);
 	passy.filter (*cloud_filtered);
 	
 	passz.setInputCloud (cloud_filtered);
 	passz.setFilterFieldName ("z");
-	passz.setFilterLimits (-5000, 5000);
+	passz.setFilterLimits (-5000, 0.80);
 	passz.filter (*cloud_filtered);
 	
 
 	// ---------------------- Visualizer -------------------------------------------
 	boost::shared_ptr<pcl::visualization::PCLVisualizer> viewer(new pcl::visualization::PCLVisualizer);
-	viewer->setBackgroundColor(255, 255, 255);
+	viewer->setBackgroundColor(0, 0, 0);
 
-	pcl::visualization::PointCloudColorHandlerCustom<pcl::PointXYZ> color_handler(cloud, 255, 255, 0);
+	pcl::visualization::PointCloudColorHandlerCustom<pcl::PointXYZ> color_handler(cloud, 255, 0, 0);
 	viewer->addPointCloud(cloud_filtered, color_handler, "sample cloud");
 	viewer->setPointCloudRenderingProperties(pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 6, "sample cloud");
 	while (!viewer->wasStopped())
