@@ -14,6 +14,7 @@
 #include <pcl/surface/convex_hull.h>
 #include <pcl/filters/passthrough.h>
 #include <pcl/visualization/pcl_visualizer.h>
+#include <pcl/filters/statistical_outlier_removal.h>
 
 pcl::PointCloud<pcl::PointXYZ>::Ptr cloud (new pcl::PointCloud<pcl::PointXYZ>);
 pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_filtered (new pcl::PointCloud<pcl::PointXYZ>);
@@ -28,6 +29,7 @@ double volume;
 double volumecm;
 std::vector<PointXYZ> pointCloud;
 boost::shared_ptr<VisionaryTData> pDataHandler;
+pcl::StatisticalOutlierRemoval<pcl::PointXYZ> sor;
 
 
 void calculatevolume(std::vector<PointXYZ> inputcloud)
@@ -56,8 +58,13 @@ void calculatevolume(std::vector<PointXYZ> inputcloud)
 	
 	passz.setInputCloud (cloud_filtered);
 	passz.setFilterFieldName ("z");
-	passz.setFilterLimits (-5000, 0.80);
+	passz.setFilterLimits (-5000, 0.78);
 	passz.filter (*cloud_filtered);
+	
+	sor.setInputCloud (cloud_filtered);
+	sor.setMeanK (3);
+	sor.setStddevMulThresh (3.0);
+	sor.filter (*cloud_filtered);
 	
 
 	// ---------------------- Visualizer -------------------------------------------
