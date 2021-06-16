@@ -1,19 +1,5 @@
-#
-# Copyright note: Redistribution and use in source, with or without modification, are permitted.
-# 
-# Created: November 2016
-# 
-# @author:	Andreas Richert
-# SICK AG, Waldkirch
-# email: TechSupport0905@sick.de
-# 
-# Last commit: $Date: 2019-07-05 07:55:11 +0200 (Fr, 05 Jul 2019) $
-# Last editor: $Author: peichto $
-# 
-# Version "$Revision: 22992 $"
-#
 
-project(VolumetryVisionaryT)
+project(VolumeVisionaryT)
 cmake_minimum_required(VERSION 2.8)
 find_package(PCL 1.2 REQUIRED)
 
@@ -37,6 +23,6 @@ add_definitions(${PCL_DEFINITIONS})
 ## Visionary-S sample ##
 
 ## Visionary-T sample ##
-add_executable(volumetry-run SampleVisionaryT/SampleVisionaryT.cpp)
-target_link_libraries(volumetry-run sick_visionary_common ${PCL_LIBRARIES})
+add_executable(volume-visionaryt volume-visionaryt.cpp)
+target_link_libraries(volume-visionaryt sick_visionary_common ${PCL_LIBRARIES})
 

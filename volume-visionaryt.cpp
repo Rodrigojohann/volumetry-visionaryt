@@ -30,8 +30,10 @@ std::vector<pcl::Vertices> polygons;
 pcl::PointCloud<pcl::PointXYZ>::Ptr surface_hull(new pcl::PointCloud<pcl::PointXYZ>);
 double volume;
 double volumecm;
+double volumemean;
 std::vector<PointXYZ> pointCloud;
 boost::shared_ptr<VisionaryTData> pDataHandler;
+int i;
 
 bool kbhit(void)
 {
@@ -48,7 +50,7 @@ bool kbhit(void)
     return pressed;
 }
 
-void calculatevolume(std::vector<PointXYZ> inputcloud)
+double calculatevolume(std::vector<PointXYZ> inputcloud)
 {
 	cloud->points.resize (inputcloud.size());
 
@@ -60,7 +62,7 @@ void calculatevolume(std::vector<PointXYZ> inputcloud)
 	}
 
 	original_size = cloud->size();
-	printf("original size: %d \n", original_size);
+	//printf("original size: %d \n", original_size);
 
 	passx.setInputCloud (cloud);
 	passx.setFilterFieldName ("x");
@@ -83,12 +85,13 @@ void calculatevolume(std::vector<PointXYZ> inputcloud)
 	chull.reconstruct(*surface_hull, polygons);
 
 	volume = chull.getTotalVolume();
-	volumecm = volume*1000000;
-	printf("volume: %f m³\n\n", volume);
-	printf("volume: %f cm³\n\n", volumecm);
+	//volumecm = volume*1000000;
+	//printf("volume: %f m³\n\n", volume);
+	//printf("volume: %f cm³\n\n", volumecm);
+	return volume;
 }
 
-bool runStreamingDemo(char* ipAddress, unsigned short port)
+void runStreamingDemo(char* ipAddress, unsigned short port)
 {
 	// Generate Visionary instance
 	pDataHandler = boost::make_shared<VisionaryTData>();
@@ -99,26 +102,35 @@ bool runStreamingDemo(char* ipAddress, unsigned short port)
 	if (!dataStream.openConnection())
 	{
 		printf("Failed to open data stream connection to device.\n");
-		return false;   // connection failed
 	}
 	//-----------------------------------------------
 	// Connect to devices control channel
 	if (!control.openConnection())
 	{
 		printf("Failed to open control connection to device.\n");
-		return false;   // connection failed
 	}
 	control.stopAcquisition();
 	control.startAcquisition();
 	
+	volumemean = 0.0;
 	while (!kbhit())
 	{
+		i = i+1; 
 		if (dataStream.getNextFrame())
 		{
 			// Convert data to a point cloud
 			pDataHandler->generatePointCloud(pointCloud);
 			// Calculate volume
-			calculatevolume(pointCloud);
+			volumemean = volumemean + calculatevolume(pointCloud);
+		}
+
+		if (i==9)
+		{
+			i = 0;
+			volumemean = volumemean/10;
+			printf("volume: %f m³\n\n", volumemean);
+			printf("volume: %f cm³\n\n", volumemean*1000000);
+			volumemean = 0.0;			
 		}
 	}
 	control.stopAcquisition();
