@@ -34,20 +34,23 @@ double volumemean;
 std::vector<PointXYZ> pointCloud;
 boost::shared_ptr<VisionaryTData> pDataHandler;
 int counter;
+int characters_buffered;
+bool pressed;
+struct termios original;
+struct termios term;
 
+///////////////////////////////////////////////////////
 
 bool kbhit(void)
 {
-    struct termios original;
     tcgetattr(STDIN_FILENO, &original);
-    struct termios term;
     memcpy(&term, &original, sizeof(term));
     term.c_lflag &= ~ICANON;
     tcsetattr(STDIN_FILENO, TCSANOW, &term);
-    int characters_buffered = 0;
+    characters_buffered = 0;
     ioctl(STDIN_FILENO, FIONREAD, &characters_buffered);
     tcsetattr(STDIN_FILENO, TCSANOW, &original);
-    bool pressed = (characters_buffered != 0);
+    pressed = (characters_buffered != 0);
     return pressed;
 }
 
