@@ -37,6 +37,6 @@ add_definitions(${PCL_DEFINITIONS})
 ## Visionary-S sample ##
 
 ## Visionary-T sample ##
-add_executable(volumetry-run SampleVisionaryT/SampleVisionaryT.cpp)
-target_link_libraries(volumetry-run sick_visionary_common ${PCL_LIBRARIES})
+add_executable(volume-visionaryt volume-visionaryt.cpp)
+target_link_libraries(volume-visionaryt sick_visionary_common ${PCL_LIBRARIES})
 
