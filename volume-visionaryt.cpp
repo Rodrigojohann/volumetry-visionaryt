@@ -145,5 +145,5 @@ void runStreamingDemo(char* ipAddress, unsigned short port)
 
 int main()
 {
-	runStreamingDemo((char*)"192.168.15.40", 2114);
+	runStreamingDemo((char*)"192.168.140.8", 2114);
 }
