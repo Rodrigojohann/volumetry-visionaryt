@@ -48,23 +48,23 @@ void calculatevolume(std::vector<PointXYZ> inputcloud)
 
 	passx.setInputCloud (cloud);
 	passx.setFilterFieldName ("x");
-	passx.setFilterLimits (-0.24, 0.2);
+	passx.setFilterLimits (-0.54, 0.50);
 	passx.filter (*cloud_filtered);
 	
 	passy.setInputCloud (cloud_filtered);
 	passy.setFilterFieldName ("y");
-	passy.setFilterLimits (-0.220, 0.220);
+	passy.setFilterLimits (-0.200, 0.200);
 	passy.filter (*cloud_filtered);
 	
 	passz.setInputCloud (cloud_filtered);
 	passz.setFilterFieldName ("z");
-	passz.setFilterLimits (-5000, 0.78);
+	passz.setFilterLimits (-5000, 1.2);
 	passz.filter (*cloud_filtered);
 	
-	sor.setInputCloud (cloud_filtered);
-	sor.setMeanK (3);
-	sor.setStddevMulThresh (3.0);
-	sor.filter (*cloud_filtered);
+//	sor.setInputCloud (cloud_filtered);
+//	sor.setMeanK (3);
+//	sor.setStddevMulThresh (3.0);
+//	sor.filter (*cloud_filtered);
 	
 
 	// ---------------------- Visualizer -------------------------------------------
@@ -118,5 +118,5 @@ bool runStreamingDemo(char* ipAddress, unsigned short port)
 
 int main()
 {
-	runStreamingDemo((char*)"192.168.15.40", 2114);
+	runStreamingDemo((char*)"192.168.140.8", 2114);
 }
