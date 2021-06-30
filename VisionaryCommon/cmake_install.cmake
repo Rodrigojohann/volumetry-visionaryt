@@ -1,4 +1,4 @@
-# Install script for directory: /home/rodrigo/Volumetry/volumetry-visionaryt/VisionaryCommon
+# Install script for directory: /home/cubagem/volumetry-visionaryt/VisionaryCommon
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

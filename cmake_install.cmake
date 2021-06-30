@@ -1,4 +1,4 @@
-# Install script for directory: /home/rodrigo/Volumetry/volumetry-visionaryt
+# Install script for directory: /home/cubagem/volumetry-visionaryt
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -34,7 +34,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/rodrigo/Volumetry/volumetry-visionaryt/VisionaryCommon/cmake_install.cmake")
+  include("/home/cubagem/volumetry-visionaryt/VisionaryCommon/cmake_install.cmake")
 
 endif()
 
@@ -46,5 +46,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/rodrigo/Volumetry/volumetry-visionaryt/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/cubagem/volumetry-visionaryt/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

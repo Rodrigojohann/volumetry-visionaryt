@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/rodrigo/Volumetry/volumetry-visionaryt
+CMAKE_SOURCE_DIR = /home/cubagem/volumetry-visionaryt
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/rodrigo/Volumetry/volumetry-visionaryt
+CMAKE_BINARY_DIR = /home/cubagem/volumetry-visionaryt
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/rodrigo/Volumetry/volumetry-visionaryt/CMakeFiles /home/rodrigo/Volumetry/volumetry-visionaryt/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/cubagem/volumetry-visionaryt/CMakeFiles /home/cubagem/volumetry-visionaryt/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/rodrigo/Volumetry/volumetry-visionaryt/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/cubagem/volumetry-visionaryt/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -111,17 +111,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named volumetry-run
+# Target rules for targets named volume-visionaryt
 
 # Build rule for target.
-volumetry-run: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 volumetry-run
-.PHONY : volumetry-run
+volume-visionaryt: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 volume-visionaryt
+.PHONY : volume-visionaryt
 
 # fast build rule for target.
-volumetry-run/fast:
-	$(MAKE) -f CMakeFiles/volumetry-run.dir/build.make CMakeFiles/volumetry-run.dir/build
-.PHONY : volumetry-run/fast
+volume-visionaryt/fast:
+	$(MAKE) -f CMakeFiles/volume-visionaryt.dir/build.make CMakeFiles/volume-visionaryt.dir/build
+.PHONY : volume-visionaryt/fast
 
 #=============================================================================
 # Target rules for targets named sick_visionary_common
@@ -136,32 +136,32 @@ sick_visionary_common/fast:
 	$(MAKE) -f VisionaryCommon/CMakeFiles/sick_visionary_common.dir/build.make VisionaryCommon/CMakeFiles/sick_visionary_common.dir/build
 .PHONY : sick_visionary_common/fast
 
-SampleVisionaryT/SampleVisionaryT.o: SampleVisionaryT/SampleVisionaryT.cpp.o
+volume-visionaryt.o: volume-visionaryt.cpp.o
 
-.PHONY : SampleVisionaryT/SampleVisionaryT.o
+.PHONY : volume-visionaryt.o
 
 # target to build an object file
-SampleVisionaryT/SampleVisionaryT.cpp.o:
-	$(MAKE) -f CMakeFiles/volumetry-run.dir/build.make CMakeFiles/volumetry-run.dir/SampleVisionaryT/SampleVisionaryT.cpp.o
-.PHONY : SampleVisionaryT/SampleVisionaryT.cpp.o
+volume-visionaryt.cpp.o:
+	$(MAKE) -f CMakeFiles/volume-visionaryt.dir/build.make CMakeFiles/volume-visionaryt.dir/volume-visionaryt.cpp.o
+.PHONY : volume-visionaryt.cpp.o
 
-SampleVisionaryT/SampleVisionaryT.i: SampleVisionaryT/SampleVisionaryT.cpp.i
+volume-visionaryt.i: volume-visionaryt.cpp.i
 
-.PHONY : SampleVisionaryT/SampleVisionaryT.i
+.PHONY : volume-visionaryt.i
 
 # target to preprocess a source file
-SampleVisionaryT/SampleVisionaryT.cpp.i:
-	$(MAKE) -f CMakeFiles/volumetry-run.dir/build.make CMakeFiles/volumetry-run.dir/SampleVisionaryT/SampleVisionaryT.cpp.i
-.PHONY : SampleVisionaryT/SampleVisionaryT.cpp.i
+volume-visionaryt.cpp.i:
+	$(MAKE) -f CMakeFiles/volume-visionaryt.dir/build.make CMakeFiles/volume-visionaryt.dir/volume-visionaryt.cpp.i
+.PHONY : volume-visionaryt.cpp.i
 
-SampleVisionaryT/SampleVisionaryT.s: SampleVisionaryT/SampleVisionaryT.cpp.s
+volume-visionaryt.s: volume-visionaryt.cpp.s
 
-.PHONY : SampleVisionaryT/SampleVisionaryT.s
+.PHONY : volume-visionaryt.s
 
 # target to generate assembly for a file
-SampleVisionaryT/SampleVisionaryT.cpp.s:
-	$(MAKE) -f CMakeFiles/volumetry-run.dir/build.make CMakeFiles/volumetry-run.dir/SampleVisionaryT/SampleVisionaryT.cpp.s
-.PHONY : SampleVisionaryT/SampleVisionaryT.cpp.s
+volume-visionaryt.cpp.s:
+	$(MAKE) -f CMakeFiles/volume-visionaryt.dir/build.make CMakeFiles/volume-visionaryt.dir/volume-visionaryt.cpp.s
+.PHONY : volume-visionaryt.cpp.s
 
 # Help Target
 help:
@@ -171,11 +171,11 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... volumetry-run"
+	@echo "... volume-visionaryt"
 	@echo "... sick_visionary_common"
-	@echo "... SampleVisionaryT/SampleVisionaryT.o"
-	@echo "... SampleVisionaryT/SampleVisionaryT.i"
-	@echo "... SampleVisionaryT/SampleVisionaryT.s"
+	@echo "... volume-visionaryt.o"
+	@echo "... volume-visionaryt.i"
+	@echo "... volume-visionaryt.s"
 .PHONY : help
 
 
