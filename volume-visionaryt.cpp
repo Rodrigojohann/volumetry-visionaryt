@@ -38,6 +38,7 @@ int characters_buffered;
 bool pressed;
 struct termios original;
 struct termios term;
+size_t cloud_size;
 
 ///////////////////////////////////////////////////////
 
@@ -85,12 +86,21 @@ double calculatevolume(std::vector<PointXYZ> inputcloud)
 	sor.setStddevMulThresh (3.5);
 	sor.filter (*cloud_filtered);
 
+	cloud_size = cloud_filtered->size();
+	
+	if (cloud_size > 10)
+	{
 	chull.setInputCloud(cloud_filtered);
 	chull.setDimension(3);
 	chull.setComputeAreaVolume(true);
 	chull.reconstruct(*surface_hull, polygons);
 
 	volume = chull.getTotalVolume();
+	}
+	else
+	{
+	volume = 0.0;
+	}
 	return volume;
 }
 
