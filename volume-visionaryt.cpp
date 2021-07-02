@@ -48,17 +48,17 @@ void calculatevolume(std::vector<PointXYZ> inputcloud)
 
 	passx.setInputCloud (cloud);
 	passx.setFilterFieldName ("x");
-	passx.setFilterLimits (-0.54, 0.50);
+	passx.setFilterLimits (-0.230, 0.25);
 	passx.filter (*cloud_filtered);
 	
 	passy.setInputCloud (cloud_filtered);
 	passy.setFilterFieldName ("y");
-	passy.setFilterLimits (-0.200, 0.200);
+	passy.setFilterLimits (-0.15, 0.28);
 	passy.filter (*cloud_filtered);
 	
 	passz.setInputCloud (cloud_filtered);
 	passz.setFilterFieldName ("z");
-	passz.setFilterLimits (-5000, 1.2);
+	passz.setFilterLimits (-5000, 0.76);
 	passz.filter (*cloud_filtered);
 	
 //	sor.setInputCloud (cloud_filtered);
