@@ -110,6 +110,9 @@ double calculatevolume(std::vector<PointXYZ> inputcloud)
 	else
 	{
 	volume = 0.0;
+	dimensionX = 0.0;
+	dimensionY = 0.0;
+	dimensionZ = 0.0;
 	}
 	return volume;
 }
