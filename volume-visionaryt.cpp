@@ -18,7 +18,7 @@
 #include <pcl/surface/convex_hull.h>
 #include <pcl/filters/passthrough.h>
 #include <pcl/filters/statistical_outlier_removal.h>
-
+#include <pcl/common/common.h>
 
 pcl::PointCloud<pcl::PointXYZ>::Ptr cloud (new pcl::PointCloud<pcl::PointXYZ>);
 pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_filtered (new pcl::PointCloud<pcl::PointXYZ>);
@@ -28,6 +28,7 @@ pcl::PassThrough<pcl::PointXYZ> passz;
 pcl::ConvexHull<pcl::PointXYZ> chull;
 pcl::PointCloud<pcl::PointXYZ>::Ptr surface_hull(new pcl::PointCloud<pcl::PointXYZ>);
 pcl::StatisticalOutlierRemoval<pcl::PointXYZ> sor;
+pcl::PointXYZ minPt, maxPt;
 std::vector<pcl::Vertices> polygons;
 double volume;
 double volumemean;
@@ -39,6 +40,9 @@ bool pressed;
 struct termios original;
 struct termios term;
 size_t cloud_size;
+double dimensionX;
+double dimensionY;
+double dimensionZ;
 
 ///////////////////////////////////////////////////////
 
@@ -94,8 +98,14 @@ double calculatevolume(std::vector<PointXYZ> inputcloud)
 	chull.setDimension(3);
 	chull.setComputeAreaVolume(true);
 	chull.reconstruct(*surface_hull, polygons);
-
+	
 	volume = chull.getTotalVolume();
+
+	pcl::getMinMax3D (*surface_hull, minPt, maxPt);
+	dimensionX = maxPt.x - minPt.x;
+	dimensionY = maxPt.y - minPt.y;
+	dimensionZ = maxPt.z - minPt.z;
+	
 	}
 	else
 	{
@@ -144,6 +154,11 @@ void runStreamingDemo(char* ipAddress, unsigned short port)
 			printf("---------------------\n\n");
 			printf("volume: %f m³\n\n", volumemean);
 			printf("volume: %f cm³\n\n", volumemean*1000000);
+			
+			printf("dimensions:\n");
+			printf("%f cm (x)\n", dimensionX*100);
+			printf("%f cm (y)\n", dimensionY*100);
+			printf("%f cm (z)\n\n", dimensionZ*100);
 			volumemean = 0.0;			
 		}
 	}

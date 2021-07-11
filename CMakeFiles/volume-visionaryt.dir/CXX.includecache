@@ -47,6 +47,8 @@ pcl/filters/passthrough.h
 -
 pcl/filters/statistical_outlier_removal.h
 -
+pcl/common/common.h
+-
 
 /usr/include/eigen3/Eigen/Cholesky
 Core
