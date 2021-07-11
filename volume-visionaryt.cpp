@@ -78,7 +78,7 @@ double calculatevolume(std::vector<PointXYZ> inputcloud)
 	
 	passz.setInputCloud (cloud_filtered);
 	passz.setFilterFieldName ("z");
-	passz.setFilterLimits (0, 0.76);
+	passz.setFilterLimits (0, 0.758);
 	passz.filter (*cloud_filtered);
 	
 	sor.setInputCloud (cloud_filtered);
