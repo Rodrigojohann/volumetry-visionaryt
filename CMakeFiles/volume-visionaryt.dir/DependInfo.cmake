@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/cubagem/volumetry-visionaryt/volume-visionaryt.cpp" "/home/cubagem/volumetry-visionaryt/CMakeFiles/volume-visionaryt.dir/volume-visionaryt.cpp.o"
+  "/home/volumetry-visionaryt/volume-visionaryt.cpp" "/home/volumetry-visionaryt/CMakeFiles/volume-visionaryt.dir/volume-visionaryt.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -67,7 +67,7 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "/home/cubagem/volumetry-visionaryt/VisionaryCommon/CMakeFiles/sick_visionary_common.dir/DependInfo.cmake"
+  "/home/volumetry-visionaryt/VisionaryCommon/CMakeFiles/sick_visionary_common.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

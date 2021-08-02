@@ -6,15 +6,15 @@
 
 #IncludeRegexTransform: 
 
-/home/cubagem/volumetry-visionaryt/VisionaryCommon/CoLaBCommand.cpp
+/home/volumetry-visionaryt/VisionaryCommon/CoLaBCommand.cpp
 CoLaBCommand.h
-/home/cubagem/volumetry-visionaryt/VisionaryCommon/CoLaBCommand.h
+/home/volumetry-visionaryt/VisionaryCommon/CoLaBCommand.h
 string
 -
 VisionaryEndian.h
-/home/cubagem/volumetry-visionaryt/VisionaryCommon/VisionaryEndian.h
+/home/volumetry-visionaryt/VisionaryCommon/VisionaryEndian.h
 
-/home/cubagem/volumetry-visionaryt/VisionaryCommon/CoLaBCommand.h
+/home/volumetry-visionaryt/VisionaryCommon/CoLaBCommand.h
 stdint.h
 -
 string
@@ -22,63 +22,63 @@ string
 vector
 -
 CoLaError.h
-/home/cubagem/volumetry-visionaryt/VisionaryCommon/CoLaError.h
+/home/volumetry-visionaryt/VisionaryCommon/CoLaError.h
 CoLaCommandType.h
-/home/cubagem/volumetry-visionaryt/VisionaryCommon/CoLaCommandType.h
+/home/volumetry-visionaryt/VisionaryCommon/CoLaCommandType.h
 
-/home/cubagem/volumetry-visionaryt/VisionaryCommon/CoLaBCommandBuilder.cpp
+/home/volumetry-visionaryt/VisionaryCommon/CoLaBCommandBuilder.cpp
 CoLaBCommandBuilder.h
-/home/cubagem/volumetry-visionaryt/VisionaryCommon/CoLaBCommandBuilder.h
+/home/volumetry-visionaryt/VisionaryCommon/CoLaBCommandBuilder.h
 MD5.h
-/home/cubagem/volumetry-visionaryt/VisionaryCommon/MD5.h
+/home/volumetry-visionaryt/VisionaryCommon/MD5.h
 VisionaryEndian.h
-/home/cubagem/volumetry-visionaryt/VisionaryCommon/VisionaryEndian.h
+/home/volumetry-visionaryt/VisionaryCommon/VisionaryEndian.h
 
-/home/cubagem/volumetry-visionaryt/VisionaryCommon/CoLaBCommandBuilder.h
+/home/volumetry-visionaryt/VisionaryCommon/CoLaBCommandBuilder.h
 vector
 -
 stdint.h
 -
 CoLaCommandType.h
-/home/cubagem/volumetry-visionaryt/VisionaryCommon/CoLaCommandType.h
+/home/volumetry-visionaryt/VisionaryCommon/CoLaCommandType.h
 CoLaBCommand.h
-/home/cubagem/volumetry-visionaryt/VisionaryCommon/CoLaBCommand.h
+/home/volumetry-visionaryt/VisionaryCommon/CoLaBCommand.h
 
-/home/cubagem/volumetry-visionaryt/VisionaryCommon/CoLaBCommandReader.cpp
+/home/volumetry-visionaryt/VisionaryCommon/CoLaBCommandReader.cpp
 CoLaBCommandReader.h
-/home/cubagem/volumetry-visionaryt/VisionaryCommon/CoLaBCommandReader.h
+/home/volumetry-visionaryt/VisionaryCommon/CoLaBCommandReader.h
 VisionaryEndian.h
-/home/cubagem/volumetry-visionaryt/VisionaryCommon/VisionaryEndian.h
+/home/volumetry-visionaryt/VisionaryCommon/VisionaryEndian.h
 
-/home/cubagem/volumetry-visionaryt/VisionaryCommon/CoLaBCommandReader.h
+/home/volumetry-visionaryt/VisionaryCommon/CoLaBCommandReader.h
 stdint.h
 -
 string
 -
 CoLaBCommand.h
-/home/cubagem/volumetry-visionaryt/VisionaryCommon/CoLaBCommand.h
+/home/volumetry-visionaryt/VisionaryCommon/CoLaBCommand.h
 
-/home/cubagem/volumetry-visionaryt/VisionaryCommon/CoLaCommandType.h
+/home/volumetry-visionaryt/VisionaryCommon/CoLaCommandType.h
 
-/home/cubagem/volumetry-visionaryt/VisionaryCommon/CoLaError.h
+/home/volumetry-visionaryt/VisionaryCommon/CoLaError.h
 
-/home/cubagem/volumetry-visionaryt/VisionaryCommon/CoLaUserLevel.h
+/home/volumetry-visionaryt/VisionaryCommon/CoLaUserLevel.h
 stdint.h
 -
 
-/home/cubagem/volumetry-visionaryt/VisionaryCommon/MD5.cpp
+/home/volumetry-visionaryt/VisionaryCommon/MD5.cpp
 MD5.h
-/home/cubagem/volumetry-visionaryt/VisionaryCommon/MD5.h
+/home/volumetry-visionaryt/VisionaryCommon/MD5.h
 cstdio
 -
 
-/home/cubagem/volumetry-visionaryt/VisionaryCommon/MD5.h
+/home/volumetry-visionaryt/VisionaryCommon/MD5.h
 cstring
 -
 iostream
 -
 
-/home/cubagem/volumetry-visionaryt/VisionaryCommon/Network.cpp
+/home/volumetry-visionaryt/VisionaryCommon/Network.cpp
 errno.h
 -
 stdio.h
@@ -86,9 +86,9 @@ stdio.h
 string.h
 -
 Network.h
-/home/cubagem/volumetry-visionaryt/VisionaryCommon/Network.h
+/home/volumetry-visionaryt/VisionaryCommon/Network.h
 
-/home/cubagem/volumetry-visionaryt/VisionaryCommon/Network.h
+/home/volumetry-visionaryt/VisionaryCommon/Network.h
 stdint.h
 -
 vector
@@ -108,17 +108,17 @@ arpa/inet.h
 unistd.h
 -
 
-/home/cubagem/volumetry-visionaryt/VisionaryCommon/PointCloudPlyWriter.cpp
+/home/volumetry-visionaryt/VisionaryCommon/PointCloudPlyWriter.cpp
 PointCloudPlyWriter.h
-/home/cubagem/volumetry-visionaryt/VisionaryCommon/PointCloudPlyWriter.h
+/home/volumetry-visionaryt/VisionaryCommon/PointCloudPlyWriter.h
 iostream
 -
 fstream
 -
 VisionaryEndian.h
-/home/cubagem/volumetry-visionaryt/VisionaryCommon/VisionaryEndian.h
+/home/volumetry-visionaryt/VisionaryCommon/VisionaryEndian.h
 
-/home/cubagem/volumetry-visionaryt/VisionaryCommon/PointCloudPlyWriter.h
+/home/volumetry-visionaryt/VisionaryCommon/PointCloudPlyWriter.h
 string
 -
 vector
@@ -126,11 +126,11 @@ vector
 stdint.h
 -
 PointXYZ.h
-/home/cubagem/volumetry-visionaryt/VisionaryCommon/PointXYZ.h
+/home/volumetry-visionaryt/VisionaryCommon/PointXYZ.h
 
-/home/cubagem/volumetry-visionaryt/VisionaryCommon/PointXYZ.h
+/home/volumetry-visionaryt/VisionaryCommon/PointXYZ.h
 
-/home/cubagem/volumetry-visionaryt/VisionaryCommon/VisionaryAutoIPScan.cpp
+/home/volumetry-visionaryt/VisionaryCommon/VisionaryAutoIPScan.cpp
 stdio.h
 -
 iostream
@@ -158,41 +158,41 @@ random
 chrono
 -
 VisionaryAutoIPScan.h
-/home/cubagem/volumetry-visionaryt/VisionaryCommon/VisionaryAutoIPScan.h
+/home/volumetry-visionaryt/VisionaryCommon/VisionaryAutoIPScan.h
 
-/home/cubagem/volumetry-visionaryt/VisionaryCommon/VisionaryAutoIPScan.h
+/home/volumetry-visionaryt/VisionaryCommon/VisionaryAutoIPScan.h
 cstring
 -
 string
 -
 Network.h
-/home/cubagem/volumetry-visionaryt/VisionaryCommon/Network.h
+/home/volumetry-visionaryt/VisionaryCommon/Network.h
 
-/home/cubagem/volumetry-visionaryt/VisionaryCommon/VisionaryControl.cpp
+/home/volumetry-visionaryt/VisionaryCommon/VisionaryControl.cpp
 VisionaryControl.h
-/home/cubagem/volumetry-visionaryt/VisionaryCommon/VisionaryControl.h
+/home/volumetry-visionaryt/VisionaryCommon/VisionaryControl.h
 VisionaryEndian.h
-/home/cubagem/volumetry-visionaryt/VisionaryCommon/VisionaryEndian.h
+/home/volumetry-visionaryt/VisionaryCommon/VisionaryEndian.h
 CoLaBCommandBuilder.h
-/home/cubagem/volumetry-visionaryt/VisionaryCommon/CoLaBCommandBuilder.h
+/home/volumetry-visionaryt/VisionaryCommon/CoLaBCommandBuilder.h
 CoLaBCommandReader.h
-/home/cubagem/volumetry-visionaryt/VisionaryCommon/CoLaBCommandReader.h
+/home/volumetry-visionaryt/VisionaryCommon/CoLaBCommandReader.h
 
-/home/cubagem/volumetry-visionaryt/VisionaryCommon/VisionaryControl.h
+/home/volumetry-visionaryt/VisionaryCommon/VisionaryControl.h
 cstring
 -
 string
 -
 Network.h
-/home/cubagem/volumetry-visionaryt/VisionaryCommon/Network.h
+/home/volumetry-visionaryt/VisionaryCommon/Network.h
 CoLaBCommand.h
-/home/cubagem/volumetry-visionaryt/VisionaryCommon/CoLaBCommand.h
+/home/volumetry-visionaryt/VisionaryCommon/CoLaBCommand.h
 CoLaUserLevel.h
-/home/cubagem/volumetry-visionaryt/VisionaryCommon/CoLaUserLevel.h
+/home/volumetry-visionaryt/VisionaryCommon/CoLaUserLevel.h
 
-/home/cubagem/volumetry-visionaryt/VisionaryCommon/VisionaryData.cpp
+/home/volumetry-visionaryt/VisionaryCommon/VisionaryData.cpp
 VisionaryData.h
-/home/cubagem/volumetry-visionaryt/VisionaryCommon/VisionaryData.h
+/home/volumetry-visionaryt/VisionaryCommon/VisionaryData.h
 sstream
 -
 algorithm
@@ -204,7 +204,7 @@ assert.h
 limits
 -
 
-/home/cubagem/volumetry-visionaryt/VisionaryCommon/VisionaryData.h
+/home/volumetry-visionaryt/VisionaryCommon/VisionaryData.h
 stdint.h
 -
 math.h
@@ -214,47 +214,47 @@ string
 vector
 -
 PointXYZ.h
-/home/cubagem/volumetry-visionaryt/VisionaryCommon/PointXYZ.h
+/home/volumetry-visionaryt/VisionaryCommon/PointXYZ.h
 
-/home/cubagem/volumetry-visionaryt/VisionaryCommon/VisionaryDataStream.cpp
+/home/volumetry-visionaryt/VisionaryCommon/VisionaryDataStream.cpp
 VisionaryDataStream.h
-/home/cubagem/volumetry-visionaryt/VisionaryCommon/VisionaryDataStream.h
+/home/volumetry-visionaryt/VisionaryCommon/VisionaryDataStream.h
 VisionaryEndian.h
-/home/cubagem/volumetry-visionaryt/VisionaryCommon/VisionaryEndian.h
+/home/volumetry-visionaryt/VisionaryCommon/VisionaryEndian.h
 cstring
 -
 stdio.h
 -
 
-/home/cubagem/volumetry-visionaryt/VisionaryCommon/VisionaryDataStream.h
+/home/volumetry-visionaryt/VisionaryCommon/VisionaryDataStream.h
 memory
 -
 boost/shared_ptr.hpp
 -
 VisionaryData.h
-/home/cubagem/volumetry-visionaryt/VisionaryCommon/VisionaryData.h
+/home/volumetry-visionaryt/VisionaryCommon/VisionaryData.h
 Network.h
-/home/cubagem/volumetry-visionaryt/VisionaryCommon/Network.h
+/home/volumetry-visionaryt/VisionaryCommon/Network.h
 
-/home/cubagem/volumetry-visionaryt/VisionaryCommon/VisionaryEndian.h
+/home/volumetry-visionaryt/VisionaryCommon/VisionaryEndian.h
 stdint.h
 -
 memory.h
 -
 
-/home/cubagem/volumetry-visionaryt/VisionaryCommon/VisionaryTData.cpp
+/home/volumetry-visionaryt/VisionaryCommon/VisionaryTData.cpp
 VisionaryTData.h
-/home/cubagem/volumetry-visionaryt/VisionaryCommon/VisionaryTData.h
+/home/volumetry-visionaryt/VisionaryCommon/VisionaryTData.h
 VisionaryEndian.h
-/home/cubagem/volumetry-visionaryt/VisionaryCommon/VisionaryEndian.h
+/home/volumetry-visionaryt/VisionaryCommon/VisionaryEndian.h
 boost/property_tree/xml_parser.hpp
 -
 boost/foreach.hpp
 -
 
-/home/cubagem/volumetry-visionaryt/VisionaryCommon/VisionaryTData.h
+/home/volumetry-visionaryt/VisionaryCommon/VisionaryTData.h
 VisionaryData.h
-/home/cubagem/volumetry-visionaryt/VisionaryCommon/VisionaryData.h
+/home/volumetry-visionaryt/VisionaryCommon/VisionaryData.h
 
 /usr/include/x86_64-linux-gnu/asm/socket.h
 asm-generic/socket.h
