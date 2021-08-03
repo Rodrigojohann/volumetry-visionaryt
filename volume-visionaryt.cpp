@@ -22,7 +22,7 @@
 #include <iostream>
 #include <pcl/point_types.h>
 #include <pcl/io/ply_io.h>
-
+#include <pcl/io/pcd_io.h>
 
 #include <pcl/common/io.h>
 #include <pcl/point_cloud.h>
@@ -103,7 +103,7 @@ double calculatevolume(std::vector<PointXYZ> inputcloud)
 		cloud_nobackground->points[i].z = (*cloud)[newPointIdxVector[i]].z;
 	}
 	
-	pcl::io::savePLYFile <pcl::PointXYZ> ("cloud_nobackground.ply", cloud_nobackground, true);
+	pcl::io::savePCDFileASCII ("cloud_nobackground.pcd", cloud_nobackground);
 	
 	passx.setInputCloud (cloud);
 	passx.setFilterFieldName ("x");
