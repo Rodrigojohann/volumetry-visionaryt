@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/cubagem/volumetry-visionaryt/volume-visionaryt.cpp
+/home/volumetry-visionaryt/volume-visionaryt.cpp
 stdio.h
 -
 boost/shared_ptr.hpp
@@ -14,17 +14,17 @@ boost/shared_ptr.hpp
 boost/make_shared.hpp
 -
 VisionaryTData.h
-/home/cubagem/volumetry-visionaryt/VisionaryTData.h
+/home/volumetry-visionaryt/VisionaryTData.h
 VisionaryDataStream.h
-/home/cubagem/volumetry-visionaryt/VisionaryDataStream.h
+/home/volumetry-visionaryt/VisionaryDataStream.h
 VisionaryControl.h
-/home/cubagem/volumetry-visionaryt/VisionaryControl.h
+/home/volumetry-visionaryt/VisionaryControl.h
 PointXYZ.h
-/home/cubagem/volumetry-visionaryt/PointXYZ.h
+/home/volumetry-visionaryt/PointXYZ.h
 PointCloudPlyWriter.h
-/home/cubagem/volumetry-visionaryt/PointCloudPlyWriter.h
+/home/volumetry-visionaryt/PointCloudPlyWriter.h
 VisionaryAutoIPScan.h
-/home/cubagem/volumetry-visionaryt/VisionaryAutoIPScan.h
+/home/volumetry-visionaryt/VisionaryAutoIPScan.h
 pcl/point_types.h
 -
 pcl/ModelCoefficients.h

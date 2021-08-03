@@ -54,10 +54,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/cubagem/volumetry-visionaryt
+CMAKE_SOURCE_DIR = /home/volumetry-visionaryt
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/cubagem/volumetry-visionaryt
+CMAKE_BINARY_DIR = /home/volumetry-visionaryt
 
 #=============================================================================
 # Target rules for target CMakeFiles/volume-visionaryt.dir
@@ -66,7 +66,7 @@ CMAKE_BINARY_DIR = /home/cubagem/volumetry-visionaryt
 CMakeFiles/volume-visionaryt.dir/all: VisionaryCommon/CMakeFiles/sick_visionary_common.dir/all
 	$(MAKE) -f CMakeFiles/volume-visionaryt.dir/build.make CMakeFiles/volume-visionaryt.dir/depend
 	$(MAKE) -f CMakeFiles/volume-visionaryt.dir/build.make CMakeFiles/volume-visionaryt.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/cubagem/volumetry-visionaryt/CMakeFiles --progress-num=13,14 "Built target volume-visionaryt"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/volumetry-visionaryt/CMakeFiles --progress-num=13,14 "Built target volume-visionaryt"
 .PHONY : CMakeFiles/volume-visionaryt.dir/all
 
 # Include target in all.
@@ -76,9 +76,9 @@ all: CMakeFiles/volume-visionaryt.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/volume-visionaryt.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/cubagem/volumetry-visionaryt/CMakeFiles 14
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/volumetry-visionaryt/CMakeFiles 14
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/volume-visionaryt.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/cubagem/volumetry-visionaryt/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/volumetry-visionaryt/CMakeFiles 0
 .PHONY : CMakeFiles/volume-visionaryt.dir/rule
 
 # Convenience name for target.
@@ -121,7 +121,7 @@ VisionaryCommon/preinstall:
 VisionaryCommon/CMakeFiles/sick_visionary_common.dir/all:
 	$(MAKE) -f VisionaryCommon/CMakeFiles/sick_visionary_common.dir/build.make VisionaryCommon/CMakeFiles/sick_visionary_common.dir/depend
 	$(MAKE) -f VisionaryCommon/CMakeFiles/sick_visionary_common.dir/build.make VisionaryCommon/CMakeFiles/sick_visionary_common.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/cubagem/volumetry-visionaryt/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12 "Built target sick_visionary_common"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/volumetry-visionaryt/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12 "Built target sick_visionary_common"
 .PHONY : VisionaryCommon/CMakeFiles/sick_visionary_common.dir/all
 
 # Include target in all.
@@ -131,9 +131,9 @@ all: VisionaryCommon/CMakeFiles/sick_visionary_common.dir/all
 
 # Build rule for subdir invocation for target.
 VisionaryCommon/CMakeFiles/sick_visionary_common.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/cubagem/volumetry-visionaryt/CMakeFiles 12
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/volumetry-visionaryt/CMakeFiles 12
 	$(MAKE) -f CMakeFiles/Makefile2 VisionaryCommon/CMakeFiles/sick_visionary_common.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/cubagem/volumetry-visionaryt/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/volumetry-visionaryt/CMakeFiles 0
 .PHONY : VisionaryCommon/CMakeFiles/sick_visionary_common.dir/rule
 
 # Convenience name for target.

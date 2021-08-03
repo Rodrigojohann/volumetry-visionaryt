@@ -1,4 +1,4 @@
-The system is: Linux - 4.9.0-16-amd64 - x86_64
+The system is: Linux - 4.19.0-17-amd64 - x86_64
 Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
 Compiler: /usr/bin/cc 
 Build flags: 
@@ -10,7 +10,7 @@ The output was:
 
 Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
 
-The C compiler identification is GNU, found in "/home/cubagem/volumetry-visionaryt/CMakeFiles/3.7.2/CompilerIdC/a.out"
+The C compiler identification is GNU, found in "/home/volumetry-visionaryt/CMakeFiles/3.7.2/CompilerIdC/a.out"
 
 Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
 Compiler: /usr/bin/c++ 
@@ -23,33 +23,33 @@ The output was:
 
 Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.out"
 
-The CXX compiler identification is GNU, found in "/home/cubagem/volumetry-visionaryt/CMakeFiles/3.7.2/CompilerIdCXX/a.out"
+The CXX compiler identification is GNU, found in "/home/volumetry-visionaryt/CMakeFiles/3.7.2/CompilerIdCXX/a.out"
 
 Determining if the C compiler works passed with the following output:
-Change Dir: /home/cubagem/volumetry-visionaryt/CMakeFiles/CMakeTmp
+Change Dir: /home/volumetry-visionaryt/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_eee46/fast"
-/usr/bin/make -f CMakeFiles/cmTC_eee46.dir/build.make CMakeFiles/cmTC_eee46.dir/build
-make[1]: Entering directory '/home/cubagem/volumetry-visionaryt/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_eee46.dir/testCCompiler.c.o
-/usr/bin/cc     -o CMakeFiles/cmTC_eee46.dir/testCCompiler.c.o   -c /home/cubagem/volumetry-visionaryt/CMakeFiles/CMakeTmp/testCCompiler.c
-Linking C executable cmTC_eee46
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_eee46.dir/link.txt --verbose=1
-/usr/bin/cc       CMakeFiles/cmTC_eee46.dir/testCCompiler.c.o  -o cmTC_eee46 -rdynamic 
-make[1]: Leaving directory '/home/cubagem/volumetry-visionaryt/CMakeFiles/CMakeTmp'
+Run Build Command:"/usr/bin/make" "cmTC_f18af/fast"
+/usr/bin/make -f CMakeFiles/cmTC_f18af.dir/build.make CMakeFiles/cmTC_f18af.dir/build
+make[1]: Entering directory '/home/volumetry-visionaryt/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_f18af.dir/testCCompiler.c.o
+/usr/bin/cc     -o CMakeFiles/cmTC_f18af.dir/testCCompiler.c.o   -c /home/volumetry-visionaryt/CMakeFiles/CMakeTmp/testCCompiler.c
+Linking C executable cmTC_f18af
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f18af.dir/link.txt --verbose=1
+/usr/bin/cc       CMakeFiles/cmTC_f18af.dir/testCCompiler.c.o  -o cmTC_f18af -rdynamic 
+make[1]: Leaving directory '/home/volumetry-visionaryt/CMakeFiles/CMakeTmp'
 
 
 Detecting C compiler ABI info compiled with the following output:
-Change Dir: /home/cubagem/volumetry-visionaryt/CMakeFiles/CMakeTmp
+Change Dir: /home/volumetry-visionaryt/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_1a160/fast"
-/usr/bin/make -f CMakeFiles/cmTC_1a160.dir/build.make CMakeFiles/cmTC_1a160.dir/build
-make[1]: Entering directory '/home/cubagem/volumetry-visionaryt/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_1a160.dir/CMakeCCompilerABI.c.o
-/usr/bin/cc     -o CMakeFiles/cmTC_1a160.dir/CMakeCCompilerABI.c.o   -c /usr/share/cmake-3.7/Modules/CMakeCCompilerABI.c
-Linking C executable cmTC_1a160
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_1a160.dir/link.txt --verbose=1
-/usr/bin/cc      -v CMakeFiles/cmTC_1a160.dir/CMakeCCompilerABI.c.o  -o cmTC_1a160 -rdynamic  
+Run Build Command:"/usr/bin/make" "cmTC_ebd48/fast"
+/usr/bin/make -f CMakeFiles/cmTC_ebd48.dir/build.make CMakeFiles/cmTC_ebd48.dir/build
+make[1]: Entering directory '/home/volumetry-visionaryt/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_ebd48.dir/CMakeCCompilerABI.c.o
+/usr/bin/cc     -o CMakeFiles/cmTC_ebd48.dir/CMakeCCompilerABI.c.o   -c /usr/share/cmake-3.7/Modules/CMakeCCompilerABI.c
+Linking C executable cmTC_ebd48
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ebd48.dir/link.txt --verbose=1
+/usr/bin/cc      -v CMakeFiles/cmTC_ebd48.dir/CMakeCCompilerABI.c.o  -o cmTC_ebd48 -rdynamic  
 Using built-in specs.
 COLLECT_GCC=/usr/bin/cc
 COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/6/lto-wrapper
@@ -59,24 +59,24 @@ Thread model: posix
 gcc version 6.3.0 20170516 (Debian 6.3.0-18+deb9u1) 
 COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/6/:/usr/lib/gcc/x86_64-linux-gnu/6/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/6/:/usr/lib/gcc/x86_64-linux-gnu/
 LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/6/:/usr/lib/gcc/x86_64-linux-gnu/6/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/6/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/6/../../../:/lib/:/usr/lib/
-COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_1a160' '-rdynamic' '-mtune=generic' '-march=x86-64'
- /usr/lib/gcc/x86_64-linux-gnu/6/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/6/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/6/lto-wrapper -plugin-opt=-fresolution=/tmp/cc45PoTd.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --sysroot=/ --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_1a160 /usr/lib/gcc/x86_64-linux-gnu/6/../../../x86_64-linux-gnu/Scrt1.o /usr/lib/gcc/x86_64-linux-gnu/6/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/6/crtbeginS.o -L/usr/lib/gcc/x86_64-linux-gnu/6 -L/usr/lib/gcc/x86_64-linux-gnu/6/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/6/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/6/../../.. CMakeFiles/cmTC_1a160.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/lib/gcc/x86_64-linux-gnu/6/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/6/../../../x86_64-linux-gnu/crtn.o
-COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_1a160' '-rdynamic' '-mtune=generic' '-march=x86-64'
-make[1]: Leaving directory '/home/cubagem/volumetry-visionaryt/CMakeFiles/CMakeTmp'
+COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_ebd48' '-rdynamic' '-mtune=generic' '-march=x86-64'
+ /usr/lib/gcc/x86_64-linux-gnu/6/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/6/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/6/lto-wrapper -plugin-opt=-fresolution=/tmp/cc1dtQFq.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --sysroot=/ --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_ebd48 /usr/lib/gcc/x86_64-linux-gnu/6/../../../x86_64-linux-gnu/Scrt1.o /usr/lib/gcc/x86_64-linux-gnu/6/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/6/crtbeginS.o -L/usr/lib/gcc/x86_64-linux-gnu/6 -L/usr/lib/gcc/x86_64-linux-gnu/6/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/6/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/6/../../.. CMakeFiles/cmTC_ebd48.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/lib/gcc/x86_64-linux-gnu/6/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/6/../../../x86_64-linux-gnu/crtn.o
+COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_ebd48' '-rdynamic' '-mtune=generic' '-march=x86-64'
+make[1]: Leaving directory '/home/volumetry-visionaryt/CMakeFiles/CMakeTmp'
 
 
 Parsed C implicit link information from above output:
   link line regex: [^( *|.*[/\])(ld|([^/\]+-)?ld|collect2)[^/\]*( |$)]
-  ignore line: [Change Dir: /home/cubagem/volumetry-visionaryt/CMakeFiles/CMakeTmp]
+  ignore line: [Change Dir: /home/volumetry-visionaryt/CMakeFiles/CMakeTmp]
   ignore line: []
-  ignore line: [Run Build Command:"/usr/bin/make" "cmTC_1a160/fast"]
-  ignore line: [/usr/bin/make -f CMakeFiles/cmTC_1a160.dir/build.make CMakeFiles/cmTC_1a160.dir/build]
-  ignore line: [make[1]: Entering directory '/home/cubagem/volumetry-visionaryt/CMakeFiles/CMakeTmp']
-  ignore line: [Building C object CMakeFiles/cmTC_1a160.dir/CMakeCCompilerABI.c.o]
-  ignore line: [/usr/bin/cc     -o CMakeFiles/cmTC_1a160.dir/CMakeCCompilerABI.c.o   -c /usr/share/cmake-3.7/Modules/CMakeCCompilerABI.c]
-  ignore line: [Linking C executable cmTC_1a160]
-  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_1a160.dir/link.txt --verbose=1]
-  ignore line: [/usr/bin/cc      -v CMakeFiles/cmTC_1a160.dir/CMakeCCompilerABI.c.o  -o cmTC_1a160 -rdynamic  ]
+  ignore line: [Run Build Command:"/usr/bin/make" "cmTC_ebd48/fast"]
+  ignore line: [/usr/bin/make -f CMakeFiles/cmTC_ebd48.dir/build.make CMakeFiles/cmTC_ebd48.dir/build]
+  ignore line: [make[1]: Entering directory '/home/volumetry-visionaryt/CMakeFiles/CMakeTmp']
+  ignore line: [Building C object CMakeFiles/cmTC_ebd48.dir/CMakeCCompilerABI.c.o]
+  ignore line: [/usr/bin/cc     -o CMakeFiles/cmTC_ebd48.dir/CMakeCCompilerABI.c.o   -c /usr/share/cmake-3.7/Modules/CMakeCCompilerABI.c]
+  ignore line: [Linking C executable cmTC_ebd48]
+  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ebd48.dir/link.txt --verbose=1]
+  ignore line: [/usr/bin/cc      -v CMakeFiles/cmTC_ebd48.dir/CMakeCCompilerABI.c.o  -o cmTC_ebd48 -rdynamic  ]
   ignore line: [Using built-in specs.]
   ignore line: [COLLECT_GCC=/usr/bin/cc]
   ignore line: [COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/6/lto-wrapper]
@@ -86,13 +86,13 @@ Parsed C implicit link information from above output:
   ignore line: [gcc version 6.3.0 20170516 (Debian 6.3.0-18+deb9u1) ]
   ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/6/:/usr/lib/gcc/x86_64-linux-gnu/6/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/6/:/usr/lib/gcc/x86_64-linux-gnu/]
   ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/6/:/usr/lib/gcc/x86_64-linux-gnu/6/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/6/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/6/../../../:/lib/:/usr/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_1a160' '-rdynamic' '-mtune=generic' '-march=x86-64']
-  link line: [ /usr/lib/gcc/x86_64-linux-gnu/6/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/6/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/6/lto-wrapper -plugin-opt=-fresolution=/tmp/cc45PoTd.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --sysroot=/ --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_1a160 /usr/lib/gcc/x86_64-linux-gnu/6/../../../x86_64-linux-gnu/Scrt1.o /usr/lib/gcc/x86_64-linux-gnu/6/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/6/crtbeginS.o -L/usr/lib/gcc/x86_64-linux-gnu/6 -L/usr/lib/gcc/x86_64-linux-gnu/6/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/6/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/6/../../.. CMakeFiles/cmTC_1a160.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/lib/gcc/x86_64-linux-gnu/6/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/6/../../../x86_64-linux-gnu/crtn.o]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_ebd48' '-rdynamic' '-mtune=generic' '-march=x86-64']
+  link line: [ /usr/lib/gcc/x86_64-linux-gnu/6/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/6/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/6/lto-wrapper -plugin-opt=-fresolution=/tmp/cc1dtQFq.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --sysroot=/ --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_ebd48 /usr/lib/gcc/x86_64-linux-gnu/6/../../../x86_64-linux-gnu/Scrt1.o /usr/lib/gcc/x86_64-linux-gnu/6/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/6/crtbeginS.o -L/usr/lib/gcc/x86_64-linux-gnu/6 -L/usr/lib/gcc/x86_64-linux-gnu/6/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/6/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/6/../../.. CMakeFiles/cmTC_ebd48.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/lib/gcc/x86_64-linux-gnu/6/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/6/../../../x86_64-linux-gnu/crtn.o]
     arg [/usr/lib/gcc/x86_64-linux-gnu/6/collect2] ==> ignore
     arg [-plugin] ==> ignore
     arg [/usr/lib/gcc/x86_64-linux-gnu/6/liblto_plugin.so] ==> ignore
     arg [-plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/6/lto-wrapper] ==> ignore
-    arg [-plugin-opt=-fresolution=/tmp/cc45PoTd.res] ==> ignore
+    arg [-plugin-opt=-fresolution=/tmp/cc1dtQFq.res] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
     arg [-plugin-opt=-pass-through=-lc] ==> ignore
@@ -109,7 +109,7 @@ Parsed C implicit link information from above output:
     arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
     arg [-pie] ==> ignore
     arg [-o] ==> ignore
-    arg [cmTC_1a160] ==> ignore
+    arg [cmTC_ebd48] ==> ignore
     arg [/usr/lib/gcc/x86_64-linux-gnu/6/../../../x86_64-linux-gnu/Scrt1.o] ==> ignore
     arg [/usr/lib/gcc/x86_64-linux-gnu/6/../../../x86_64-linux-gnu/crti.o] ==> ignore
     arg [/usr/lib/gcc/x86_64-linux-gnu/6/crtbeginS.o] ==> ignore
@@ -121,7 +121,7 @@ Parsed C implicit link information from above output:
     arg [-L/usr/lib/x86_64-linux-gnu] ==> dir [/usr/lib/x86_64-linux-gnu]
     arg [-L/usr/lib/../lib] ==> dir [/usr/lib/../lib]
     arg [-L/usr/lib/gcc/x86_64-linux-gnu/6/../../..] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/6/../../..]
-    arg [CMakeFiles/cmTC_1a160.dir/CMakeCCompilerABI.c.o] ==> ignore
+    arg [CMakeFiles/cmTC_ebd48.dir/CMakeCCompilerABI.c.o] ==> ignore
     arg [-lgcc] ==> lib [gcc]
     arg [--as-needed] ==> ignore
     arg [-lgcc_s] ==> lib [gcc_s]
@@ -153,17 +153,17 @@ Parsed C implicit link information from above output:
 
 
 Detecting C [-std=c11] compiler features compiled with the following output:
-Change Dir: /home/cubagem/volumetry-visionaryt/CMakeFiles/CMakeTmp
+Change Dir: /home/volumetry-visionaryt/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_0923b/fast"
-/usr/bin/make -f CMakeFiles/cmTC_0923b.dir/build.make CMakeFiles/cmTC_0923b.dir/build
-make[1]: Entering directory '/home/cubagem/volumetry-visionaryt/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_0923b.dir/feature_tests.c.o
-/usr/bin/cc    -std=c11 -o CMakeFiles/cmTC_0923b.dir/feature_tests.c.o   -c /home/cubagem/volumetry-visionaryt/CMakeFiles/feature_tests.c
-Linking C executable cmTC_0923b
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_0923b.dir/link.txt --verbose=1
-/usr/bin/cc       CMakeFiles/cmTC_0923b.dir/feature_tests.c.o  -o cmTC_0923b -rdynamic 
-make[1]: Leaving directory '/home/cubagem/volumetry-visionaryt/CMakeFiles/CMakeTmp'
+Run Build Command:"/usr/bin/make" "cmTC_202b0/fast"
+/usr/bin/make -f CMakeFiles/cmTC_202b0.dir/build.make CMakeFiles/cmTC_202b0.dir/build
+make[1]: Entering directory '/home/volumetry-visionaryt/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_202b0.dir/feature_tests.c.o
+/usr/bin/cc    -std=c11 -o CMakeFiles/cmTC_202b0.dir/feature_tests.c.o   -c /home/volumetry-visionaryt/CMakeFiles/feature_tests.c
+Linking C executable cmTC_202b0
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_202b0.dir/link.txt --verbose=1
+/usr/bin/cc       CMakeFiles/cmTC_202b0.dir/feature_tests.c.o  -o cmTC_202b0 -rdynamic 
+make[1]: Leaving directory '/home/volumetry-visionaryt/CMakeFiles/CMakeTmp'
 
 
     Feature record: C_FEATURE:1c_function_prototypes
@@ -173,17 +173,17 @@ make[1]: Leaving directory '/home/cubagem/volumetry-visionaryt/CMakeFiles/CMakeT
 
 
 Detecting C [-std=c99] compiler features compiled with the following output:
-Change Dir: /home/cubagem/volumetry-visionaryt/CMakeFiles/CMakeTmp
+Change Dir: /home/volumetry-visionaryt/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_fa396/fast"
-/usr/bin/make -f CMakeFiles/cmTC_fa396.dir/build.make CMakeFiles/cmTC_fa396.dir/build
-make[1]: Entering directory '/home/cubagem/volumetry-visionaryt/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_fa396.dir/feature_tests.c.o
-/usr/bin/cc    -std=c99 -o CMakeFiles/cmTC_fa396.dir/feature_tests.c.o   -c /home/cubagem/volumetry-visionaryt/CMakeFiles/feature_tests.c
-Linking C executable cmTC_fa396
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_fa396.dir/link.txt --verbose=1
-/usr/bin/cc       CMakeFiles/cmTC_fa396.dir/feature_tests.c.o  -o cmTC_fa396 -rdynamic 
-make[1]: Leaving directory '/home/cubagem/volumetry-visionaryt/CMakeFiles/CMakeTmp'
+Run Build Command:"/usr/bin/make" "cmTC_199f4/fast"
+/usr/bin/make -f CMakeFiles/cmTC_199f4.dir/build.make CMakeFiles/cmTC_199f4.dir/build
+make[1]: Entering directory '/home/volumetry-visionaryt/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_199f4.dir/feature_tests.c.o
+/usr/bin/cc    -std=c99 -o CMakeFiles/cmTC_199f4.dir/feature_tests.c.o   -c /home/volumetry-visionaryt/CMakeFiles/feature_tests.c
+Linking C executable cmTC_199f4
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_199f4.dir/link.txt --verbose=1
+/usr/bin/cc       CMakeFiles/cmTC_199f4.dir/feature_tests.c.o  -o cmTC_199f4 -rdynamic 
+make[1]: Leaving directory '/home/volumetry-visionaryt/CMakeFiles/CMakeTmp'
 
 
     Feature record: C_FEATURE:1c_function_prototypes
@@ -193,17 +193,17 @@ make[1]: Leaving directory '/home/cubagem/volumetry-visionaryt/CMakeFiles/CMakeT
 
 
 Detecting C [-std=c90] compiler features compiled with the following output:
-Change Dir: /home/cubagem/volumetry-visionaryt/CMakeFiles/CMakeTmp
+Change Dir: /home/volumetry-visionaryt/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_596c4/fast"
-/usr/bin/make -f CMakeFiles/cmTC_596c4.dir/build.make CMakeFiles/cmTC_596c4.dir/build
-make[1]: Entering directory '/home/cubagem/volumetry-visionaryt/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_596c4.dir/feature_tests.c.o
-/usr/bin/cc    -std=c90 -o CMakeFiles/cmTC_596c4.dir/feature_tests.c.o   -c /home/cubagem/volumetry-visionaryt/CMakeFiles/feature_tests.c
-Linking C executable cmTC_596c4
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_596c4.dir/link.txt --verbose=1
-/usr/bin/cc       CMakeFiles/cmTC_596c4.dir/feature_tests.c.o  -o cmTC_596c4 -rdynamic 
-make[1]: Leaving directory '/home/cubagem/volumetry-visionaryt/CMakeFiles/CMakeTmp'
+Run Build Command:"/usr/bin/make" "cmTC_ed96d/fast"
+/usr/bin/make -f CMakeFiles/cmTC_ed96d.dir/build.make CMakeFiles/cmTC_ed96d.dir/build
+make[1]: Entering directory '/home/volumetry-visionaryt/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_ed96d.dir/feature_tests.c.o
+/usr/bin/cc    -std=c90 -o CMakeFiles/cmTC_ed96d.dir/feature_tests.c.o   -c /home/volumetry-visionaryt/CMakeFiles/feature_tests.c
+Linking C executable cmTC_ed96d
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ed96d.dir/link.txt --verbose=1
+/usr/bin/cc       CMakeFiles/cmTC_ed96d.dir/feature_tests.c.o  -o cmTC_ed96d -rdynamic 
+make[1]: Leaving directory '/home/volumetry-visionaryt/CMakeFiles/CMakeTmp'
 
 
     Feature record: C_FEATURE:1c_function_prototypes
@@ -211,30 +211,30 @@ make[1]: Leaving directory '/home/cubagem/volumetry-visionaryt/CMakeFiles/CMakeT
     Feature record: C_FEATURE:0c_static_assert
     Feature record: C_FEATURE:0c_variadic_macros
 Determining if the CXX compiler works passed with the following output:
-Change Dir: /home/cubagem/volumetry-visionaryt/CMakeFiles/CMakeTmp
+Change Dir: /home/volumetry-visionaryt/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_30d73/fast"
-/usr/bin/make -f CMakeFiles/cmTC_30d73.dir/build.make CMakeFiles/cmTC_30d73.dir/build
-make[1]: Entering directory '/home/cubagem/volumetry-visionaryt/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_30d73.dir/testCXXCompiler.cxx.o
-/usr/bin/c++      -o CMakeFiles/cmTC_30d73.dir/testCXXCompiler.cxx.o -c /home/cubagem/volumetry-visionaryt/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
-Linking CXX executable cmTC_30d73
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_30d73.dir/link.txt --verbose=1
-/usr/bin/c++        CMakeFiles/cmTC_30d73.dir/testCXXCompiler.cxx.o  -o cmTC_30d73 -rdynamic 
-make[1]: Leaving directory '/home/cubagem/volumetry-visionaryt/CMakeFiles/CMakeTmp'
+Run Build Command:"/usr/bin/make" "cmTC_a9119/fast"
+/usr/bin/make -f CMakeFiles/cmTC_a9119.dir/build.make CMakeFiles/cmTC_a9119.dir/build
+make[1]: Entering directory '/home/volumetry-visionaryt/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_a9119.dir/testCXXCompiler.cxx.o
+/usr/bin/c++      -o CMakeFiles/cmTC_a9119.dir/testCXXCompiler.cxx.o -c /home/volumetry-visionaryt/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
+Linking CXX executable cmTC_a9119
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_a9119.dir/link.txt --verbose=1
+/usr/bin/c++        CMakeFiles/cmTC_a9119.dir/testCXXCompiler.cxx.o  -o cmTC_a9119 -rdynamic 
+make[1]: Leaving directory '/home/volumetry-visionaryt/CMakeFiles/CMakeTmp'
 
 
 Detecting CXX compiler ABI info compiled with the following output:
-Change Dir: /home/cubagem/volumetry-visionaryt/CMakeFiles/CMakeTmp
+Change Dir: /home/volumetry-visionaryt/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_3cec1/fast"
-/usr/bin/make -f CMakeFiles/cmTC_3cec1.dir/build.make CMakeFiles/cmTC_3cec1.dir/build
-make[1]: Entering directory '/home/cubagem/volumetry-visionaryt/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_3cec1.dir/CMakeCXXCompilerABI.cpp.o
-/usr/bin/c++      -o CMakeFiles/cmTC_3cec1.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-3.7/Modules/CMakeCXXCompilerABI.cpp
-Linking CXX executable cmTC_3cec1
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_3cec1.dir/link.txt --verbose=1
-/usr/bin/c++       -v CMakeFiles/cmTC_3cec1.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_3cec1 -rdynamic  
+Run Build Command:"/usr/bin/make" "cmTC_d240a/fast"
+/usr/bin/make -f CMakeFiles/cmTC_d240a.dir/build.make CMakeFiles/cmTC_d240a.dir/build
+make[1]: Entering directory '/home/volumetry-visionaryt/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_d240a.dir/CMakeCXXCompilerABI.cpp.o
+/usr/bin/c++      -o CMakeFiles/cmTC_d240a.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-3.7/Modules/CMakeCXXCompilerABI.cpp
+Linking CXX executable cmTC_d240a
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d240a.dir/link.txt --verbose=1
+/usr/bin/c++       -v CMakeFiles/cmTC_d240a.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_d240a -rdynamic  
 Using built-in specs.
 COLLECT_GCC=/usr/bin/c++
 COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/6/lto-wrapper
@@ -244,24 +244,24 @@ Thread model: posix
 gcc version 6.3.0 20170516 (Debian 6.3.0-18+deb9u1) 
 COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/6/:/usr/lib/gcc/x86_64-linux-gnu/6/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/6/:/usr/lib/gcc/x86_64-linux-gnu/
 LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/6/:/usr/lib/gcc/x86_64-linux-gnu/6/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/6/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/6/../../../:/lib/:/usr/lib/
-COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_3cec1' '-rdynamic' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
- /usr/lib/gcc/x86_64-linux-gnu/6/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/6/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/6/lto-wrapper -plugin-opt=-fresolution=/tmp/ccNpIFJ0.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --sysroot=/ --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_3cec1 /usr/lib/gcc/x86_64-linux-gnu/6/../../../x86_64-linux-gnu/Scrt1.o /usr/lib/gcc/x86_64-linux-gnu/6/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/6/crtbeginS.o -L/usr/lib/gcc/x86_64-linux-gnu/6 -L/usr/lib/gcc/x86_64-linux-gnu/6/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/6/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/6/../../.. CMakeFiles/cmTC_3cec1.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-linux-gnu/6/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/6/../../../x86_64-linux-gnu/crtn.o
-COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_3cec1' '-rdynamic' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
-make[1]: Leaving directory '/home/cubagem/volumetry-visionaryt/CMakeFiles/CMakeTmp'
+COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_d240a' '-rdynamic' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ /usr/lib/gcc/x86_64-linux-gnu/6/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/6/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/6/lto-wrapper -plugin-opt=-fresolution=/tmp/ccT1Q1FL.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --sysroot=/ --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_d240a /usr/lib/gcc/x86_64-linux-gnu/6/../../../x86_64-linux-gnu/Scrt1.o /usr/lib/gcc/x86_64-linux-gnu/6/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/6/crtbeginS.o -L/usr/lib/gcc/x86_64-linux-gnu/6 -L/usr/lib/gcc/x86_64-linux-gnu/6/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/6/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/6/../../.. CMakeFiles/cmTC_d240a.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-linux-gnu/6/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/6/../../../x86_64-linux-gnu/crtn.o
+COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_d240a' '-rdynamic' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+make[1]: Leaving directory '/home/volumetry-visionaryt/CMakeFiles/CMakeTmp'
 
 
 Parsed CXX implicit link information from above output:
   link line regex: [^( *|.*[/\])(ld|([^/\]+-)?ld|collect2)[^/\]*( |$)]
-  ignore line: [Change Dir: /home/cubagem/volumetry-visionaryt/CMakeFiles/CMakeTmp]
+  ignore line: [Change Dir: /home/volumetry-visionaryt/CMakeFiles/CMakeTmp]
   ignore line: []
-  ignore line: [Run Build Command:"/usr/bin/make" "cmTC_3cec1/fast"]
-  ignore line: [/usr/bin/make -f CMakeFiles/cmTC_3cec1.dir/build.make CMakeFiles/cmTC_3cec1.dir/build]
-  ignore line: [make[1]: Entering directory '/home/cubagem/volumetry-visionaryt/CMakeFiles/CMakeTmp']
-  ignore line: [Building CXX object CMakeFiles/cmTC_3cec1.dir/CMakeCXXCompilerABI.cpp.o]
-  ignore line: [/usr/bin/c++      -o CMakeFiles/cmTC_3cec1.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-3.7/Modules/CMakeCXXCompilerABI.cpp]
-  ignore line: [Linking CXX executable cmTC_3cec1]
-  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_3cec1.dir/link.txt --verbose=1]
-  ignore line: [/usr/bin/c++       -v CMakeFiles/cmTC_3cec1.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_3cec1 -rdynamic  ]
+  ignore line: [Run Build Command:"/usr/bin/make" "cmTC_d240a/fast"]
+  ignore line: [/usr/bin/make -f CMakeFiles/cmTC_d240a.dir/build.make CMakeFiles/cmTC_d240a.dir/build]
+  ignore line: [make[1]: Entering directory '/home/volumetry-visionaryt/CMakeFiles/CMakeTmp']
+  ignore line: [Building CXX object CMakeFiles/cmTC_d240a.dir/CMakeCXXCompilerABI.cpp.o]
+  ignore line: [/usr/bin/c++      -o CMakeFiles/cmTC_d240a.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-3.7/Modules/CMakeCXXCompilerABI.cpp]
+  ignore line: [Linking CXX executable cmTC_d240a]
+  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d240a.dir/link.txt --verbose=1]
+  ignore line: [/usr/bin/c++       -v CMakeFiles/cmTC_d240a.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_d240a -rdynamic  ]
   ignore line: [Using built-in specs.]
   ignore line: [COLLECT_GCC=/usr/bin/c++]
   ignore line: [COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/6/lto-wrapper]
@@ -271,13 +271,13 @@ Parsed CXX implicit link information from above output:
   ignore line: [gcc version 6.3.0 20170516 (Debian 6.3.0-18+deb9u1) ]
   ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/6/:/usr/lib/gcc/x86_64-linux-gnu/6/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/6/:/usr/lib/gcc/x86_64-linux-gnu/]
   ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/6/:/usr/lib/gcc/x86_64-linux-gnu/6/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/6/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/6/../../../:/lib/:/usr/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_3cec1' '-rdynamic' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
-  link line: [ /usr/lib/gcc/x86_64-linux-gnu/6/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/6/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/6/lto-wrapper -plugin-opt=-fresolution=/tmp/ccNpIFJ0.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --sysroot=/ --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_3cec1 /usr/lib/gcc/x86_64-linux-gnu/6/../../../x86_64-linux-gnu/Scrt1.o /usr/lib/gcc/x86_64-linux-gnu/6/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/6/crtbeginS.o -L/usr/lib/gcc/x86_64-linux-gnu/6 -L/usr/lib/gcc/x86_64-linux-gnu/6/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/6/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/6/../../.. CMakeFiles/cmTC_3cec1.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-linux-gnu/6/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/6/../../../x86_64-linux-gnu/crtn.o]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_d240a' '-rdynamic' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
+  link line: [ /usr/lib/gcc/x86_64-linux-gnu/6/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/6/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/6/lto-wrapper -plugin-opt=-fresolution=/tmp/ccT1Q1FL.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --sysroot=/ --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_d240a /usr/lib/gcc/x86_64-linux-gnu/6/../../../x86_64-linux-gnu/Scrt1.o /usr/lib/gcc/x86_64-linux-gnu/6/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/6/crtbeginS.o -L/usr/lib/gcc/x86_64-linux-gnu/6 -L/usr/lib/gcc/x86_64-linux-gnu/6/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/6/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/6/../../.. CMakeFiles/cmTC_d240a.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-linux-gnu/6/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/6/../../../x86_64-linux-gnu/crtn.o]
     arg [/usr/lib/gcc/x86_64-linux-gnu/6/collect2] ==> ignore
     arg [-plugin] ==> ignore
     arg [/usr/lib/gcc/x86_64-linux-gnu/6/liblto_plugin.so] ==> ignore
     arg [-plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/6/lto-wrapper] ==> ignore
-    arg [-plugin-opt=-fresolution=/tmp/ccNpIFJ0.res] ==> ignore
+    arg [-plugin-opt=-fresolution=/tmp/ccT1Q1FL.res] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
     arg [-plugin-opt=-pass-through=-lc] ==> ignore
@@ -294,7 +294,7 @@ Parsed CXX implicit link information from above output:
     arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
     arg [-pie] ==> ignore
     arg [-o] ==> ignore
-    arg [cmTC_3cec1] ==> ignore
+    arg [cmTC_d240a] ==> ignore
     arg [/usr/lib/gcc/x86_64-linux-gnu/6/../../../x86_64-linux-gnu/Scrt1.o] ==> ignore
     arg [/usr/lib/gcc/x86_64-linux-gnu/6/../../../x86_64-linux-gnu/crti.o] ==> ignore
     arg [/usr/lib/gcc/x86_64-linux-gnu/6/crtbeginS.o] ==> ignore
@@ -306,7 +306,7 @@ Parsed CXX implicit link information from above output:
     arg [-L/usr/lib/x86_64-linux-gnu] ==> dir [/usr/lib/x86_64-linux-gnu]
     arg [-L/usr/lib/../lib] ==> dir [/usr/lib/../lib]
     arg [-L/usr/lib/gcc/x86_64-linux-gnu/6/../../..] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/6/../../..]
-    arg [CMakeFiles/cmTC_3cec1.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+    arg [CMakeFiles/cmTC_d240a.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
     arg [-lstdc++] ==> lib [stdc++]
     arg [-lm] ==> lib [m]
     arg [-lgcc_s] ==> lib [gcc_s]
@@ -336,17 +336,17 @@ Parsed CXX implicit link information from above output:
 
 
 Detecting CXX [-std=c++14] compiler features compiled with the following output:
-Change Dir: /home/cubagem/volumetry-visionaryt/CMakeFiles/CMakeTmp
+Change Dir: /home/volumetry-visionaryt/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_85584/fast"
-/usr/bin/make -f CMakeFiles/cmTC_85584.dir/build.make CMakeFiles/cmTC_85584.dir/build
-make[1]: Entering directory '/home/cubagem/volumetry-visionaryt/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_85584.dir/feature_tests.cxx.o
-/usr/bin/c++     -std=c++14 -o CMakeFiles/cmTC_85584.dir/feature_tests.cxx.o -c /home/cubagem/volumetry-visionaryt/CMakeFiles/feature_tests.cxx
-Linking CXX executable cmTC_85584
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_85584.dir/link.txt --verbose=1
-/usr/bin/c++        CMakeFiles/cmTC_85584.dir/feature_tests.cxx.o  -o cmTC_85584 -rdynamic 
-make[1]: Leaving directory '/home/cubagem/volumetry-visionaryt/CMakeFiles/CMakeTmp'
+Run Build Command:"/usr/bin/make" "cmTC_92b93/fast"
+/usr/bin/make -f CMakeFiles/cmTC_92b93.dir/build.make CMakeFiles/cmTC_92b93.dir/build
+make[1]: Entering directory '/home/volumetry-visionaryt/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_92b93.dir/feature_tests.cxx.o
+/usr/bin/c++     -std=c++14 -o CMakeFiles/cmTC_92b93.dir/feature_tests.cxx.o -c /home/volumetry-visionaryt/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_92b93
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_92b93.dir/link.txt --verbose=1
+/usr/bin/c++        CMakeFiles/cmTC_92b93.dir/feature_tests.cxx.o  -o cmTC_92b93 -rdynamic 
+make[1]: Leaving directory '/home/volumetry-visionaryt/CMakeFiles/CMakeTmp'
 
 
     Feature record: CXX_FEATURE:1cxx_aggregate_default_initializers
@@ -409,17 +409,17 @@ make[1]: Leaving directory '/home/cubagem/volumetry-visionaryt/CMakeFiles/CMakeT
 
 
 Detecting CXX [-std=c++11] compiler features compiled with the following output:
-Change Dir: /home/cubagem/volumetry-visionaryt/CMakeFiles/CMakeTmp
+Change Dir: /home/volumetry-visionaryt/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_913c8/fast"
-/usr/bin/make -f CMakeFiles/cmTC_913c8.dir/build.make CMakeFiles/cmTC_913c8.dir/build
-make[1]: Entering directory '/home/cubagem/volumetry-visionaryt/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_913c8.dir/feature_tests.cxx.o
-/usr/bin/c++     -std=c++11 -o CMakeFiles/cmTC_913c8.dir/feature_tests.cxx.o -c /home/cubagem/volumetry-visionaryt/CMakeFiles/feature_tests.cxx
-Linking CXX executable cmTC_913c8
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_913c8.dir/link.txt --verbose=1
-/usr/bin/c++        CMakeFiles/cmTC_913c8.dir/feature_tests.cxx.o  -o cmTC_913c8 -rdynamic 
-make[1]: Leaving directory '/home/cubagem/volumetry-visionaryt/CMakeFiles/CMakeTmp'
+Run Build Command:"/usr/bin/make" "cmTC_c2dae/fast"
+/usr/bin/make -f CMakeFiles/cmTC_c2dae.dir/build.make CMakeFiles/cmTC_c2dae.dir/build
+make[1]: Entering directory '/home/volumetry-visionaryt/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_c2dae.dir/feature_tests.cxx.o
+/usr/bin/c++     -std=c++11 -o CMakeFiles/cmTC_c2dae.dir/feature_tests.cxx.o -c /home/volumetry-visionaryt/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_c2dae
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c2dae.dir/link.txt --verbose=1
+/usr/bin/c++        CMakeFiles/cmTC_c2dae.dir/feature_tests.cxx.o  -o cmTC_c2dae -rdynamic 
+make[1]: Leaving directory '/home/volumetry-visionaryt/CMakeFiles/CMakeTmp'
 
 
     Feature record: CXX_FEATURE:0cxx_aggregate_default_initializers
@@ -482,17 +482,17 @@ make[1]: Leaving directory '/home/cubagem/volumetry-visionaryt/CMakeFiles/CMakeT
 
 
 Detecting CXX [-std=c++98] compiler features compiled with the following output:
-Change Dir: /home/cubagem/volumetry-visionaryt/CMakeFiles/CMakeTmp
+Change Dir: /home/volumetry-visionaryt/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_885ad/fast"
-/usr/bin/make -f CMakeFiles/cmTC_885ad.dir/build.make CMakeFiles/cmTC_885ad.dir/build
-make[1]: Entering directory '/home/cubagem/volumetry-visionaryt/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_885ad.dir/feature_tests.cxx.o
-/usr/bin/c++     -std=c++98 -o CMakeFiles/cmTC_885ad.dir/feature_tests.cxx.o -c /home/cubagem/volumetry-visionaryt/CMakeFiles/feature_tests.cxx
-Linking CXX executable cmTC_885ad
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_885ad.dir/link.txt --verbose=1
-/usr/bin/c++        CMakeFiles/cmTC_885ad.dir/feature_tests.cxx.o  -o cmTC_885ad -rdynamic 
-make[1]: Leaving directory '/home/cubagem/volumetry-visionaryt/CMakeFiles/CMakeTmp'
+Run Build Command:"/usr/bin/make" "cmTC_8ce76/fast"
+/usr/bin/make -f CMakeFiles/cmTC_8ce76.dir/build.make CMakeFiles/cmTC_8ce76.dir/build
+make[1]: Entering directory '/home/volumetry-visionaryt/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_8ce76.dir/feature_tests.cxx.o
+/usr/bin/c++     -std=c++98 -o CMakeFiles/cmTC_8ce76.dir/feature_tests.cxx.o -c /home/volumetry-visionaryt/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_8ce76
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_8ce76.dir/link.txt --verbose=1
+/usr/bin/c++        CMakeFiles/cmTC_8ce76.dir/feature_tests.cxx.o  -o cmTC_8ce76 -rdynamic 
+make[1]: Leaving directory '/home/volumetry-visionaryt/CMakeFiles/CMakeTmp'
 
 
     Feature record: CXX_FEATURE:0cxx_aggregate_default_initializers
@@ -553,30 +553,30 @@ make[1]: Leaving directory '/home/cubagem/volumetry-visionaryt/CMakeFiles/CMakeT
     Feature record: CXX_FEATURE:0cxx_variadic_macros
     Feature record: CXX_FEATURE:0cxx_variadic_templates
 Determining if the include file pthread.h exists passed with the following output:
-Change Dir: /home/cubagem/volumetry-visionaryt/CMakeFiles/CMakeTmp
+Change Dir: /home/volumetry-visionaryt/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_c32cb/fast"
-/usr/bin/make -f CMakeFiles/cmTC_c32cb.dir/build.make CMakeFiles/cmTC_c32cb.dir/build
-make[1]: Entering directory '/home/cubagem/volumetry-visionaryt/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_c32cb.dir/CheckIncludeFile.c.o
-/usr/bin/cc     -o CMakeFiles/cmTC_c32cb.dir/CheckIncludeFile.c.o   -c /home/cubagem/volumetry-visionaryt/CMakeFiles/CMakeTmp/CheckIncludeFile.c
-Linking C executable cmTC_c32cb
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c32cb.dir/link.txt --verbose=1
-/usr/bin/cc       CMakeFiles/cmTC_c32cb.dir/CheckIncludeFile.c.o  -o cmTC_c32cb -rdynamic 
-make[1]: Leaving directory '/home/cubagem/volumetry-visionaryt/CMakeFiles/CMakeTmp'
+Run Build Command:"/usr/bin/make" "cmTC_924d3/fast"
+/usr/bin/make -f CMakeFiles/cmTC_924d3.dir/build.make CMakeFiles/cmTC_924d3.dir/build
+make[1]: Entering directory '/home/volumetry-visionaryt/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_924d3.dir/CheckIncludeFile.c.o
+/usr/bin/cc     -o CMakeFiles/cmTC_924d3.dir/CheckIncludeFile.c.o   -c /home/volumetry-visionaryt/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_924d3
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_924d3.dir/link.txt --verbose=1
+/usr/bin/cc       CMakeFiles/cmTC_924d3.dir/CheckIncludeFile.c.o  -o cmTC_924d3 -rdynamic 
+make[1]: Leaving directory '/home/volumetry-visionaryt/CMakeFiles/CMakeTmp'
 
 
 Determining if the function pthread_create exists in the pthread passed with the following output:
-Change Dir: /home/cubagem/volumetry-visionaryt/CMakeFiles/CMakeTmp
+Change Dir: /home/volumetry-visionaryt/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_eeaa1/fast"
-/usr/bin/make -f CMakeFiles/cmTC_eeaa1.dir/build.make CMakeFiles/cmTC_eeaa1.dir/build
-make[1]: Entering directory '/home/cubagem/volumetry-visionaryt/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_eeaa1.dir/CheckFunctionExists.c.o
-/usr/bin/cc    -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_eeaa1.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.7/Modules/CheckFunctionExists.c
-Linking C executable cmTC_eeaa1
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_eeaa1.dir/link.txt --verbose=1
-/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_eeaa1.dir/CheckFunctionExists.c.o  -o cmTC_eeaa1 -rdynamic -lpthread 
-make[1]: Leaving directory '/home/cubagem/volumetry-visionaryt/CMakeFiles/CMakeTmp'
+Run Build Command:"/usr/bin/make" "cmTC_c4fb6/fast"
+/usr/bin/make -f CMakeFiles/cmTC_c4fb6.dir/build.make CMakeFiles/cmTC_c4fb6.dir/build
+make[1]: Entering directory '/home/volumetry-visionaryt/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_c4fb6.dir/CheckFunctionExists.c.o
+/usr/bin/cc    -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_c4fb6.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.7/Modules/CheckFunctionExists.c
+Linking C executable cmTC_c4fb6
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c4fb6.dir/link.txt --verbose=1
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_c4fb6.dir/CheckFunctionExists.c.o  -o cmTC_c4fb6 -rdynamic -lpthread 
+make[1]: Leaving directory '/home/volumetry-visionaryt/CMakeFiles/CMakeTmp'
 
 
