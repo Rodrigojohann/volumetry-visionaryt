@@ -23,9 +23,13 @@
 #include <pcl/point_types.h>
 #include <pcl/io/ply_io.h>
 
+#include <pcl/point_cloud.h>
+#include <pcl/octree/octree_pointcloud_changedetector.h>
+
 pcl::PointCloud<pcl::PointXYZ>::Ptr cloud (new pcl::PointCloud<pcl::PointXYZ>);
 pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_filtered (new pcl::PointCloud<pcl::PointXYZ>);
 pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_background (new pcl::PointCloud<pcl::PointXYZ>);
+pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_nobackground (new pcl::PointCloud<pcl::PointXYZ>);
 pcl::PassThrough<pcl::PointXYZ> passx;
 pcl::PassThrough<pcl::PointXYZ> passy;
 pcl::PassThrough<pcl::PointXYZ> passz;
@@ -48,7 +52,8 @@ double dimensionX;
 double dimensionY;
 double dimensionZ;
 
-
+float resolution = 32.0f;
+pcl::octree::OctreePointCloudChangeDetector<pcl::PointXYZ> octree (resolution);
 
 ///////////////////////////////////////////////////////
 
@@ -68,6 +73,12 @@ bool kbhit(void)
 double calculatevolume(std::vector<PointXYZ> inputcloud)
 {
 	pcl::io::loadPLYFile<pcl::PointXYZ> ("volumetry-background/backgroundclound.ply", *cloud_background);
+	
+	// Add points from cloudA to octree
+	octree.setInputCloud (cloud_background);
+	octree.addPointsFromInputCloud ();
+	octree.switchBuffers ();
+	
 	cloud->points.resize (inputcloud.size());
 
 	for(size_t i=0;i<cloud->points.size();++i)
@@ -77,6 +88,21 @@ double calculatevolume(std::vector<PointXYZ> inputcloud)
 		cloud->points[i].z = inputcloud[i].z;
 	}
 
+	octree.setInputCloud (cloud);
+	octree.addPointsFromInputCloud ();
+
+	std::vector<int> newPointIdxVector;
+	octree.getPointIndicesFromNewVoxels (newPointIdxVector);
+	
+	for (size_t i = 0; i < newPointIdxVector.size(); ++i)
+	{
+		cloud_nobackground->points[i].x = cloud[newPointIdxVector[i]].x;
+		cloud_nobackground->points[i].y = cloud[newPointIdxVector[i]].y;
+		cloud_nobackground->points[i].z = cloud[newPointIdxVector[i]].z;
+	}
+	
+	pcl::io::savePLYFileASCII ("cloud_nobackground.ply", cloud_nobackground);
+	
 	passx.setInputCloud (cloud);
 	passx.setFilterFieldName ("x");
 	passx.setFilterLimits (-0.23, 0.25);
