@@ -23,6 +23,8 @@
 #include <pcl/point_types.h>
 #include <pcl/io/ply_io.h>
 
+
+#include <pcl/common/io.h>
 #include <pcl/point_cloud.h>
 #include <pcl/octree/octree_pointcloud_changedetector.h>
 
@@ -72,7 +74,7 @@ bool kbhit(void)
 
 double calculatevolume(std::vector<PointXYZ> inputcloud)
 {
-	pcl::io::loadPLYFile<pcl::PointXYZ> ("volumetry-background/backgroundclound.ply", *cloud_background, True);
+	pcl::io::loadPLYFile<pcl::PointXYZ> ("volumetry-background/backgroundclound.ply", *cloud_background);
 	
 	// Add points from cloudA to octree
 	octree.setInputCloud (cloud_background);
@@ -101,7 +103,7 @@ double calculatevolume(std::vector<PointXYZ> inputcloud)
 		cloud_nobackground->points[i].z = (*cloud)[newPointIdxVector[i]].z;
 	}
 	
-	pcl::io::savePLYFile("cloud_nobackground.ply", cloud_nobackground);
+	pcl::io::savePLYFile <pcl::PointXYZ> ("cloud_nobackground.ply", cloud_nobackground, true);
 	
 	passx.setInputCloud (cloud);
 	passx.setFilterFieldName ("x");
