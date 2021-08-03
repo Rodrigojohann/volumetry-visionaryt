@@ -48,7 +48,7 @@ double dimensionX;
 double dimensionY;
 double dimensionZ;
 
-pcl::io::loadPLYFile<pcl::PointXYZ> ("volumetry-background/backgroundclound.ply", *cloud_background);
+
 
 ///////////////////////////////////////////////////////
 
@@ -67,6 +67,7 @@ bool kbhit(void)
 
 double calculatevolume(std::vector<PointXYZ> inputcloud)
 {
+	pcl::io::loadPLYFile<pcl::PointXYZ> ("volumetry-background/backgroundclound.ply", *cloud_background);
 	cloud->points.resize (inputcloud.size());
 
 	for(size_t i=0;i<cloud->points.size();++i)
