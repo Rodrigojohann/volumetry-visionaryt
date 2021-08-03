@@ -26,7 +26,6 @@
 pcl::PointCloud<pcl::PointXYZ>::Ptr cloud (new pcl::PointCloud<pcl::PointXYZ>);
 pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_filtered (new pcl::PointCloud<pcl::PointXYZ>);
 pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_background (new pcl::PointCloud<pcl::PointXYZ>);
-pcl::PLYReader Reader;
 pcl::PassThrough<pcl::PointXYZ> passx;
 pcl::PassThrough<pcl::PointXYZ> passy;
 pcl::PassThrough<pcl::PointXYZ> passz;
@@ -49,7 +48,7 @@ double dimensionX;
 double dimensionY;
 double dimensionZ;
 
-pcl::io::loadPCDFile<pcl::PointXYZ> ("volumetry-background/backgroundclound.ply", *cloud_background);
+pcl::io::loadPLYFile<pcl::PointXYZ> ("volumetry-background/backgroundclound.ply", *cloud_background);
 
 ///////////////////////////////////////////////////////
 
