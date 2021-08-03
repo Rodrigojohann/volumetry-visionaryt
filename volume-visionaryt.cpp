@@ -53,7 +53,7 @@ double dimensionX;
 double dimensionY;
 double dimensionZ;
 
-float resolution = 32.0f;
+float resolution = 32.0;
 pcl::octree::OctreePointCloudChangeDetector<pcl::PointXYZ> octree (resolution);
 
 ///////////////////////////////////////////////////////
