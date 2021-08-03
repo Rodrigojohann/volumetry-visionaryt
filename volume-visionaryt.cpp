@@ -19,9 +19,9 @@
 #include <pcl/filters/passthrough.h>
 #include <pcl/filters/statistical_outlier_removal.h>
 #include <pcl/common/common.h>
-#include <pcl/io/ply_io.h>
 #include <iostream>
 #include <pcl/point_types.h>
+#include <pcl/io/ply_io.h>
 
 pcl::PointCloud<pcl::PointXYZ>::Ptr cloud (new pcl::PointCloud<pcl::PointXYZ>);
 pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_filtered (new pcl::PointCloud<pcl::PointXYZ>);
@@ -49,7 +49,7 @@ double dimensionX;
 double dimensionY;
 double dimensionZ;
 
-Reader.read("volumetry-background/backgroundclound.ply", *cloud_background);
+pcl::io::loadPCDFile<pcl::PointXYZ> ("volumetry-background/backgroundclound.ply", *cloud_background);
 
 ///////////////////////////////////////////////////////
 
