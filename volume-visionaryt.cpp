@@ -105,10 +105,12 @@ void calculatevolume(std::vector<PointXYZ> inputcloud)
 	
 	//printf("point x: %f", newPointIdxVector[0]);
 	
+	cloud_nobackground->points.resize (newPointIdxVector.size());
+	
 	for (size_t i = 0; i < newPointIdxVector.size(); ++i)
 	{
-		cloud_nobackground->points[i].x = cloud[newPointIdxVector[i]].x;
-		cloud_nobackground->points[i].y = cloud[newPointIdxVector[i]].y;
+		cloud_nobackground->points[i].x = cloud->points[newPointIdxVector[i]].x;
+		cloud_nobackground->points[i].y = cloud->points[newPointIdxVector[i]].y;
 		cloud_nobackground->points[i].z = cloud[newPointIdxVector[i]].z;
 	}
 }	
