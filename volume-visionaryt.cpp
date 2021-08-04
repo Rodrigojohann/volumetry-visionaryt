@@ -90,7 +90,8 @@ double calculatevolume(std::vector<PointXYZ> inputcloud)
 		cloud->points[i].z = inputcloud[i].z;
 	}
 
-	printf("input size: %d", cloud.size())	
+	size_t input_size = cloud->size();
+	printf("input size: %d", input_size);	
 
 	octree.setInputCloud (cloud);
 	octree.addPointsFromInputCloud ();
@@ -98,7 +99,8 @@ double calculatevolume(std::vector<PointXYZ> inputcloud)
 	std::vector<int> newPointIdxVector;
 	octree.getPointIndicesFromNewVoxels (newPointIdxVector);
 	
-		printf("output size: %d", newPointIdxVector.size())
+	//size_t output_size = cloud->size();
+	printf("output size: %d", newPointIdxVector.size());
 	
 	for (size_t i = 0; i < newPointIdxVector.size(); ++i)
 	{
