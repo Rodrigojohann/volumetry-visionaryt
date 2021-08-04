@@ -25,6 +25,7 @@
 
 #include <pcl/common/io.h>
 #include <pcl/point_cloud.h>
+#include <pcl/octree/octree.h>
 #include <pcl/octree/octree_pointcloud_changedetector.h>
 
 pcl::PointCloud<pcl::PointXYZ>::Ptr cloud (new pcl::PointCloud<pcl::PointXYZ>);
