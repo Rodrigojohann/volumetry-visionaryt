@@ -53,7 +53,7 @@ double dimensionX;
 double dimensionY;
 double dimensionZ;
 
-float resolution = 32.0;
+
 
 
 ///////////////////////////////////////////////////////
@@ -73,6 +73,7 @@ bool kbhit(void)
 
 double calculatevolume(std::vector<PointXYZ> inputcloud)
 {
+	float resolution = 32.0f;
 	pcl::io::loadPLYFile<pcl::PointXYZ> ("volumetry-background/backgroundclound.ply", *cloud_background);
 	pcl::octree::OctreePointCloudChangeDetector<pcl::PointXYZ> octree (resolution);
 	// Add points from cloudA to octree
