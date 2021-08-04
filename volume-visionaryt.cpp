@@ -113,9 +113,9 @@ void calculatevolume(std::vector<PointXYZ> inputcloud)
 		cloud_nobackground->points[i].y = (*cloud)[newPointIdxVector[i]].y;
 		cloud_nobackground->points[i].z = (*cloud)[newPointIdxVector[i]].z;
 	}
-}	
-	//pcl::io::savePLYFileASCII ("cloud_nobackground.ply", *cloud_nobackground);
 	
+	pcl::io::savePLYFileASCII ("cloud_nobackground.ply", *cloud_nobackground);
+}	
 	//passx.setInputCloud (cloud);
 	//passx.setFilterFieldName ("x");
 	//passx.setFilterLimits (-0.23, 0.25);
