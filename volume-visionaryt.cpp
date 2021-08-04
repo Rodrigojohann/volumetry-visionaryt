@@ -76,10 +76,10 @@ double calculatevolume(std::vector<PointXYZ> inputcloud)
 	float resolution = 32.0f;
 	pcl::io::loadPLYFile<pcl::PointXYZ> ("volumetry-background/backgroundclound.ply", *cloud_background);
 	pcl::octree::OctreePointCloudChangeDetector<pcl::PointXYZ> octree (resolution);
-	// Add points from cloudA to octree
-	//octree.setInputCloud (cloud_background);
-	//octree.addPointsFromInputCloud ();
-	//octree.switchBuffers ();
+
+	octree.setInputCloud (cloud_background);
+	octree.addPointsFromInputCloud ();
+	octree.switchBuffers ();
 	
 	cloud->points.resize (inputcloud.size());
 
@@ -90,20 +90,20 @@ double calculatevolume(std::vector<PointXYZ> inputcloud)
 		cloud->points[i].z = inputcloud[i].z;
 	}
 
-	//octree.setInputCloud (cloud);
-	//octree.addPointsFromInputCloud ();
+	octree.setInputCloud (cloud);
+	octree.addPointsFromInputCloud ();
 
-	//std::vector<int> newPointIdxVector;
-	//octree.getPointIndicesFromNewVoxels (newPointIdxVector);
+	std::vector<int> newPointIdxVector;
+	octree.getPointIndicesFromNewVoxels (newPointIdxVector);
 	
-	//for (size_t i = 0; i < newPointIdxVector.size(); ++i)
-	//{
-		//cloud_nobackground->points[i].x = (*cloud)[newPointIdxVector[i]].x;
-		//cloud_nobackground->points[i].y = (*cloud)[newPointIdxVector[i]].y;
-		//cloud_nobackground->points[i].z = (*cloud)[newPointIdxVector[i]].z;
-	//}
+	for (size_t i = 0; i < newPointIdxVector.size(); ++i)
+	{
+		cloud_nobackground->points[i].x = (*cloud)[newPointIdxVector[i]].x;
+		cloud_nobackground->points[i].y = (*cloud)[newPointIdxVector[i]].y;
+		cloud_nobackground->points[i].z = (*cloud)[newPointIdxVector[i]].z;
+	}
 	
-	//pcl::io::savePLYFileASCII ("cloud_nobackground.ply", *cloud_nobackground);
+	pcl::io::savePLYFileASCII ("cloud_nobackground.ply", *cloud_nobackground);
 	
 	passx.setInputCloud (cloud);
 	passx.setFilterFieldName ("x");
@@ -120,7 +120,7 @@ double calculatevolume(std::vector<PointXYZ> inputcloud)
 	passz.setFilterLimits (0, 0.758);
 	passz.filter (*cloud_filtered);
 	
-	sor.setInputCloud (cloud_filtered);
+	sor.setInputCloud (cloud_nobackground);
 	sor.setMeanK (5);
 	sor.setStddevMulThresh (3.5);
 	sor.filter (*cloud_filtered);
