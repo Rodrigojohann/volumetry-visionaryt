@@ -103,14 +103,14 @@ void calculatevolume(std::vector<PointXYZ> inputcloud)
 	//size_t output_size = cloud->size();
 	printf("output size: %d \n\n", newPointIdxVector.size());
 	
-	printf("point x: %f", newPointIdxVector[0]);
+	//printf("point x: %f", newPointIdxVector[0]);
 	
-	//for (size_t i = 0; i < newPointIdxVector.size(); ++i)
-	//{
-	//	cloud_nobackground->points[i].x = (*cloud)[newPointIdxVector[i]].x;
-	//	cloud_nobackground->points[i].y = (*cloud)[newPointIdxVector[i]].y;
-	//	cloud_nobackground->points[i].z = (*cloud)[newPointIdxVector[i]].z;
-	//}
+	for (size_t i = 0; i < newPointIdxVector.size(); ++i)
+	{
+		cloud_nobackground->points[i].x = cloud[newPointIdxVector[i]].x;
+		cloud_nobackground->points[i].y = cloud[newPointIdxVector[i]].y;
+		cloud_nobackground->points[i].z = cloud[newPointIdxVector[i]].z;
+	}
 }	
 	//pcl::io::savePLYFileASCII ("cloud_nobackground.ply", *cloud_nobackground);
 	
