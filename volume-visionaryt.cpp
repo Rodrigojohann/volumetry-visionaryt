@@ -82,7 +82,7 @@ double calculatevolume(std::vector<PointXYZ> inputcloud)
 	octree.switchBuffers ();
 	
 	cloud->points.resize (inputcloud.size());
-
+	
 	for(size_t i=0;i<cloud->points.size();++i)
 	{
 		cloud->points[i].x = inputcloud[i].x;
@@ -90,11 +90,15 @@ double calculatevolume(std::vector<PointXYZ> inputcloud)
 		cloud->points[i].z = inputcloud[i].z;
 	}
 
+	printf("input size: %d", cloud.size())	
+
 	octree.setInputCloud (cloud);
 	octree.addPointsFromInputCloud ();
 
 	std::vector<int> newPointIdxVector;
 	octree.getPointIndicesFromNewVoxels (newPointIdxVector);
+	
+		printf("output size: %d", newPointIdxVector.size())
 	
 	for (size_t i = 0; i < newPointIdxVector.size(); ++i)
 	{
@@ -105,51 +109,51 @@ double calculatevolume(std::vector<PointXYZ> inputcloud)
 	
 	pcl::io::savePLYFileASCII ("cloud_nobackground.ply", *cloud_nobackground);
 	
-	passx.setInputCloud (cloud);
-	passx.setFilterFieldName ("x");
-	passx.setFilterLimits (-0.23, 0.25);
-	passx.filter (*cloud_filtered);
+	//passx.setInputCloud (cloud);
+	//passx.setFilterFieldName ("x");
+	//passx.setFilterLimits (-0.23, 0.25);
+	//passx.filter (*cloud_filtered);
 	
-	passy.setInputCloud (cloud_filtered);
-	passy.setFilterFieldName ("y");
-	passy.setFilterLimits (-0.15, 0.26);
-	passy.filter (*cloud_filtered);
+	//passy.setInputCloud (cloud_filtered);
+	//passy.setFilterFieldName ("y");
+	//passy.setFilterLimits (-0.15, 0.26);
+	//passy.filter (*cloud_filtered);
 	
-	passz.setInputCloud (cloud_filtered);
-	passz.setFilterFieldName ("z");
-	passz.setFilterLimits (0, 0.758);
-	passz.filter (*cloud_filtered);
+	//passz.setInputCloud (cloud_filtered);
+	//passz.setFilterFieldName ("z");
+	//passz.setFilterLimits (0, 0.758);
+	//passz.filter (*cloud_filtered);
 	
-	sor.setInputCloud (cloud_nobackground);
-	sor.setMeanK (5);
-	sor.setStddevMulThresh (3.5);
-	sor.filter (*cloud_filtered);
+	//sor.setInputCloud (cloud_nobackground);
+	//sor.setMeanK (5);
+	//sor.setStddevMulThresh (3.5);
+	//sor.filter (*cloud_filtered);
 
-	cloud_size = cloud_filtered->size();
+	//cloud_size = cloud_filtered->size();
 	
-	if (cloud_size > 10)
-	{
-	chull.setInputCloud(cloud_filtered);
-	chull.setDimension(3);
-	chull.setComputeAreaVolume(true);
-	chull.reconstruct(*surface_hull, polygons);
+	//if (cloud_size > 10)
+	//{
+	//chull.setInputCloud(cloud_filtered);
+	//chull.setDimension(3);
+	//chull.setComputeAreaVolume(true);
+	//chull.reconstruct(*surface_hull, polygons);
 	
-	volume = chull.getTotalVolume();
+	//volume = chull.getTotalVolume();
 
-	pcl::getMinMax3D (*surface_hull, minPt, maxPt);
-	dimensionX = maxPt.x - minPt.x;
-	dimensionY = maxPt.y - minPt.y;
-	dimensionZ = maxPt.z - minPt.z;
+	//pcl::getMinMax3D (*surface_hull, minPt, maxPt);
+	//dimensionX = maxPt.x - minPt.x;
+	//dimensionY = maxPt.y - minPt.y;
+	//dimensionZ = maxPt.z - minPt.z;
 	
-	}
-	else
-	{
-	volume = 0.0;
-	dimensionX = 0.0;
-	dimensionY = 0.0;
-	dimensionZ = 0.0;
-	}
-	return volume;
+	//}
+	//else
+	//{
+	//volume = 0.0;
+	//dimensionX = 0.0;
+	//dimensionY = 0.0;
+	//dimensionZ = 0.0;
+	//}
+	//return volume;
 }
 
 void runStreamingDemo(char* ipAddress, unsigned short port)
@@ -173,33 +177,41 @@ void runStreamingDemo(char* ipAddress, unsigned short port)
 	control.stopAcquisition();
 	control.startAcquisition();
 	
-	volumemean = 0.0;
-	while (!kbhit())
-	{
-		counter = counter+1; 
-		if (dataStream.getNextFrame())
+	if (dataStream.getNextFrame())
 		{
 			// Convert data to a point cloud
 			pDataHandler->generatePointCloud(pointCloud);
 			// Calculate volume
-			volumemean = volumemean + calculatevolume(pointCloud);
+			calculatevolume(pointCloud);
 		}
+	
+	//volumemean = 0.0;
+	//while (!kbhit())
+	//{
+		//counter = counter+1; 
+		//if (dataStream.getNextFrame())
+		//{
+			//// Convert data to a point cloud
+			//pDataHandler->generatePointCloud(pointCloud);
+			//// Calculate volume
+			//volumemean = volumemean + calculatevolume(pointCloud);
+		//}
 
-		if (counter==9)
-		{
-			counter = 0;
-			volumemean = volumemean/10;
-			printf("---------------------\n\n");
-			printf("volume: %f m³\n\n", volumemean);
-			printf("volume: %f cm³\n\n", volumemean*1000000);
+		//if (counter==9)
+		//{
+			//counter = 0;
+			//volumemean = volumemean/10;
+			//printf("---------------------\n\n");
+			//printf("volume: %f m³\n\n", volumemean);
+			//printf("volume: %f cm³\n\n", volumemean*1000000);
 			
-			printf("dimensions:\n");
-			printf("%f cm (x)\n", dimensionX*100);
-			printf("%f cm (y)\n", dimensionY*100);
-			printf("%f cm (z)\n\n", dimensionZ*100);
-			volumemean = 0.0;			
-		}
-	}
+			//printf("dimensions:\n");
+			//printf("%f cm (x)\n", dimensionX*100);
+			//printf("%f cm (y)\n", dimensionY*100);
+			//printf("%f cm (z)\n\n", dimensionZ*100);
+			//volumemean = 0.0;			
+		//}
+	//}
 	control.stopAcquisition();
 	control.closeConnection();
 	dataStream.closeConnection();
