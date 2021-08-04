@@ -74,7 +74,7 @@ bool kbhit(void)
 //double calculatevolume(std::vector<PointXYZ> inputcloud)
 void calculatevolume(std::vector<PointXYZ> inputcloud)
 {
-	float resolution = 0.5f;
+	float resolution = 0.05f;
 	pcl::io::loadPLYFile<pcl::PointXYZ> ("volumetry-background/backgroundcloud.ply", *cloud_background);
 	pcl::octree::OctreePointCloudChangeDetector<pcl::PointXYZ> octree (resolution);
 
@@ -103,13 +103,15 @@ void calculatevolume(std::vector<PointXYZ> inputcloud)
 	//size_t output_size = cloud->size();
 	printf("output size: %d \n\n", newPointIdxVector.size());
 	
-	for (size_t i = 0; i < newPointIdxVector.size(); ++i)
-	{
-		cloud_nobackground->points[i].x = (*cloud)[newPointIdxVector[i]].x;
-		cloud_nobackground->points[i].y = (*cloud)[newPointIdxVector[i]].y;
-		cloud_nobackground->points[i].z = (*cloud)[newPointIdxVector[i]].z;
-	}
+	printf("point x: %f", newPointIdxVector[i].x);
 	
+	//for (size_t i = 0; i < newPointIdxVector.size(); ++i)
+	//{
+	//	cloud_nobackground->points[i].x = (*cloud)[newPointIdxVector[i]].x;
+	//	cloud_nobackground->points[i].y = (*cloud)[newPointIdxVector[i]].y;
+	//	cloud_nobackground->points[i].z = (*cloud)[newPointIdxVector[i]].z;
+	//}
+}	
 	//pcl::io::savePLYFileASCII ("cloud_nobackground.ply", *cloud_nobackground);
 	
 	//passx.setInputCloud (cloud);
@@ -157,7 +159,7 @@ void calculatevolume(std::vector<PointXYZ> inputcloud)
 	//dimensionZ = 0.0;
 	//}
 	//return volume;
-}
+//}
 
 void runStreamingDemo(char* ipAddress, unsigned short port)
 {
