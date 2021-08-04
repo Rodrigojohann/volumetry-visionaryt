@@ -73,7 +73,7 @@ bool kbhit(void)
 
 double calculatevolume(std::vector<PointXYZ> inputcloud)
 {
-	float resolution = 32.0f;
+	float resolution = 2.0f;
 	pcl::io::loadPLYFile<pcl::PointXYZ> ("volumetry-background/backgroundcloud.ply", *cloud_background);
 	pcl::octree::OctreePointCloudChangeDetector<pcl::PointXYZ> octree (resolution);
 
@@ -91,7 +91,7 @@ double calculatevolume(std::vector<PointXYZ> inputcloud)
 	}
 
 	size_t input_size = cloud->size();
-	printf("input size: %d", input_size);	
+	printf("input size: %d \n\n", input_size);	
 
 	octree.setInputCloud (cloud);
 	octree.addPointsFromInputCloud ();
@@ -100,7 +100,7 @@ double calculatevolume(std::vector<PointXYZ> inputcloud)
 	octree.getPointIndicesFromNewVoxels (newPointIdxVector);
 	
 	//size_t output_size = cloud->size();
-	printf("output size: %d", newPointIdxVector.size());
+	printf("output size: %d \n\n", newPointIdxVector.size());
 	
 	for (size_t i = 0; i < newPointIdxVector.size(); ++i)
 	{
@@ -109,7 +109,7 @@ double calculatevolume(std::vector<PointXYZ> inputcloud)
 		cloud_nobackground->points[i].z = (*cloud)[newPointIdxVector[i]].z;
 	}
 	
-	pcl::io::savePLYFileASCII ("cloud_nobackground.ply", *cloud_nobackground);
+	//pcl::io::savePLYFileASCII ("cloud_nobackground.ply", *cloud_nobackground);
 	
 	//passx.setInputCloud (cloud);
 	//passx.setFilterFieldName ("x");
