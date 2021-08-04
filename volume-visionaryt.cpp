@@ -74,7 +74,7 @@ bool kbhit(void)
 double calculatevolume(std::vector<PointXYZ> inputcloud)
 {
 	float resolution = 32.0f;
-	pcl::io::loadPLYFile<pcl::PointXYZ> ("volumetry-background/backgroundclound.ply", *cloud_background);
+	pcl::io::loadPLYFile<pcl::PointXYZ> ("volumetry-background/backgroundcloud.ply", *cloud_background);
 	pcl::octree::OctreePointCloudChangeDetector<pcl::PointXYZ> octree (resolution);
 
 	octree.setInputCloud (cloud_background);
