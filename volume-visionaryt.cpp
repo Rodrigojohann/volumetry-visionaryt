@@ -29,6 +29,7 @@
 double dimensionX;
 double dimensionY;
 double dimensionZ;
+pcl::PointCloud<pcl::PointXYZ>::Ptr inputfiltercloud (new pcl::PointCloud<pcl::PointXYZ>);
 pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_filtered (new pcl::PointCloud<pcl::PointXYZ>);
 pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_nobackground    (new pcl::PointCloud<pcl::PointXYZ>);
 pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_with_background (new pcl::PointCloud<pcl::PointXYZ>);
@@ -53,12 +54,12 @@ bool kbhit(void)
     return pressed;
 }
 
-void erasebackground (pcl::PointCloud<pcl::PointXYZ>::Ptr inputcloud (new pcl::PointCloud<pcl::PointXYZ>))
+void erasebackground()
 {
 //var
 	std::vector<int> newPointIdxVector;
 	float resolution;
-	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_background      (new pcl::PointCloud<pcl::PointXYZ>);
+	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_background (new pcl::PointCloud<pcl::PointXYZ>);
 ////
 	resolution = 0.02f;
 	pcl::io::loadPLYFile<pcl::PointXYZ> ("volumetry-background/backgroundcloud.ply", *cloud_background);
@@ -68,7 +69,7 @@ void erasebackground (pcl::PointCloud<pcl::PointXYZ>::Ptr inputcloud (new pcl::P
 	octree.addPointsFromInputCloud();
 	octree.switchBuffers();
 
-	octree.setInputCloud(inputcloud);
+	octree.setInputCloud(cloud_filtered);
 	octree.addPointsFromInputCloud();
 	octree.getPointIndicesFromNewVoxels(newPointIdxVector);
 	
@@ -82,7 +83,7 @@ void erasebackground (pcl::PointCloud<pcl::PointXYZ>::Ptr inputcloud (new pcl::P
 	}
 }
 
-void filtercloud (pcl::PointCloud<pcl::PointXYZ>::Ptr inputcloud (new pcl::PointCloud<pcl::PointXYZ>))
+void filtercloud ()
 {
 // var
 	pcl::PassThrough<pcl::PointXYZ> passx;
@@ -90,7 +91,7 @@ void filtercloud (pcl::PointCloud<pcl::PointXYZ>::Ptr inputcloud (new pcl::Point
 	pcl::PassThrough<pcl::PointXYZ> passz;
 	pcl::StatisticalOutlierRemoval<pcl::PointXYZ> sor;
 ////
-	passx.setInputCloud(inputcloud);
+	passx.setInputCloud(cloud_raw);
 	passx.setFilterFieldName ("x");
 	passx.setFilterLimits (-0.23, 0.25);
 	passx.filter (*cloud_filtered);
@@ -132,8 +133,8 @@ double calculatevolume(std::vector<PointXYZ> inputcloud)
 		cloud_raw->points[i].z = inputcloud[i].z;
 	}
 
-	filtercloud(cloud_raw);
-	erasebackground(cloud_filtered);
+	filtercloud();
+	erasebackground();
 	cloud_size = cloud_nobackground->size();
 	
 	if (cloud_size > 10)
