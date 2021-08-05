@@ -71,8 +71,8 @@ bool kbhit(void)
     return pressed;
 }
 
-//double calculatevolume(std::vector<PointXYZ> inputcloud)
-void calculatevolume(std::vector<PointXYZ> inputcloud)
+double calculatevolume(std::vector<PointXYZ> inputcloud)
+//void calculatevolume(std::vector<PointXYZ> inputcloud)
 {
 	float resolution = 0.02f;
 	pcl::io::loadPLYFile<pcl::PointXYZ> ("volumetry-background/backgroundcloud.ply", *cloud_background);
@@ -91,8 +91,8 @@ void calculatevolume(std::vector<PointXYZ> inputcloud)
 		cloud->points[i].z = inputcloud[i].z;
 	}
 
-	size_t input_size = cloud->size();
-	printf("input size: %d \n\n", input_size);	
+	//size_t input_size = cloud->size();
+	//printf("input size: %d \n\n", input_size);	
 
 	octree.setInputCloud (cloud);
 	octree.addPointsFromInputCloud ();
@@ -101,7 +101,7 @@ void calculatevolume(std::vector<PointXYZ> inputcloud)
 	octree.getPointIndicesFromNewVoxels (newPointIdxVector);
 	
 	//size_t output_size = cloud->size();
-	printf("output size: %d \n\n", newPointIdxVector.size());
+	//printf("output size: %d \n\n", newPointIdxVector.size());
 	
 	//printf("point x: %f", newPointIdxVector[0]);
 	
@@ -114,54 +114,54 @@ void calculatevolume(std::vector<PointXYZ> inputcloud)
 		cloud_nobackground->points[i].z = (*cloud)[newPointIdxVector[i]].z;
 	}
 	
-	pcl::io::savePLYFileASCII ("volumetry-background/cloud_nobackground.ply", *cloud_nobackground);
-}	
-	//passx.setInputCloud (cloud);
-	//passx.setFilterFieldName ("x");
-	//passx.setFilterLimits (-0.23, 0.25);
-	//passx.filter (*cloud_filtered);
+	//pcl::io::savePLYFileASCII ("volumetry-background/cloud_nobackground.ply", *cloud_nobackground);
 	
-	//passy.setInputCloud (cloud_filtered);
-	//passy.setFilterFieldName ("y");
-	//passy.setFilterLimits (-0.15, 0.26);
-	//passy.filter (*cloud_filtered);
+	passx.setInputCloud (cloud_nobackground);
+	passx.setFilterFieldName ("x");
+	passx.setFilterLimits (-0.23, 0.25);
+	passx.filter (*cloud_filtered);
 	
-	//passz.setInputCloud (cloud_filtered);
-	//passz.setFilterFieldName ("z");
-	//passz.setFilterLimits (0, 0.758);
-	//passz.filter (*cloud_filtered);
+	passy.setInputCloud (cloud_filtered);
+	passy.setFilterFieldName ("y");
+	passy.setFilterLimits (-0.15, 0.26);
+	passy.filter (*cloud_filtered);
 	
-	//sor.setInputCloud (cloud_nobackground);
-	//sor.setMeanK (5);
-	//sor.setStddevMulThresh (3.5);
-	//sor.filter (*cloud_filtered);
+	passz.setInputCloud (cloud_filtered);
+	passz.setFilterFieldName ("z");
+	passz.setFilterLimits (0, 0.758);
+	passz.filter (*cloud_filtered);
+	
+	sor.setInputCloud (cloud_nobackground);
+	sor.setMeanK (5);
+	sor.setStddevMulThresh (3.5);
+	sor.filter (*cloud_filtered);
 
-	//cloud_size = cloud_filtered->size();
+	cloud_size = cloud_filtered->size();
 	
-	//if (cloud_size > 10)
-	//{
-	//chull.setInputCloud(cloud_filtered);
-	//chull.setDimension(3);
-	//chull.setComputeAreaVolume(true);
-	//chull.reconstruct(*surface_hull, polygons);
+	if (cloud_size > 10)
+	{
+	chull.setInputCloud(cloud_filtered);
+	chull.setDimension(3);
+	chull.setComputeAreaVolume(true);
+	chull.reconstruct(*surface_hull, polygons);
 	
-	//volume = chull.getTotalVolume();
+	volume = chull.getTotalVolume();
 
-	//pcl::getMinMax3D (*surface_hull, minPt, maxPt);
-	//dimensionX = maxPt.x - minPt.x;
-	//dimensionY = maxPt.y - minPt.y;
-	//dimensionZ = maxPt.z - minPt.z;
+	pcl::getMinMax3D (*surface_hull, minPt, maxPt);
+	dimensionX = maxPt.x - minPt.x;
+	dimensionY = maxPt.y - minPt.y;
+	dimensionZ = maxPt.z - minPt.z;
+	}
+	else
+	{
+	volume = 0.0;
+	dimensionX = 0.0;
+	dimensionY = 0.0;
+	dimensionZ = 0.0;
+	}
 	
-	//}
-	//else
-	//{
-	//volume = 0.0;
-	//dimensionX = 0.0;
-	//dimensionY = 0.0;
-	//dimensionZ = 0.0;
-	//}
-	//return volume;
-//}
+	return volume;
+}
 
 void runStreamingDemo(char* ipAddress, unsigned short port)
 {
