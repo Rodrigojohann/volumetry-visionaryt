@@ -111,7 +111,7 @@ void filtercloud ()
 	sor.filter(*cloud_filtered);
 }
 
-double calculatevolume(std::vector<PointXYZ> inputcloud)
+auto calculatevolume(std::vector<PointXYZ> inputcloud)
 {
 // var
    	pcl::PointCloud<pcl::PointXYZ>::Ptr surface_hull (new pcl::PointCloud<pcl::PointXYZ>);
