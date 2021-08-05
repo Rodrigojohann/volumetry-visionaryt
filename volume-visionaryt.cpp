@@ -3,6 +3,7 @@
 #include <string.h>
 #include <termio.h>
 #include <unistd.h>
+#include <iostream>
 #include <boost/shared_ptr.hpp>
 #include <boost/make_shared.hpp>
 #include "VisionaryTData.h"
@@ -19,15 +20,14 @@
 #include <pcl/filters/passthrough.h>
 #include <pcl/filters/statistical_outlier_removal.h>
 #include <pcl/common/common.h>
-#include <iostream>
 #include <pcl/point_types.h>
 #include <pcl/io/ply_io.h>
-
 #include <pcl/common/io.h>
 #include <pcl/point_cloud.h>
 #include <pcl/octree/octree_pointcloud_changedetector.h>
 
 pcl::PointCloud<pcl::PointXYZ>::Ptr cloud (new pcl::PointCloud<pcl::PointXYZ>);
+pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_with_background (new pcl::PointCloud<pcl::PointXYZ>);
 pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_filtered (new pcl::PointCloud<pcl::PointXYZ>);
 pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_background (new pcl::PointCloud<pcl::PointXYZ>);
 pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_nobackground (new pcl::PointCloud<pcl::PointXYZ>);
@@ -52,9 +52,8 @@ size_t cloud_size;
 double dimensionX;
 double dimensionY;
 double dimensionZ;
-
-
-
+std::vector<int> newPointIdxVector;
+float resolution;
 
 ///////////////////////////////////////////////////////
 
@@ -71,39 +70,22 @@ bool kbhit(void)
     return pressed;
 }
 
-double calculatevolume(std::vector<PointXYZ> inputcloud)
-//void calculatevolume(std::vector<PointXYZ> inputcloud)
+void erasebackground (pcl::PointCloud<pcl::PointXYZ>::Ptr inputcloud)
 {
-	float resolution = 0.02f;
+	resolution = 0.02f;
 	pcl::io::loadPLYFile<pcl::PointXYZ> ("volumetry-background/backgroundcloud.ply", *cloud_background);
 	pcl::octree::OctreePointCloudChangeDetector<pcl::PointXYZ> octree (resolution);
 
 	octree.setInputCloud (cloud_background);
 	octree.addPointsFromInputCloud ();
 	octree.switchBuffers ();
-	
-	cloud->points.resize (inputcloud.size());
-	
-	for(size_t i=0;i<cloud->points.size();++i)
-	{
-		cloud->points[i].x = inputcloud[i].x;
-		cloud->points[i].y = inputcloud[i].y;
-		cloud->points[i].z = inputcloud[i].z;
-	}
 
 	//size_t input_size = cloud->size();
 	//printf("input size: %d \n\n", input_size);	
 
 	octree.setInputCloud (cloud);
 	octree.addPointsFromInputCloud ();
-
-	std::vector<int> newPointIdxVector;
 	octree.getPointIndicesFromNewVoxels (newPointIdxVector);
-	
-	//size_t output_size = cloud->size();
-	//printf("output size: %d \n\n", newPointIdxVector.size());
-	
-	//printf("point x: %f", newPointIdxVector[0]);
 	
 	cloud_nobackground->points.resize (newPointIdxVector.size());
 	
@@ -113,10 +95,12 @@ double calculatevolume(std::vector<PointXYZ> inputcloud)
 		cloud_nobackground->points[i].y = (*cloud)[newPointIdxVector[i]].y;
 		cloud_nobackground->points[i].z = (*cloud)[newPointIdxVector[i]].z;
 	}
-	
-	//pcl::io::savePLYFileASCII ("volumetry-background/cloud_nobackground.ply", *cloud_nobackground);
-	
-	passx.setInputCloud (cloud_nobackground);
+
+}
+
+void filtercloud (pcl::PointCloud<pcl::PointXYZ>::Ptr inputcloud)
+{
+	passx.setInputCloud (inputcloud);
 	passx.setFilterFieldName ("x");
 	passx.setFilterLimits (-0.23, 0.25);
 	passx.filter (*cloud_filtered);
@@ -135,6 +119,22 @@ double calculatevolume(std::vector<PointXYZ> inputcloud)
 	sor.setMeanK (5);
 	sor.setStddevMulThresh (3.5);
 	sor.filter (*cloud_filtered);
+}
+
+
+double calculatevolume(std::vector<PointXYZ> inputcloud)
+{
+
+	cloud->points.resize (inputcloud.size());
+	
+	for(size_t i=0;i<cloud->points.size();++i)
+	{
+		cloud->points[i].x = inputcloud[i].x;
+		cloud->points[i].y = inputcloud[i].y;
+		cloud->points[i].z = inputcloud[i].z;
+	}
+
+	filtercloud(cloud);
 
 	cloud_size = cloud_filtered->size();
 	
@@ -192,33 +192,33 @@ void runStreamingDemo(char* ipAddress, unsigned short port)
 			calculatevolume(pointCloud);
 		}
 	
-	//volumemean = 0.0;
-	//while (!kbhit())
-	//{
-		//counter = counter+1; 
-		//if (dataStream.getNextFrame())
-		//{
-			//// Convert data to a point cloud
-			//pDataHandler->generatePointCloud(pointCloud);
-			//// Calculate volume
-			//volumemean = volumemean + calculatevolume(pointCloud);
-		//}
+	volumemean = 0.0;
+	while (!kbhit())
+	{
+		counter = counter+1; 
+		if (dataStream.getNextFrame())
+		{
+			// Convert data to a point cloud
+			pDataHandler->generatePointCloud(pointCloud);
+			// Calculate volume
+			volumemean = volumemean + calculatevolume(pointCloud);
+		}
 
-		//if (counter==9)
-		//{
-			//counter = 0;
-			//volumemean = volumemean/10;
-			//printf("---------------------\n\n");
-			//printf("volume: %f m³\n\n", volumemean);
-			//printf("volume: %f cm³\n\n", volumemean*1000000);
+		if (counter==9)
+		{
+			counter = 0;
+			volumemean = volumemean/10;
+			printf("---------------------\n\n");
+			printf("volume:\n", volumemean);
+			printf("%f cm³\n\n", volumemean*1000000);
 			
-			//printf("dimensions:\n");
-			//printf("%f cm (x)\n", dimensionX*100);
-			//printf("%f cm (y)\n", dimensionY*100);
-			//printf("%f cm (z)\n\n", dimensionZ*100);
-			//volumemean = 0.0;			
-		//}
-	//}
+			printf("dimensions:\n");
+			printf("%f cm (x)\n", dimensionX*100);
+			printf("%f cm (y)\n", dimensionY*100);
+			printf("%f cm (z)\n\n", dimensionZ*100);
+			volumemean = 0.0;			
+		}
+	}
 	control.stopAcquisition();
 	control.closeConnection();
 	dataStream.closeConnection();
