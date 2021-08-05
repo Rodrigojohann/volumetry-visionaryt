@@ -21,7 +21,7 @@
 #include <pcl/filters/statistical_outlier_removal.h>
 #include <pcl/common/common.h>
 #include <pcl/point_types.h>
-#include <pcl/io/ply_io.h>
+#include <pcl/io/pcd_io.h>
 #include <pcl/common/io.h>
 #include <pcl/point_cloud.h>
 #include <pcl/octree/octree_pointcloud_changedetector.h>
@@ -63,7 +63,7 @@ void erasebackground()
 	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_background (new pcl::PointCloud<pcl::PointXYZ>);
 ////
 	resolution = 0.02f;
-	pcl::io::loadPLYFile<pcl::PointXYZ> ("volumetry-background/backgroundcloud.ply", *cloud_background);
+	pcl::io::loadPCDFile<pcl::PointXYZ> ("volumetry-background/backgroundcloud.pcd", *cloud_background);
 	pcl::octree::OctreePointCloudChangeDetector<pcl::PointXYZ> octree(resolution);
 
 	octree.setInputCloud(cloud_background);
