@@ -29,6 +29,7 @@
 double dimensionX;
 double dimensionY;
 double dimensionZ;
+pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_raw 	 (new pcl::PointCloud<pcl::PointXYZ>);
 pcl::PointCloud<pcl::PointXYZ>::Ptr inputfiltercloud (new pcl::PointCloud<pcl::PointXYZ>);
 pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_filtered (new pcl::PointCloud<pcl::PointXYZ>);
 pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_nobackground    (new pcl::PointCloud<pcl::PointXYZ>);
@@ -116,7 +117,6 @@ void filtercloud ()
 double calculatevolume(std::vector<PointXYZ> inputcloud)
 {
 // var
-	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_raw 	 (new pcl::PointCloud<pcl::PointXYZ>);
    	pcl::PointCloud<pcl::PointXYZ>::Ptr surface_hull (new pcl::PointCloud<pcl::PointXYZ>);
 	size_t cloud_size;
 	pcl::ConvexHull<pcl::PointXYZ> chull;
