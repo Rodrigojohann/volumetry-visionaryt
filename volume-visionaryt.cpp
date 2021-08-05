@@ -118,8 +118,12 @@ auto calculatevolume(std::vector<PointXYZ> inputcloud)
 	size_t cloud_size;
 	pcl::ConvexHull<pcl::PointXYZ> chull;
 	std::vector<pcl::Vertices> polygons;
-	double volume, dimensionX, dimensionY, dimensionZ;
+	double volume, dimensionX, dimensionY, dimensionZ;	
 	pcl::PointXYZ minPt, maxPt;
+	struct values
+	{
+	double volume, dimensionX, dimensionY, dimensionZ;	
+	}
 ////
 	cloud_raw->points.resize(inputcloud.size());
 	
@@ -156,7 +160,7 @@ auto calculatevolume(std::vector<PointXYZ> inputcloud)
 	dimensionZ = 0.0;
 	}
 	
-	return {volume, dimensionX, dimensionY, dimensionZ};
+	return values {volume, dimensionX, dimensionY, dimensionZ};
 }
 
 void runStreamingDemo(char* ipAddress, unsigned short port)
