@@ -26,36 +26,16 @@
 #include <pcl/point_cloud.h>
 #include <pcl/octree/octree_pointcloud_changedetector.h>
 
-pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_with_background (new pcl::PointCloud<pcl::PointXYZ>);
-pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_background (new pcl::PointCloud<pcl::PointXYZ>);
-
-
-pcl::PassThrough<pcl::PointXYZ> passx;
-pcl::PassThrough<pcl::PointXYZ> passy;
-pcl::PassThrough<pcl::PointXYZ> passz;
-
-
-pcl::StatisticalOutlierRemoval<pcl::PointXYZ> sor;
-
-
-
-double volumemean;
-std::vector<PointXYZ> pointCloud;
-boost::shared_ptr<VisionaryTData> pDataHandler;
-int counter;
-int characters_buffered;
-bool pressed;
-struct termios original;
-struct termios term;
-
-
-std::vector<int> newPointIdxVector;
-float resolution;
-
-///////////////////////////////////////////////////////
+/////////////////////////////////////////////////////
 
 bool kbhit(void)
 {
+// var	
+	int characters_buffered;
+	bool pressed;
+	struct termios original;
+	struct termios term;
+////
     tcgetattr(STDIN_FILENO, &original);
     memcpy(&term, &original, sizeof(term));
     term.c_lflag &= ~ICANON;
@@ -69,6 +49,13 @@ bool kbhit(void)
 
 pcl::PointCloud<pcl::PointXYZ> erasebackground (pcl::PointCloud<pcl::PointXYZ> inputcloud)
 {
+//var
+	std::vector<int> newPointIdxVector;
+	float resolution;
+	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_with_background (new pcl::PointCloud<pcl::PointXYZ>);
+	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_background      (new pcl::PointCloud<pcl::PointXYZ>);
+	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_nobackground    (new pcl::PointCloud<pcl::PointXYZ>);
+////
 	resolution = 0.02f;
 	pcl::io::loadPLYFile<pcl::PointXYZ> ("volumetry-background/backgroundcloud.ply", *cloud_background);
 	pcl::octree::OctreePointCloudChangeDetector<pcl::PointXYZ> octree(resolution);
@@ -77,10 +64,7 @@ pcl::PointCloud<pcl::PointXYZ> erasebackground (pcl::PointCloud<pcl::PointXYZ> i
 	octree.addPointsFromInputCloud();
 	octree.switchBuffers();
 
-	//size_t input_size = cloud->size();
-	//printf("input size: %d \n\n", input_size);	
-
-	octree.setInputCloud(cloud);
+	octree.setInputCloud(cloud_with_background);
 	octree.addPointsFromInputCloud();
 	octree.getPointIndicesFromNewVoxels(newPointIdxVector);
 	
@@ -88,9 +72,9 @@ pcl::PointCloud<pcl::PointXYZ> erasebackground (pcl::PointCloud<pcl::PointXYZ> i
 	
 	for (size_t i = 0; i < newPointIdxVector.size(); ++i)
 	{
-		cloud_nobackground->points[i].x = (*cloud)[newPointIdxVector[i]].x;
-		cloud_nobackground->points[i].y = (*cloud)[newPointIdxVector[i]].y;
-		cloud_nobackground->points[i].z = (*cloud)[newPointIdxVector[i]].z;
+		cloud_nobackground->points[i].x = (*cloud_with_background)[newPointIdxVector[i]].x;
+		cloud_nobackground->points[i].y = (*cloud_with_background)[newPointIdxVector[i]].y;
+		cloud_nobackground->points[i].z = (*cloud_with_background)[newPointIdxVector[i]].z;
 	}
 
 	return cloud_nobackground;
@@ -98,6 +82,13 @@ pcl::PointCloud<pcl::PointXYZ> erasebackground (pcl::PointCloud<pcl::PointXYZ> i
 
 pcl::PointCloud<pcl::PointXYZ> filtercloud(pcl::PointCloud<pcl::PointXYZ> inputcloud)
 {
+// var
+	pcl::PassThrough<pcl::PointXYZ> passx;
+	pcl::PassThrough<pcl::PointXYZ> passy;
+	pcl::PassThrough<pcl::PointXYZ> passz;
+	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_filtered (new pcl::PointCloud<pcl::PointXYZ>);
+	pcl::StatisticalOutlierRemoval<pcl::PointXYZ> sor;
+////
 	passx.setInputCloud(inputcloud);
 	passx.setFilterFieldName ("x");
 	passx.setFilterLimits (-0.23, 0.25);
@@ -113,7 +104,7 @@ pcl::PointCloud<pcl::PointXYZ> filtercloud(pcl::PointCloud<pcl::PointXYZ> inputc
 	passz.setFilterLimits (0, 0.758);
 	passz.filter (*cloud_filtered);
 	
-	sor.setInputCloud(cloud_nobackground);
+	sor.setInputCloud(cloud_filtered);
 	sor.setMeanK(5);
 	sor.setStddevMulThresh(3.5);
 	sor.filter(*cloud_filtered);
@@ -178,6 +169,12 @@ double calculatevolume(std::vector<PointXYZ> inputcloud)
 
 void runStreamingDemo(char* ipAddress, unsigned short port)
 {
+// var
+	int counter;
+	double volumemean;	
+	std::vector<PointXYZ> pointCloud;
+	boost::shared_ptr<VisionaryTData> pDataHandler;
+////
 	// Generate Visionary instance
 	pDataHandler = boost::make_shared<VisionaryTData>();
 	VisionaryDataStream dataStream(pDataHandler, inet_addr(ipAddress), htons(port));
@@ -216,7 +213,7 @@ void runStreamingDemo(char* ipAddress, unsigned short port)
 			volumemean = volumemean/10;
 			
 			printf("---------------------\n\n");
-			printf("volume:\n", volumemean);
+			printf("volume:\n");
 			printf("%f cm³\n\n", volumemean*1000000);
 			
 			printf("dimensions:\n");
