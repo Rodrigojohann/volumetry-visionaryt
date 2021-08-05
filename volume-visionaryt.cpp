@@ -26,6 +26,10 @@
 #include <pcl/point_cloud.h>
 #include <pcl/octree/octree_pointcloud_changedetector.h>
 
+double dimensionX;
+double dimensionY;
+double dimensionZ;
+
 /////////////////////////////////////////////////////
 
 bool kbhit(void)
@@ -124,9 +128,7 @@ double calculatevolume(std::vector<PointXYZ> inputcloud)
 	pcl::ConvexHull<pcl::PointXYZ> chull;
 	std::vector<pcl::Vertices> polygons;
 	double volume;
-	double dimensionX;
-	double dimensionY;
-	double dimensionZ;
+
 	pcl::PointXYZ minPt, maxPt;
 ////
 	cloud_raw->points.resize(inputcloud.size());
