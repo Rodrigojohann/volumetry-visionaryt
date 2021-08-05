@@ -4,6 +4,7 @@
 #include <termio.h>
 #include <unistd.h>
 #include <iostream>
+#include <tuple>
 #include <boost/shared_ptr.hpp>
 #include <boost/make_shared.hpp>
 #include "VisionaryTData.h"
@@ -111,7 +112,7 @@ void filtercloud ()
 	sor.filter(*cloud_filtered);
 }
 
-auto calculatevolume(std::vector<PointXYZ> inputcloud)
+std::tuple<double, double, double, double> calculatevolume(std::vector<PointXYZ> inputcloud)
 {
 // var
    	pcl::PointCloud<pcl::PointXYZ>::Ptr surface_hull (new pcl::PointCloud<pcl::PointXYZ>);
@@ -120,10 +121,6 @@ auto calculatevolume(std::vector<PointXYZ> inputcloud)
 	std::vector<pcl::Vertices> polygons;
 	double volume, dimensionX, dimensionY, dimensionZ;	
 	pcl::PointXYZ minPt, maxPt;
-	struct values
-	{
-	double volume, dimensionX, dimensionY, dimensionZ;	
-	}
 ////
 	cloud_raw->points.resize(inputcloud.size());
 	
@@ -160,7 +157,7 @@ auto calculatevolume(std::vector<PointXYZ> inputcloud)
 	dimensionZ = 0.0;
 	}
 	
-	return values {volume, dimensionX, dimensionY, dimensionZ};
+	return std::make_tuple(volume, dimensionX, dimensionY, dimensionZ);
 }
 
 void runStreamingDemo(char* ipAddress, unsigned short port)
@@ -201,7 +198,7 @@ void runStreamingDemo(char* ipAddress, unsigned short port)
 			// Convert data to a point cloud
 			pDataHandler->generatePointCloud(pointCloud);
 			// Calculate volume
-			auto [volume, dimensionX, dimensionY, dimensionZ] = calculatevolume(pointCloud); 
+			std::tie(volume, dimensionX, dimensionY, dimensionZ) = calculatevolume(pointCloud); 
 			volumemean = volumemean + volume;
 			X_mean = X_mean + dimensionX;
 			Y_mean = Y_mean + dimensionY;
