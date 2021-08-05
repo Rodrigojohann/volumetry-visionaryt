@@ -26,12 +26,10 @@
 #include <pcl/point_cloud.h>
 #include <pcl/octree/octree_pointcloud_changedetector.h>
 
-double dimensionX;
-double dimensionY;
-double dimensionZ;
-pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_raw 	 (new pcl::PointCloud<pcl::PointXYZ>);
-pcl::PointCloud<pcl::PointXYZ>::Ptr inputfiltercloud (new pcl::PointCloud<pcl::PointXYZ>);
-pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_filtered (new pcl::PointCloud<pcl::PointXYZ>);
+
+pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_raw 	          (new pcl::PointCloud<pcl::PointXYZ>);
+pcl::PointCloud<pcl::PointXYZ>::Ptr inputfiltercloud      (new pcl::PointCloud<pcl::PointXYZ>);
+pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_filtered        (new pcl::PointCloud<pcl::PointXYZ>);
 pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_nobackground    (new pcl::PointCloud<pcl::PointXYZ>);
 pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_with_background (new pcl::PointCloud<pcl::PointXYZ>);
 /////////////////////////////////////////////////////
@@ -113,7 +111,6 @@ void filtercloud ()
 	sor.filter(*cloud_filtered);
 }
 
-
 double calculatevolume(std::vector<PointXYZ> inputcloud)
 {
 // var
@@ -121,7 +118,7 @@ double calculatevolume(std::vector<PointXYZ> inputcloud)
 	size_t cloud_size;
 	pcl::ConvexHull<pcl::PointXYZ> chull;
 	std::vector<pcl::Vertices> polygons;
-	double volume;
+	double volume, dimensionX, dimensionY, dimensionZ;
 	pcl::PointXYZ minPt, maxPt;
 ////
 	cloud_raw->points.resize(inputcloud.size());
@@ -159,16 +156,17 @@ double calculatevolume(std::vector<PointXYZ> inputcloud)
 	dimensionZ = 0.0;
 	}
 	
-	return volume;
+	return {volume, dimensionX, dimensionY, dimensionZ};
 }
 
 void runStreamingDemo(char* ipAddress, unsigned short port)
 {
 // var
 	int counter;
-	double volumemean;	
+	double volumemean, X_mean, Y_mean, Z_mean;	
 	std::vector<PointXYZ> pointCloud;
 	boost::shared_ptr<VisionaryTData> pDataHandler;
+	double volume, dimensionX, dimensionY, dimensionZ;
 ////
 	// Generate Visionary instance
 	pDataHandler = boost::make_shared<VisionaryTData>();
@@ -199,22 +197,29 @@ void runStreamingDemo(char* ipAddress, unsigned short port)
 			// Convert data to a point cloud
 			pDataHandler->generatePointCloud(pointCloud);
 			// Calculate volume
-			volumemean = volumemean + calculatevolume(pointCloud);
+			auto [volume, dimensionX, dimensionY, dimensionZ] = calculatevolume(pointCloud); 
+			volumemean = volumemean + volume;
+			X_mean = X_mean + dimensionX;
+			Y_mean = Y_mean + dimensionY;
+			Z_mean = Z_mean + dimensionZ;			
 		}
 
 		if (counter==9)
 		{
 			counter    = 0;
 			volumemean = volumemean/10;
+			X_mean     = X_mean/10;
+			Y_mean     = Y_mean/10;
+			Z_mean     = Z_mean/10;
 			
 			printf("---------------------\n\n");
 			printf("volume:\n");
 			printf("%f cm³\n\n", volumemean*1000000);
 			
 			printf("dimensions:\n");
-			printf("%f cm (x)\n", dimensionX*100);
-			printf("%f cm (y)\n", dimensionY*100);
-			printf("%f cm (z)\n\n", dimensionZ*100);
+			printf("%f cm (x)\n", X_mean*100);
+			printf("%f cm (y)\n", Y_mean*100);
+			printf("%f cm (z)\n\n", Z_mean*100);
 			volumemean = 0.0;			
 		}
 	}
