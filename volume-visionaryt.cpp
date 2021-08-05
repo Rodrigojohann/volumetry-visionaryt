@@ -77,9 +77,9 @@ void erasebackground()
 	
 	for (size_t i = 0; i < newPointIdxVector.size(); ++i)
 	{
-		cloud_nobackground->points[i].x = (*inputcloud)[newPointIdxVector[i]].x;
-		cloud_nobackground->points[i].y = (*inputcloud)[newPointIdxVector[i]].y;
-		cloud_nobackground->points[i].z = (*inputcloud)[newPointIdxVector[i]].z;
+		cloud_nobackground->points[i].x = (*cloud_filtered)[newPointIdxVector[i]].x;
+		cloud_nobackground->points[i].y = (*cloud_filtered)[newPointIdxVector[i]].y;
+		cloud_nobackground->points[i].z = (*cloud_filtered)[newPointIdxVector[i]].z;
 	}
 }
 
