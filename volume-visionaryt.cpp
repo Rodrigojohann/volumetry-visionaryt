@@ -70,7 +70,7 @@ bool kbhit(void)
     return pressed;
 }
 
-void erasebackground (pcl::PointCloud<pcl::PointXYZ>::Ptr inputcloud)
+pcl::PointCloud<pcl::PointXYZ> erasebackground ( pcl::PointCloud<pcl::PointXYZ> inputcloud)
 {
 	resolution = 0.02f;
 	pcl::io::loadPLYFile<pcl::PointXYZ> ("volumetry-background/backgroundcloud.ply", *cloud_background);
@@ -96,9 +96,10 @@ void erasebackground (pcl::PointCloud<pcl::PointXYZ>::Ptr inputcloud)
 		cloud_nobackground->points[i].z = (*cloud)[newPointIdxVector[i]].z;
 	}
 
+	return cloud_nobackground;
 }
 
-void filtercloud (pcl::PointCloud<pcl::PointXYZ>::Ptr inputcloud)
+pcl::PointCloud<pcl::PointXYZ> filtercloud (pcl::PointCloud<pcl::PointXYZ> inputcloud)
 {
 	passx.setInputCloud (inputcloud);
 	passx.setFilterFieldName ("x");
@@ -119,6 +120,8 @@ void filtercloud (pcl::PointCloud<pcl::PointXYZ>::Ptr inputcloud)
 	sor.setMeanK (5);
 	sor.setStddevMulThresh (3.5);
 	sor.filter (*cloud_filtered);
+	
+	return cloud_filtered;
 }
 
 
@@ -134,8 +137,8 @@ double calculatevolume(std::vector<PointXYZ> inputcloud)
 		cloud->points[i].z = inputcloud[i].z;
 	}
 
-	filtercloud(cloud);
-
+	cloud_filtered = filtercloud(cloud);
+	cloud_nobackground = erasebackground
 	cloud_size = cloud_filtered->size();
 	
 	if (cloud_size > 10)
