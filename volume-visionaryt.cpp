@@ -51,7 +51,7 @@ bool kbhit(void)
     return pressed;
 }
 
-pcl::PointCloud<pcl::PointXYZ> erasebackground (pcl::PointCloud<pcl::PointXYZ> inputcloud)
+pcl::PointCloud<pcl::PointXYZ>::Ptr erasebackground (new pcl::PointCloud<pcl::PointXYZ>) (pcl::PointCloud<pcl::PointXYZ>::Ptr inputcloud (new pcl::PointCloud<pcl::PointXYZ>))
 {
 //var
 	std::vector<int> newPointIdxVector;
@@ -84,7 +84,7 @@ pcl::PointCloud<pcl::PointXYZ> erasebackground (pcl::PointCloud<pcl::PointXYZ> i
 	return cloud_nobackground;
 }
 
-pcl::PointCloud<pcl::PointXYZ> filtercloud(pcl::PointCloud<pcl::PointXYZ> inputcloud)
+pcl::PointCloud<pcl::PointXYZ>::Ptr filtercloud (new pcl::PointCloud<pcl::PointXYZ>)(pcl::PointCloud<pcl::PointXYZ>::Ptr inputcloud (new pcl::PointCloud<pcl::PointXYZ>))
 {
 // var
 	pcl::PassThrough<pcl::PointXYZ> passx;
