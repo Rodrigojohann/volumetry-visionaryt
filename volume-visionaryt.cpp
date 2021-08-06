@@ -61,7 +61,7 @@ pcl::PointCloud<pcl::PointXYZ>::Ptr erasebackground(pcl::PointCloud<pcl::PointXY
 	pcl::octree::OctreePointCloudChangeDetector<pcl::PointXYZ> octree(resolution);
 
 	if ((inputcloud->size()) > 10)
-		{
+	{
 		octree.setInputCloud(cloud_background);
 		octree.addPointsFromInputCloud();
 		octree.switchBuffers();
@@ -78,6 +78,7 @@ pcl::PointCloud<pcl::PointXYZ>::Ptr erasebackground(pcl::PointCloud<pcl::PointXY
 			outputcloud->points[i].y = (*inputcloud)[newPointIdxVector[i]].y;
 			outputcloud->points[i].z = (*inputcloud)[newPointIdxVector[i]].z;
 		}
+	}
 	else
 	{
 		outputcloud = inputcloud;
