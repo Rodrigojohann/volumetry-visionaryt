@@ -60,7 +60,7 @@ pcl::PointCloud<pcl::PointXYZ>::Ptr erasebackground(pcl::PointCloud<pcl::PointXY
 	resolution = 0.02;
 	pcl::octree::OctreePointCloudChangeDetector<pcl::PointXYZ> octree(resolution);
 
-	if (inputcloud.size() > 10)
+	if ((inputcloud->size()) > 10)
 		{
 		octree.setInputCloud(cloud_background);
 		octree.addPointsFromInputCloud();
