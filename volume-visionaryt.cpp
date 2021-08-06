@@ -29,7 +29,7 @@
 
 
 
-pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_filtered        (new pcl::PointCloud<pcl::PointXYZ>);
+
 pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_background      (new pcl::PointCloud<pcl::PointXYZ>);
 pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_nobackground    (new pcl::PointCloud<pcl::PointXYZ>);
 
@@ -89,40 +89,42 @@ pcl::PointCloud<pcl::PointXYZ>::Ptr filtercloud(pcl::PointCloud<pcl::PointXYZ>::
 	pcl::PassThrough<pcl::PointXYZ> passy;
 	pcl::PassThrough<pcl::PointXYZ> passz;
 	pcl::StatisticalOutlierRemoval<pcl::PointXYZ> sor;
+	pcl::PointCloud<pcl::PointXYZ>::Ptr outputcloud (new pcl::PointCloud<pcl::PointXYZ>);
 ////
 	passx.setInputCloud(inputcloud);
 	passx.setFilterFieldName ("x");
 	passx.setFilterLimits (-0.23, 0.25);
-	passx.filter (*cloud_filtered);
+	passx.filter (*outputcloud);
 	
-	passy.setInputCloud(cloud_filtered);
+	passy.setInputCloud(outputcloud);
 	passy.setFilterFieldName ("y");
 	passy.setFilterLimits (-0.15, 0.26);
-	passy.filter (*cloud_filtered);
+	passy.filter (*outputcloud);
 	
-	passz.setInputCloud(cloud_filtered);
+	passz.setInputCloud(outputcloud);
 	passz.setFilterFieldName ("z");
 	passz.setFilterLimits (0, 0.758);
-	passz.filter (*cloud_filtered);
+	passz.filter (*outputcloud);
 	
-	sor.setInputCloud(cloud_filtered);
+	sor.setInputCloud(outputcloud);
 	sor.setMeanK(5);
 	sor.setStddevMulThresh(3.5);
-	sor.filter(*cloud_filtered);
+	sor.filter(*outputcloud);
 	
-	return cloud_filtered;
+	return outputcloud;
 }
 
 std::tuple<double, double, double, double> calculatevolume(std::vector<PointXYZ> inputcloud)
 {
 // var
    	pcl::PointCloud<pcl::PointXYZ>::Ptr surface_hull (new pcl::PointCloud<pcl::PointXYZ>);
+	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_raw (new pcl::PointCloud<pcl::PointXYZ>);
+	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_filtered        (new pcl::PointCloud<pcl::PointXYZ>);
 	size_t                              cloud_size;
 	pcl::ConvexHull<pcl::PointXYZ>      chull;
 	std::vector<pcl::Vertices>          polygons;
 	double                              volume, dimensionX, dimensionY, dimensionZ;	
 	pcl::PointXYZ                       minPt, maxPt;
-	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_raw (new pcl::PointCloud<pcl::PointXYZ>);
 ////
 	cloud_raw->points.resize(inputcloud.size());
 	
