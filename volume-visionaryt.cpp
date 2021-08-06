@@ -31,6 +31,7 @@
 pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_raw 	          (new pcl::PointCloud<pcl::PointXYZ>);
 pcl::PointCloud<pcl::PointXYZ>::Ptr inputfiltercloud      (new pcl::PointCloud<pcl::PointXYZ>);
 pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_filtered        (new pcl::PointCloud<pcl::PointXYZ>);
+pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_background      (new pcl::PointCloud<pcl::PointXYZ>);
 pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_nobackground    (new pcl::PointCloud<pcl::PointXYZ>);
 pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_with_background (new pcl::PointCloud<pcl::PointXYZ>);
 /////////////////////////////////////////////////////
@@ -59,10 +60,9 @@ void erasebackground()
 //var
 	std::vector<int> newPointIdxVector;
 	float resolution;
-	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_background (new pcl::PointCloud<pcl::PointXYZ>);
 ////
 	resolution = 0.02f;
-	pcl::io::loadPCDFile<pcl::PointXYZ> ("volumetry-background/backgroundcloud.pcd", *cloud_background);
+
 	pcl::octree::OctreePointCloudChangeDetector<pcl::PointXYZ> octree(resolution);
 
 	octree.setInputCloud(cloud_background);
@@ -169,6 +169,7 @@ void runStreamingDemo(char* ipAddress, unsigned short port)
 	boost::shared_ptr<VisionaryTData> pDataHandler;
 	double volume, dimensionX, dimensionY, dimensionZ;
 ////
+	pcl::io::loadPCDFile<pcl::PointXYZ> ("volumetry-background/backgroundcloud.pcd", *cloud_background);
 	// Generate Visionary instance
 	pDataHandler = boost::make_shared<VisionaryTData>();
 	VisionaryDataStream dataStream(pDataHandler, inet_addr(ipAddress), htons(port));
