@@ -27,11 +27,7 @@
 #include <pcl/point_cloud.h>
 #include <pcl/octree/octree_pointcloud_changedetector.h>
 
-
-
-
 pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_background      (new pcl::PointCloud<pcl::PointXYZ>);
-
 
 ////////////////////////////////////////////////////
 
@@ -57,12 +53,11 @@ bool kbhit(void)
 pcl::PointCloud<pcl::PointXYZ>::Ptr erasebackground(pcl::PointCloud<pcl::PointXYZ>::Ptr inputcloud)
 {
 //var
-	std::vector<int> newPointIdxVector;
-	float resolution;
+	std::vector<int>					newPointIdxVector;
+	float 								resolution;
 	pcl::PointCloud<pcl::PointXYZ>::Ptr outputcloud (new pcl::PointCloud<pcl::PointXYZ>);
 ////
 	resolution = 0.02f;
-
 	pcl::octree::OctreePointCloudChangeDetector<pcl::PointXYZ> octree(resolution);
 
 	octree.setInputCloud(cloud_background);
@@ -87,11 +82,11 @@ pcl::PointCloud<pcl::PointXYZ>::Ptr erasebackground(pcl::PointCloud<pcl::PointXY
 pcl::PointCloud<pcl::PointXYZ>::Ptr filtercloud(pcl::PointCloud<pcl::PointXYZ>::Ptr inputcloud)
 {
 // var
-	pcl::PassThrough<pcl::PointXYZ> passx;
-	pcl::PassThrough<pcl::PointXYZ> passy;
-	pcl::PassThrough<pcl::PointXYZ> passz;
+	pcl::PassThrough<pcl::PointXYZ> 			  passx;
+	pcl::PassThrough<pcl::PointXYZ> 			  passy;
+	pcl::PassThrough<pcl::PointXYZ> 			  passz;
 	pcl::StatisticalOutlierRemoval<pcl::PointXYZ> sor;
-	pcl::PointCloud<pcl::PointXYZ>::Ptr outputcloud (new pcl::PointCloud<pcl::PointXYZ>);
+	pcl::PointCloud<pcl::PointXYZ>::Ptr			  outputcloud (new pcl::PointCloud<pcl::PointXYZ>);
 ////
 	passx.setInputCloud(inputcloud);
 	passx.setFilterFieldName ("x");
@@ -138,9 +133,9 @@ std::tuple<double, double, double, double> calculatevolume(std::vector<PointXYZ>
 		cloud_raw->points[i].z = inputcloud[i].z;
 	}
 
-	cloud_filtered = filtercloud(cloud_raw);
+	cloud_filtered     = filtercloud(cloud_raw);
 	cloud_nobackground = erasebackground(cloud_filtered);
-	cloud_size = cloud_nobackground->size();
+	cloud_size         = cloud_nobackground->size();
 	
 	if (cloud_size > 10)
 	{
@@ -170,11 +165,11 @@ std::tuple<double, double, double, double> calculatevolume(std::vector<PointXYZ>
 void runStreamingDemo(char* ipAddress, unsigned short port)
 {
 // var
-	int counter;
-	double volumemean, X_mean, Y_mean, Z_mean;	
-	std::vector<PointXYZ> pointCloud;
+	int 							  counter;
+	double 							  volumemean, X_mean, Y_mean, Z_mean;	
+	std::vector<PointXYZ>			  pointCloud;
 	boost::shared_ptr<VisionaryTData> pDataHandler;
-	double volume, dimensionX, dimensionY, dimensionZ;
+	double 							  volume, dimensionX, dimensionY, dimensionZ;
 ////
 	pcl::io::loadPCDFile<pcl::PointXYZ> ("volumetry-background/backgroundcloud.pcd", *cloud_background);
 	// Generate Visionary instance
@@ -208,9 +203,9 @@ void runStreamingDemo(char* ipAddress, unsigned short port)
 			// Calculate volume
 			std::tie(volume, dimensionX, dimensionY, dimensionZ) = calculatevolume(pointCloud); 
 			volumemean = volumemean + volume;
-			X_mean = X_mean + dimensionX;
-			Y_mean = Y_mean + dimensionY;
-			Z_mean = Z_mean + dimensionZ;			
+			X_mean     = X_mean + dimensionX;
+			Y_mean     = Y_mean + dimensionY;
+			Z_mean     = Z_mean + dimensionZ;			
 		}
 
 		if (counter==9)
