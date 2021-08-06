@@ -54,7 +54,7 @@ bool kbhit(void)
     return pressed;
 }
 
-void erasebackground()
+void erasebackground(pcl::PointCloud<pcl::PointXYZ>::Ptr inputcloud)
 {
 //var
 	std::vector<int> newPointIdxVector;
@@ -68,7 +68,7 @@ void erasebackground()
 	octree.addPointsFromInputCloud();
 	octree.switchBuffers();
 
-	octree.setInputCloud(cloud_filtered);
+	octree.setInputCloud(inputcloud);
 	octree.addPointsFromInputCloud();
 	octree.getPointIndicesFromNewVoxels(newPointIdxVector);
 	
@@ -76,13 +76,13 @@ void erasebackground()
 	
 	for (size_t i = 0; i < newPointIdxVector.size(); ++i)
 	{
-		cloud_nobackground->points[i].x = (*cloud_filtered)[newPointIdxVector[i]].x;
-		cloud_nobackground->points[i].y = (*cloud_filtered)[newPointIdxVector[i]].y;
-		cloud_nobackground->points[i].z = (*cloud_filtered)[newPointIdxVector[i]].z;
+		cloud_nobackground->points[i].x = (*inputcloud)[newPointIdxVector[i]].x;
+		cloud_nobackground->points[i].y = (*inputcloud)[newPointIdxVector[i]].y;
+		cloud_nobackground->points[i].z = (*inputcloud)[newPointIdxVector[i]].z;
 	}
 }
 
-void filtercloud (pcl::PointCloud<pcl::PointXYZ>::Ptr inputcloud)
+void filtercloud(pcl::PointCloud<pcl::PointXYZ>::Ptr inputcloud)
 {
 // var
 	pcl::PassThrough<pcl::PointXYZ> passx;
@@ -132,7 +132,7 @@ std::tuple<double, double, double, double> calculatevolume(std::vector<PointXYZ>
 	}
 
 	filtercloud(cloud_raw);
-	erasebackground();
+	erasebackground(cloud_filtered);
 	cloud_size = cloud_nobackground->size();
 	
 	if (cloud_size > 10)
