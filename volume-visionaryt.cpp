@@ -82,7 +82,7 @@ void erasebackground()
 	}
 }
 
-void filtercloud ()
+void filtercloud (pcl::PointCloud<pcl::PointXYZ>::Ptr inputcloud)
 {
 // var
 	pcl::PassThrough<pcl::PointXYZ> passx;
@@ -90,7 +90,7 @@ void filtercloud ()
 	pcl::PassThrough<pcl::PointXYZ> passz;
 	pcl::StatisticalOutlierRemoval<pcl::PointXYZ> sor;
 ////
-	passx.setInputCloud(cloud_raw);
+	passx.setInputCloud(inputcloud);
 	passx.setFilterFieldName ("x");
 	passx.setFilterLimits (-0.23, 0.25);
 	passx.filter (*cloud_filtered);
