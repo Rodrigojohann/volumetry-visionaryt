@@ -28,7 +28,7 @@
 #include <pcl/octree/octree_pointcloud_changedetector.h>
 
 
-pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_raw 	          (new pcl::PointCloud<pcl::PointXYZ>);
+
 pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_filtered        (new pcl::PointCloud<pcl::PointXYZ>);
 pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_background      (new pcl::PointCloud<pcl::PointXYZ>);
 pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_nobackground    (new pcl::PointCloud<pcl::PointXYZ>);
@@ -120,6 +120,7 @@ std::tuple<double, double, double, double> calculatevolume(std::vector<PointXYZ>
 	std::vector<pcl::Vertices> polygons;
 	double volume, dimensionX, dimensionY, dimensionZ;	
 	pcl::PointXYZ minPt, maxPt;
+	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_raw 	          (new pcl::PointCloud<pcl::PointXYZ>);
 ////
 	cloud_raw->points.resize(inputcloud.size());
 	
@@ -130,7 +131,7 @@ std::tuple<double, double, double, double> calculatevolume(std::vector<PointXYZ>
 		cloud_raw->points[i].z = inputcloud[i].z;
 	}
 
-	filtercloud();
+	filtercloud(cloud_raw);
 	erasebackground();
 	cloud_size = cloud_nobackground->size();
 	
