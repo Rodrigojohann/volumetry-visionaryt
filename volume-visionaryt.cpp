@@ -82,7 +82,7 @@ void erasebackground(pcl::PointCloud<pcl::PointXYZ>::Ptr inputcloud)
 	}
 }
 
-void filtercloud(pcl::PointCloud<pcl::PointXYZ>::Ptr inputcloud)
+pcl::PointCloud<pcl::PointXYZ>::Ptr filtercloud(pcl::PointCloud<pcl::PointXYZ>::Ptr inputcloud)
 {
 // var
 	pcl::PassThrough<pcl::PointXYZ> passx;
@@ -109,18 +109,20 @@ void filtercloud(pcl::PointCloud<pcl::PointXYZ>::Ptr inputcloud)
 	sor.setMeanK(5);
 	sor.setStddevMulThresh(3.5);
 	sor.filter(*cloud_filtered);
+	
+	return cloud_filtered;
 }
 
 std::tuple<double, double, double, double> calculatevolume(std::vector<PointXYZ> inputcloud)
 {
 // var
    	pcl::PointCloud<pcl::PointXYZ>::Ptr surface_hull (new pcl::PointCloud<pcl::PointXYZ>);
-	size_t cloud_size;
-	pcl::ConvexHull<pcl::PointXYZ> chull;
-	std::vector<pcl::Vertices> polygons;
-	double volume, dimensionX, dimensionY, dimensionZ;	
-	pcl::PointXYZ minPt, maxPt;
-	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_raw 	          (new pcl::PointCloud<pcl::PointXYZ>);
+	size_t                              cloud_size;
+	pcl::ConvexHull<pcl::PointXYZ>      chull;
+	std::vector<pcl::Vertices>          polygons;
+	double                              volume, dimensionX, dimensionY, dimensionZ;	
+	pcl::PointXYZ                       minPt, maxPt;
+	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_raw (new pcl::PointCloud<pcl::PointXYZ>);
 ////
 	cloud_raw->points.resize(inputcloud.size());
 	
@@ -131,7 +133,7 @@ std::tuple<double, double, double, double> calculatevolume(std::vector<PointXYZ>
 		cloud_raw->points[i].z = inputcloud[i].z;
 	}
 
-	filtercloud(cloud_raw);
+	cloud_filtered = filtercloud(cloud_raw);
 	erasebackground(cloud_filtered);
 	cloud_size = cloud_nobackground->size();
 	
