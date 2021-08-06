@@ -110,11 +110,13 @@ pcl::PointCloud<pcl::PointXYZ>::Ptr filtercloud(pcl::PointCloud<pcl::PointXYZ>::
 	passz.setFilterLimits (0, 0.758);
 	passz.filter (*outputcloud);
 	
-	sor.setInputCloud(outputcloud);
-	sor.setMeanK(5);
-	sor.setStddevMulThresh(3.5);
-	sor.filter(*outputcloud);
-	
+	if (outputcloud->size() > 10)
+	{
+		sor.setInputCloud(outputcloud);
+		sor.setMeanK(5);
+		sor.setStddevMulThresh(3.5);
+		sor.filter(*outputcloud);
+	}
 	return outputcloud;
 }
 
