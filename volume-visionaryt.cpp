@@ -57,25 +57,31 @@ pcl::PointCloud<pcl::PointXYZ>::Ptr erasebackground(pcl::PointCloud<pcl::PointXY
 	float 								resolution;
 	pcl::PointCloud<pcl::PointXYZ>::Ptr outputcloud (new pcl::PointCloud<pcl::PointXYZ>);
 ////
-	resolution = 0.02f;
+	resolution = 0.02;
 	pcl::octree::OctreePointCloudChangeDetector<pcl::PointXYZ> octree(resolution);
 
-	octree.setInputCloud(cloud_background);
-	octree.addPointsFromInputCloud();
-	octree.switchBuffers();
+	if (inputcloud.size() > 10)
+		{
+		octree.setInputCloud(cloud_background);
+		octree.addPointsFromInputCloud();
+		octree.switchBuffers();
 
-	octree.setInputCloud(inputcloud);
-	octree.addPointsFromInputCloud();
-	octree.getPointIndicesFromNewVoxels(newPointIdxVector);
-	
-	outputcloud->points.resize(newPointIdxVector.size());
-	
-	for (size_t i = 0; i < newPointIdxVector.size(); ++i)
+		octree.setInputCloud(inputcloud);
+		octree.addPointsFromInputCloud();
+		octree.getPointIndicesFromNewVoxels(newPointIdxVector);
+		
+		outputcloud->points.resize(newPointIdxVector.size());
+		
+		for (size_t i = 0; i < newPointIdxVector.size(); ++i)
+		{
+			outputcloud->points[i].x = (*inputcloud)[newPointIdxVector[i]].x;
+			outputcloud->points[i].y = (*inputcloud)[newPointIdxVector[i]].y;
+			outputcloud->points[i].z = (*inputcloud)[newPointIdxVector[i]].z;
+		}
+	else
 	{
-		outputcloud->points[i].x = (*inputcloud)[newPointIdxVector[i]].x;
-		outputcloud->points[i].y = (*inputcloud)[newPointIdxVector[i]].y;
-		outputcloud->points[i].z = (*inputcloud)[newPointIdxVector[i]].z;
-	}
+		outputcloud = inputcloud;
+	}	
 	return outputcloud;
 }
 
@@ -114,15 +120,16 @@ pcl::PointCloud<pcl::PointXYZ>::Ptr filtercloud(pcl::PointCloud<pcl::PointXYZ>::
 std::tuple<double, double, double, double> calculatevolume(std::vector<PointXYZ> inputcloud)
 {
 // var
-   	pcl::PointCloud<pcl::PointXYZ>::Ptr surface_hull (new pcl::PointCloud<pcl::PointXYZ>);
-	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_raw (new pcl::PointCloud<pcl::PointXYZ>);
-	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_filtered        (new pcl::PointCloud<pcl::PointXYZ>);
+	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_raw          (new pcl::PointCloud<pcl::PointXYZ>);
+	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_filtered     (new pcl::PointCloud<pcl::PointXYZ>);
+	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_nobackground (new pcl::PointCloud<pcl::PointXYZ>);
+   	pcl::PointCloud<pcl::PointXYZ>::Ptr surface_hull       (new pcl::PointCloud<pcl::PointXYZ>);
 	size_t                              cloud_size;
 	pcl::ConvexHull<pcl::PointXYZ>      chull;
 	std::vector<pcl::Vertices>          polygons;
 	double                              volume, dimensionX, dimensionY, dimensionZ;	
 	pcl::PointXYZ                       minPt, maxPt;
-	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_nobackground    (new pcl::PointCloud<pcl::PointXYZ>);
+
 ////
 	cloud_raw->points.resize(inputcloud.size());
 	
