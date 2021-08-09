@@ -50,6 +50,37 @@ bool kbhit(void)
     return pressed;
 }
 
+double calculate_mean (double data[])
+{
+//var	
+	double sum = 0.0;
+	double mean;
+////	
+	for (int i = 0; i < 10; i++)
+	{
+	sum += data[i];
+	}
+	
+	mean = sum/10;
+	
+	return mean;	
+}
+
+double calculate_std (double data[], double mean)
+{
+//var	
+	double sum = 0.0;
+////
+	for(i = 0; i < 10; ++i)
+	{
+		sum += pow(data[i] - mean, 2);
+	}
+	
+	std = sqrt(sum / 10);
+	
+	return std;
+}
+
 pcl::PointCloud<pcl::PointXYZ>::Ptr erasebackground(pcl::PointCloud<pcl::PointXYZ>::Ptr inputcloud)
 {
 //var
@@ -176,10 +207,12 @@ void runStreamingDemo(char* ipAddress, unsigned short port)
 {
 // var
 	int 							  counter;
-	double 							  volumemean, X_mean, Y_mean, Z_mean;	
+	double 							  volumemean, X_mean, Y_mean, Z_mean;
+	double 							  volumestd, X_std, Y_std, Z_std;	
 	std::vector<PointXYZ>			  pointCloud;
 	boost::shared_ptr<VisionaryTData> pDataHandler;
 	double 							  volume, dimensionX, dimensionY, dimensionZ;
+	double 							  volumearray[10], Xarray[10], Yarray[10], Zarray[10];
 ////
 	pcl::io::loadPCDFile<pcl::PointXYZ> ("volumetry-background/backgroundcloud.pcd", *cloud_background);
 	// Generate Visionary instance
@@ -211,20 +244,30 @@ void runStreamingDemo(char* ipAddress, unsigned short port)
 			// Convert data to a point cloud
 			pDataHandler->generatePointCloud(pointCloud);
 			// Calculate volume
-			std::tie(volume, dimensionX, dimensionY, dimensionZ) = calculatevolume(pointCloud); 
-			volumemean = volumemean + volume;
-			X_mean     = X_mean + dimensionX;
-			Y_mean     = Y_mean + dimensionY;
-			Z_mean     = Z_mean + dimensionZ;			
+			//std::tie(volume, dimensionX, dimensionY, dimensionZ) = calculatevolume(pointCloud); 
+			
+			//volumemean = volumemean + volume;
+			//X_mean     = X_mean + dimensionX;
+			//Y_mean     = Y_mean + dimensionY;
+			//Z_mean     = Z_mean + dimensionZ;			
+		
+			std::tie(volumearray[counter], Xarray[counter], Yarray[counter], Zarray[counter]) = calculatevolume(pointCloud);
 		}
 
 		if (counter==9)
 		{
 			counter    = 0;
-			volumemean = volumemean/10;
-			X_mean     = X_mean/10;
-			Y_mean     = Y_mean/10;
-			Z_mean     = Z_mean/10;
+			//volumemean = volumemean/10;
+			//X_mean     = X_mean/10;
+			//Y_mean     = Y_mean/10;
+			//Z_mean     = Z_mean/10;
+			
+			volumemean = calculate_mean(volumearray);
+			X_mean 	   = calculate_mean(Xarray);
+			Y_mean     = calculate_mean(Yarray);
+			Z_mean     = calculate_mean(Zarray);
+			
+			
 			
 			printf("---------------------\n\n");
 			printf("volume:\n");
