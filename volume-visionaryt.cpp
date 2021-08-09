@@ -129,17 +129,17 @@ pcl::PointCloud<pcl::PointXYZ>::Ptr filtercloud(pcl::PointCloud<pcl::PointXYZ>::
 ////
 	passx.setInputCloud(inputcloud);
 	passx.setFilterFieldName ("x");
-	passx.setFilterLimits (-0.23, 0.25);
+	passx.setFilterLimits (-0.6, 0.6);
 	passx.filter (*outputcloud);
 	
 	passy.setInputCloud(outputcloud);
 	passy.setFilterFieldName ("y");
-	passy.setFilterLimits (-0.15, 0.26);
+	passy.setFilterLimits (-0.6, 0.6);
 	passy.filter (*outputcloud);
 	
 	passz.setInputCloud(outputcloud);
 	passz.setFilterFieldName ("z");
-	passz.setFilterLimits (0, 0.758);
+	passz.setFilterLimits (0, 2.2);
 	passz.filter (*outputcloud);
 	
 	if (outputcloud->size() > 10)
