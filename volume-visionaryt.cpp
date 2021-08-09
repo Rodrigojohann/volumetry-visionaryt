@@ -70,8 +70,9 @@ double calculate_std (double data[], double mean)
 {
 //var	
 	double sum = 0.0;
+	double std;
 ////
-	for(i = 0; i < 10; ++i)
+	for(int i = 0; i < 10; ++i)
 	{
 		sum += pow(data[i] - mean, 2);
 	}
