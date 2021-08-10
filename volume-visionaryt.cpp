@@ -50,18 +50,22 @@ bool kbhit(void)
     return pressed;
 }
 
-double calculate_mean (double data[])
+double calculate_new_mean (double data[], double meanvalue, double stdvalue)
 {
 //var	
 	double sum = 0.0;
 	double mean;
+	int counter = 1;
 ////	
 	for (int i = 0; i < 10; i++)
 	{
-	sum += data[i];
+		if ((data[i] <= meanvalue+stdvalue) and (data[i] >= meanvalue-stdvalue))
+		{
+			sum+=data[i];
+			counter += 1;
+		}
 	}
-	
-	mean = sum/10;
+	mean = sum/counter;
 	
 	return mean;	
 }
@@ -212,6 +216,7 @@ void runStreamingDemo(char* ipAddress, unsigned short port)
 	int 							  counter;
 	double 							  volumemean, X_mean, Y_mean, Z_mean;
 	double 							  volumestd, X_std, Y_std, Z_std;	
+	double 							  volumemean_new, X_mean_new, Y_mean_new, Z_mean_new;
 	std::vector<PointXYZ>			  pointCloud;
 	boost::shared_ptr<VisionaryTData> pDataHandler;
 	double 							  volume, dimensionX, dimensionY, dimensionZ;
@@ -247,40 +252,47 @@ void runStreamingDemo(char* ipAddress, unsigned short port)
 			// Convert data to a point cloud
 			pDataHandler->generatePointCloud(pointCloud);
 			// Calculate volume
-			//std::tie(volume, dimensionX, dimensionY, dimensionZ) = calculatevolume(pointCloud); 
-			
-			//volumemean = volumemean + volume;
-			//X_mean     = X_mean + dimensionX;
-			//Y_mean     = Y_mean + dimensionY;
-			//Z_mean     = Z_mean + dimensionZ;			
-		
-			std::tie(volumearray[counter], Xarray[counter], Yarray[counter], Zarray[counter]) = calculatevolume(pointCloud);
+			std::tie(volume, dimensionX, dimensionY, dimensionZ) 							  = calculatevolume(pointCloud); 
+			std::tie(volumearray[counter], Xarray[counter], Yarray[counter], Zarray[counter]) = std::make_tuple(volume, dimensionX, dimensionY, dimensionZ);
+			volumemean = volumemean + volume;
+			X_mean     = X_mean + dimensionX;
+			Y_mean     = Y_mean + dimensionY;
+			Z_mean     = Z_mean + dimensionZ;			
 		}
 
 		if (counter==9)
 		{
 			counter    = 0;
-			//volumemean = volumemean/10;
-			//X_mean     = X_mean/10;
-			//Y_mean     = Y_mean/10;
-			//Z_mean     = Z_mean/10;
+			volumemean = volumemean/10;
+			X_mean     = X_mean/10;
+			Y_mean     = Y_mean/10;
+			Z_mean     = Z_mean/10;
 			
-			volumemean = calculate_mean(volumearray);
-			X_mean 	   = calculate_mean(Xarray);
-			Y_mean     = calculate_mean(Yarray);
-			Z_mean     = calculate_mean(Zarray);
+			volumestd = volumemean/10;
+			X_std     = X_mean/10;
+			Y_std     = Y_mean/10;
+			Z_std     = Z_mean/10;			
+			
+			
+			volumemean_new = calculate_new_mean(volumearray, volumemean, volumestd);
+			X_mean_new 	   = calculate_new_mean(Xarray, X_mean, X_std);
+			Y_mean_new     = calculate_new_mean(Yarray, Y_mean, Y_std);
+			Z_mean_new     = calculate_new_mean(Zarray, Z_mean, Z_std);
 			
 			
 			
 			printf("---------------------\n\n");
 			printf("volume:\n");
-			printf("%f cm³\n\n", volumemean*1000000);
+			printf("%f cm³\n\n", volumemean_new*1000000);
 			
 			printf("dimensions:\n");
-			printf("%f cm (x)\n", X_mean*100);
-			printf("%f cm (y)\n", Y_mean*100);
-			printf("%f cm (z)\n\n", Z_mean*100);
-			volumemean = 0.0;			
+			printf("%f cm (x)\n", X_mean_new*100);
+			printf("%f cm (y)\n", Y_mean_new*100);
+			printf("%f cm (z)\n\n", Z_mean_new*100);
+			volumemean = 0.0;
+			X_mean 	   = 0.0;
+			Y_mean     = 0.0;
+			Z_mean     = 0.0;			
 		}
 	}
 	control.stopAcquisition();
