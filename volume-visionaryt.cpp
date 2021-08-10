@@ -179,7 +179,7 @@ std::tuple<double, double, double, double> calculatevolume(std::vector<PointXYZ>
 	cloud_nobackground = erasebackground(cloud_filtered);
 	cloud_size         = cloud_nobackground->size();
 	
-	pcl::io::savePCDFile ("outputcloud.pcd", cloud_nobackground);
+	//pcl::io::savePCDFile ("outputcloud.pcd", *cloud_nobackground);
 	
 	if (cloud_size > 10)
 	{
@@ -203,7 +203,7 @@ std::tuple<double, double, double, double> calculatevolume(std::vector<PointXYZ>
 	dimensionZ = 0.0;
 	}
 	
-	return std::make_tuple(volume, dimensionX, dimensionY, dimensionZ);
+	return std::make_tuple(volume, dimensionX, dimensionY, dimensionZ);zshgh
 }
 
 void runStreamingDemo(char* ipAddress, unsigned short port)
