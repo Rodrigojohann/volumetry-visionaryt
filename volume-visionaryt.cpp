@@ -54,9 +54,9 @@ bool kbhit(void)
 double calculate_new_mean (double data[], double meanvalue, double stdvalue)
 {
 //var	
-	double sum = 0.0;
-	double mean;
+	double sum     = 0.0;
 	int    counter = 1;
+	double mean;
 ////	
 	for (int i = 0; i < 10; i++)
 	{
@@ -82,7 +82,7 @@ double calculate_std (double data[], double mean)
 		sum += pow(data[i] - mean, 2);
 	}
 	
-	std = sqrt(sum / 10);
+	std = sqrt(sum/10);
 	
 	return std;
 }
@@ -290,7 +290,7 @@ void runStreamingDemo(char* ipAddress, unsigned short port)
 			Y_mean_new     = calculate_new_mean(Yarray, Y_mean, Y_std);
 			Z_mean_new     = calculate_new_mean(Zarray, Z_mean, Z_std);
 			
-			pcl::io::savePLYFile ("outputcloud.ply", *cloud_concat);
+			pcl::io::savePLYFile("outputcloud.ply", *cloud_concat);
 			
 			pass_remove.setInputCloud(cloud_concat);
 			pass_remove.setFilterFieldName("x");
