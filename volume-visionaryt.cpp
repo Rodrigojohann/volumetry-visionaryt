@@ -223,6 +223,7 @@ void runStreamingDemo(char* ipAddress, unsigned short port)
 	boost::shared_ptr<VisionaryTData> pDataHandler;
 	double 							  volume, dimensionX, dimensionY, dimensionZ;
 	double 							  volumearray[10], Xarray[10], Yarray[10], Zarray[10];
+	pcl::PassThrough<pcl::PointXYZ> 			  pass_remove;
 ////
 	pcl::io::loadPCDFile<pcl::PointXYZ> ("volumetry-background/backgroundcloud.pcd", *cloud_background);
 	// Generate Visionary instance
@@ -283,7 +284,12 @@ void runStreamingDemo(char* ipAddress, unsigned short port)
 			
 			
 			pcl::io::savePLYFile ("outputcloud.ply", *cloud_concat);
-			*cloud_concat = *cloud_concat - *cloud_concat
+			
+			pass_remove.setInputCloud(cloud_concat);
+			pass_remove.setFilterFieldName ("x");
+			pass_remove.setFilterLimits (-5000, -4000);
+			pass_remove.filter (*cloud_concat);
+			
 			printf("---------------------\n\n");
 			printf("volume:\n");
 			printf("%f cm³\n\n", volumemean_new*1000000);
