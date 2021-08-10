@@ -203,7 +203,7 @@ std::tuple<double, double, double, double> calculatevolume(std::vector<PointXYZ>
 	dimensionZ = 0.0;
 	}
 	
-	return std::make_tuple(volume, dimensionX, dimensionY, dimensionZ);zshgh
+	return std::make_tuple(volume, dimensionX, dimensionY, dimensionZ);
 }
 
 void runStreamingDemo(char* ipAddress, unsigned short port)
