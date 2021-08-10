@@ -179,6 +179,8 @@ std::tuple<double, double, double, double> calculatevolume(std::vector<PointXYZ>
 	cloud_nobackground = erasebackground(cloud_filtered);
 	cloud_size         = cloud_nobackground->size();
 	
+	pcl::io::savePCDFile ("outputcloud.pcd", cloud_nobackground);
+	
 	if (cloud_size > 10)
 	{
 	chull.setInputCloud(cloud_nobackground);
