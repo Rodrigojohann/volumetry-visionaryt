@@ -172,7 +172,7 @@ std::tuple<double, double, double, double> calculatevolume(std::vector<PointXYZ>
 	double 						   cutvalue;
 	pcl::PassThrough<pcl::PointXYZ> pass_groundnoise;
 ////
-	cutvalue = 0.05
+	cutvalue = 0.05;
 	cloud_raw->points.resize(inputcloud.size());
 	
 	for(size_t i=0; i<cloud_raw->points.size(); ++i)
