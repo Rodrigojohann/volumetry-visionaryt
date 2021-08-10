@@ -28,8 +28,8 @@
 #include <pcl/point_cloud.h>
 #include <pcl/octree/octree_pointcloud_changedetector.h>
 
-pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_background      (new pcl::PointCloud<pcl::PointXYZ>);
-pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_concat       (new pcl::PointCloud<pcl::PointXYZ>);
+pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_background (new pcl::PointCloud<pcl::PointXYZ>);
+pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_concat     (new pcl::PointCloud<pcl::PointXYZ>);
 ////////////////////////////////////////////////////
 
 bool kbhit(void)
@@ -62,7 +62,7 @@ double calculate_new_mean (double data[], double meanvalue, double stdvalue)
 	{
 		if ((data[i] <= meanvalue+stdvalue) and (data[i] >= meanvalue-stdvalue))
 		{
-			sum+=data[i];
+			sum     += data[i];
 			counter += 1;
 		}
 	}
@@ -164,13 +164,11 @@ std::tuple<double, double, double, double> calculatevolume(std::vector<PointXYZ>
 	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_filtered     (new pcl::PointCloud<pcl::PointXYZ>);
 	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_nobackground (new pcl::PointCloud<pcl::PointXYZ>);
    	pcl::PointCloud<pcl::PointXYZ>::Ptr surface_hull       (new pcl::PointCloud<pcl::PointXYZ>);
-
-	size_t                              cloud_size;
-	pcl::ConvexHull<pcl::PointXYZ>      chull;
-	std::vector<pcl::Vertices>          polygons;
-	double                              volume, dimensionX, dimensionY, dimensionZ;	
-	pcl::PointXYZ                       minPt, maxPt;
-
+	size_t                         cloud_size;
+	pcl::ConvexHull<pcl::PointXYZ> chull;
+	std::vector<pcl::Vertices>     polygons;
+	double                         volume, dimensionX, dimensionY, dimensionZ;	
+	pcl::PointXYZ                  minPt, maxPt;
 ////
 	cloud_raw->points.resize(inputcloud.size());
 	
@@ -189,24 +187,24 @@ std::tuple<double, double, double, double> calculatevolume(std::vector<PointXYZ>
 	
 	if (cloud_size > 10)
 	{
-	chull.setInputCloud(cloud_nobackground);
-	chull.setDimension(3);
-	chull.setComputeAreaVolume(true);
-	chull.reconstruct(*surface_hull, polygons);
-	
-	volume = chull.getTotalVolume();
-	pcl::getMinMax3D(*surface_hull, minPt, maxPt);
-	
-	dimensionX = maxPt.x - minPt.x;
-	dimensionY = maxPt.y - minPt.y;
-	dimensionZ = maxPt.z - minPt.z;
+		chull.setInputCloud(cloud_nobackground);
+		chull.setDimension(3);
+		chull.setComputeAreaVolume(true);
+		chull.reconstruct(*surface_hull, polygons);
+		
+		volume = chull.getTotalVolume();
+		pcl::getMinMax3D(*surface_hull, minPt, maxPt);
+		
+		dimensionX = maxPt.x - minPt.x;
+		dimensionY = maxPt.y - minPt.y;
+		dimensionZ = maxPt.z - minPt.z;
 	}
 	else
 	{
-	volume     = 0.0;
-	dimensionX = 0.0;
-	dimensionY = 0.0;
-	dimensionZ = 0.0;
+		volume     = 0.0;
+		dimensionX = 0.0;
+		dimensionY = 0.0;
+		dimensionZ = 0.0;
 	}
 	
 	return std::make_tuple(volume, dimensionX, dimensionY, dimensionZ);
@@ -223,7 +221,7 @@ void runStreamingDemo(char* ipAddress, unsigned short port)
 	boost::shared_ptr<VisionaryTData> pDataHandler;
 	double 							  volume, dimensionX, dimensionY, dimensionZ;
 	double 							  volumearray[10], Xarray[10], Yarray[10], Zarray[10];
-	pcl::PassThrough<pcl::PointXYZ> 			  pass_remove;
+	pcl::PassThrough<pcl::PointXYZ>   pass_remove;
 ////
 	pcl::io::loadPCDFile<pcl::PointXYZ> ("volumetry-background/backgroundcloud.pcd", *cloud_background);
 	// Generate Visionary instance
@@ -271,17 +269,15 @@ void runStreamingDemo(char* ipAddress, unsigned short port)
 			Y_mean     = Y_mean/10;
 			Z_mean     = Z_mean/10;
 			
-			volumestd = volumemean/10;
-			X_std     = X_mean/10;
-			Y_std     = Y_mean/10;
-			Z_std     = Z_mean/10;
-			
+			volumestd = calculate_std(volumearray, volumemean);
+			X_std	  = calculate_std(Xarray, X_mean);
+			Y_std	  = calculate_std(Yarray, Y_mean);
+			Z_std 	  = calculate_std(Zarray, Z_mean);
 			
 			volumemean_new = calculate_new_mean(volumearray, volumemean, volumestd);
 			X_mean_new 	   = calculate_new_mean(Xarray, X_mean, X_std);
 			Y_mean_new     = calculate_new_mean(Yarray, Y_mean, Y_std);
 			Z_mean_new     = calculate_new_mean(Zarray, Z_mean, Z_std);
-			
 			
 			pcl::io::savePLYFile ("outputcloud.ply", *cloud_concat);
 			
