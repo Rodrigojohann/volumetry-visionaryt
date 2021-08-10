@@ -169,7 +169,10 @@ std::tuple<double, double, double, double> calculatevolume(std::vector<PointXYZ>
 	std::vector<pcl::Vertices>     polygons;
 	double                         volume, dimensionX, dimensionY, dimensionZ;	
 	pcl::PointXYZ                  minPt, maxPt;
+	double 						   cutvalue;
+	pcl::PassThrough<pcl::PointXYZ> pass_groundnoise;
 ////
+	cutvalue = 0.05
 	cloud_raw->points.resize(inputcloud.size());
 	
 	for(size_t i=0; i<cloud_raw->points.size(); ++i)
@@ -187,6 +190,13 @@ std::tuple<double, double, double, double> calculatevolume(std::vector<PointXYZ>
 	
 	if (cloud_size > 10)
 	{
+		pcl::getMinMax3D(*cloud_nobackground, minPt, maxPt);
+		
+		pass_groundnoise.setInputCloud(cloud_nobackground);
+		pass_groundnoise.setFilterFieldName ("z");
+		pass_groundnoise.setFilterLimits (0, (maxPt.z - cutvalue);
+		pass_groundnoise.filter (*cloud_nobackground);		
+		
 		chull.setInputCloud(cloud_nobackground);
 		chull.setDimension(3);
 		chull.setComputeAreaVolume(true);
@@ -197,7 +207,7 @@ std::tuple<double, double, double, double> calculatevolume(std::vector<PointXYZ>
 		
 		dimensionX = maxPt.x - minPt.x;
 		dimensionY = maxPt.y - minPt.y;
-		dimensionZ = maxPt.z - minPt.z;
+		dimensionZ = maxPt.z - minPt.z + cutvalue;
 	}
 	else
 	{
