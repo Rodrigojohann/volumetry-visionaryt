@@ -257,14 +257,18 @@ void runStreamingDemo(char* ipAddress, unsigned short port)
 	counter    = 0;
 	while (!kbhit())
 	{
-		counter = counter+1; 
+		counter = counter + 1; 
 		if (dataStream.getNextFrame())
 		{
 			// Convert data to a point cloud
 			pDataHandler->generatePointCloud(pointCloud);
 			// Calculate volume
-			std::tie(volume, dimensionX, dimensionY, dimensionZ) 							  = calculatevolume(pointCloud); 
-			std::tie(volumearray[counter], Xarray[counter], Yarray[counter], Zarray[counter]) = std::make_tuple(volume, dimensionX, dimensionY, dimensionZ);
+			std::tie(volume, dimensionX, dimensionY, dimensionZ) = calculatevolume(pointCloud); 
+
+			volumearray[counter] = volume;
+			Xarray[counter]		 = dimensionX;
+			Yarray[counter]		 = dimensionY;
+			Zarray[counter]		 = dimensionZ;
 
 			volumemean = volumemean + volume;
 			X_mean     = X_mean + dimensionX;
