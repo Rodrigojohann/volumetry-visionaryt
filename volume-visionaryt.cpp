@@ -29,7 +29,7 @@
 #include <pcl/octree/octree_pointcloud_changedetector.h>
 
 pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_background      (new pcl::PointCloud<pcl::PointXYZ>);
-
+pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_concat       (new pcl::PointCloud<pcl::PointXYZ>);
 ////////////////////////////////////////////////////
 
 bool kbhit(void)
@@ -164,6 +164,7 @@ std::tuple<double, double, double, double> calculatevolume(std::vector<PointXYZ>
 	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_filtered     (new pcl::PointCloud<pcl::PointXYZ>);
 	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_nobackground (new pcl::PointCloud<pcl::PointXYZ>);
    	pcl::PointCloud<pcl::PointXYZ>::Ptr surface_hull       (new pcl::PointCloud<pcl::PointXYZ>);
+
 	size_t                              cloud_size;
 	pcl::ConvexHull<pcl::PointXYZ>      chull;
 	std::vector<pcl::Vertices>          polygons;
@@ -184,7 +185,7 @@ std::tuple<double, double, double, double> calculatevolume(std::vector<PointXYZ>
 	cloud_nobackground = erasebackground(cloud_filtered);
 	cloud_size         = cloud_nobackground->size();
 	
-	pcl::io::savePLYFile ("outputcloud.ply", *cloud_nobackground);
+	*cloud_concat = (*cloud_concat) + (*cloud_nobackground);
 	
 	if (cloud_size > 10)
 	{
@@ -281,7 +282,8 @@ void runStreamingDemo(char* ipAddress, unsigned short port)
 			Z_mean_new     = calculate_new_mean(Zarray, Z_mean, Z_std);
 			
 			
-			
+			pcl::io::savePLYFile ("outputcloud.ply", *cloud_concat);
+			*cloud_concat = *cloud_concat - *cloud_concat
 			printf("---------------------\n\n");
 			printf("volume:\n");
 			printf("%f cm³\n\n", volumemean_new*1000000);
