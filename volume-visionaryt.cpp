@@ -89,7 +89,7 @@ pcl::PointCloud<pcl::PointXYZ>::Ptr erasebackground(pcl::PointCloud<pcl::PointXY
 	float 								resolution;
 	pcl::PointCloud<pcl::PointXYZ>::Ptr outputcloud (new pcl::PointCloud<pcl::PointXYZ>);
 ////
-	resolution = 0.02;
+	resolution = 0.05;
 	pcl::octree::OctreePointCloudChangeDetector<pcl::PointXYZ> octree(resolution);
 
 	if ((inputcloud->size()) > 10)
@@ -121,26 +121,26 @@ pcl::PointCloud<pcl::PointXYZ>::Ptr erasebackground(pcl::PointCloud<pcl::PointXY
 pcl::PointCloud<pcl::PointXYZ>::Ptr filtercloud(pcl::PointCloud<pcl::PointXYZ>::Ptr inputcloud)
 {
 // var
-	pcl::PassThrough<pcl::PointXYZ> 			  passx;
-	pcl::PassThrough<pcl::PointXYZ> 			  passy;
-	pcl::PassThrough<pcl::PointXYZ> 			  passz;
+	pcl::PassThrough<pcl::PointXYZ> 			  pass_x;
+	pcl::PassThrough<pcl::PointXYZ> 			  pass_y;
+	pcl::PassThrough<pcl::PointXYZ> 			  pass_z;
 	pcl::StatisticalOutlierRemoval<pcl::PointXYZ> sor;
 	pcl::PointCloud<pcl::PointXYZ>::Ptr			  outputcloud (new pcl::PointCloud<pcl::PointXYZ>);
 ////
-	passx.setInputCloud(inputcloud);
-	passx.setFilterFieldName ("x");
-	passx.setFilterLimits (-0.6, 0.6);
-	passx.filter (*outputcloud);
+	pass_x.setInputCloud(inputcloud);
+	pass_x.setFilterFieldName ("x");
+	pass_x.setFilterLimits (-0.6, 0.6);
+	pass_x.filter (*outputcloud);
 	
-	passy.setInputCloud(outputcloud);
-	passy.setFilterFieldName ("y");
-	passy.setFilterLimits (-0.6, 0.6);
-	passy.filter (*outputcloud);
+	pass_y.setInputCloud(outputcloud);
+	pass_y.setFilterFieldName ("y");
+	pass_y.setFilterLimits (-0.6, 0.6);
+	pass_y.filter (*outputcloud);
 	
-	passz.setInputCloud(outputcloud);
-	passz.setFilterFieldName ("z");
-	passz.setFilterLimits (0, 2.2);
-	passz.filter (*outputcloud);
+	pass_z.setInputCloud(outputcloud);
+	pass_z.setFilterFieldName ("z");
+	pass_z.setFilterLimits (0, 2.2);
+	pass_z.filter (*outputcloud);
 	
 	if (outputcloud->size() > 10)
 	{
