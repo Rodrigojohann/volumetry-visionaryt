@@ -194,7 +194,7 @@ std::tuple<double, double, double, double> calculatevolume(std::vector<PointXYZ>
 		
 		pass_groundnoise.setInputCloud(cloud_nobackground);
 		pass_groundnoise.setFilterFieldName ("z");
-		pass_groundnoise.setFilterLimits (0, (maxPt.z - cutvalue);
+		pass_groundnoise.setFilterLimits (0, (maxPt.z - cutvalue));
 		pass_groundnoise.filter (*cloud_nobackground);		
 		
 		chull.setInputCloud(cloud_nobackground);
