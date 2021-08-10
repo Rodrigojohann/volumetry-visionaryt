@@ -35,8 +35,8 @@ pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_concat     (new pcl::PointCloud<pcl::P
 bool kbhit(void)
 {
 // var	
-	int characters_buffered;
-	bool pressed;
+	int    characters_buffered;
+	bool   pressed;
 	struct termios original;
 	struct termios term;
 ////
@@ -56,7 +56,7 @@ double calculate_new_mean (double data[], double meanvalue, double stdvalue)
 //var	
 	double sum = 0.0;
 	double mean;
-	int counter = 1;
+	int    counter = 1;
 ////	
 	for (int i = 0; i < 10; i++)
 	{
@@ -133,19 +133,19 @@ pcl::PointCloud<pcl::PointXYZ>::Ptr filtercloud(pcl::PointCloud<pcl::PointXYZ>::
 	pcl::PointCloud<pcl::PointXYZ>::Ptr			  outputcloud (new pcl::PointCloud<pcl::PointXYZ>);
 ////
 	pass_x.setInputCloud(inputcloud);
-	pass_x.setFilterFieldName ("x");
-	pass_x.setFilterLimits (-0.6, 0.6);
-	pass_x.filter (*outputcloud);
+	pass_x.setFilterFieldName("x");
+	pass_x.setFilterLimits(-0.6, 0.6);
+	pass_x.filter(*outputcloud);
 	
 	pass_y.setInputCloud(outputcloud);
-	pass_y.setFilterFieldName ("y");
-	pass_y.setFilterLimits (-0.6, 0.6);
-	pass_y.filter (*outputcloud);
+	pass_y.setFilterFieldName("y");
+	pass_y.setFilterLimits(-0.6, 0.6);
+	pass_y.filter(*outputcloud);
 	
 	pass_z.setInputCloud(outputcloud);
-	pass_z.setFilterFieldName ("z");
-	pass_z.setFilterLimits (0, 2.2);
-	pass_z.filter (*outputcloud);
+	pass_z.setFilterFieldName("z");
+	pass_z.setFilterLimits(0, 2.2);
+	pass_z.filter(*outputcloud);
 	
 	if (outputcloud->size() > 10)
 	{
@@ -164,13 +164,13 @@ std::tuple<double, double, double, double> calculatevolume(std::vector<PointXYZ>
 	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_filtered     (new pcl::PointCloud<pcl::PointXYZ>);
 	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_nobackground (new pcl::PointCloud<pcl::PointXYZ>);
    	pcl::PointCloud<pcl::PointXYZ>::Ptr surface_hull       (new pcl::PointCloud<pcl::PointXYZ>);
-	size_t                         cloud_size;
-	pcl::ConvexHull<pcl::PointXYZ> chull;
-	std::vector<pcl::Vertices>     polygons;
-	double                         volume, dimensionX, dimensionY, dimensionZ;	
-	pcl::PointXYZ                  minPt, maxPt;
-	double 						   cutvalue;
-	pcl::PassThrough<pcl::PointXYZ> pass_groundnoise;
+	size_t                              cloud_size;
+	pcl::ConvexHull<pcl::PointXYZ>      chull;
+	std::vector<pcl::Vertices>          polygons;
+	double                              volume, dimensionX, dimensionY, dimensionZ;	
+	pcl::PointXYZ                       minPt, maxPt;
+	double 						        cutvalue;
+	pcl::PassThrough<pcl::PointXYZ>     pass_groundnoise;
 ////
 	cutvalue = 0.05;
 	cloud_raw->points.resize(inputcloud.size());
@@ -193,9 +193,9 @@ std::tuple<double, double, double, double> calculatevolume(std::vector<PointXYZ>
 		pcl::getMinMax3D(*cloud_nobackground, minPt, maxPt);
 		
 		pass_groundnoise.setInputCloud(cloud_nobackground);
-		pass_groundnoise.setFilterFieldName ("z");
-		pass_groundnoise.setFilterLimits (0, (maxPt.z - cutvalue));
-		pass_groundnoise.filter (*cloud_nobackground);		
+		pass_groundnoise.setFilterFieldName("z");
+		pass_groundnoise.setFilterLimits(0, (maxPt.z - cutvalue));
+		pass_groundnoise.filter(*cloud_nobackground);		
 		
 		chull.setInputCloud(cloud_nobackground);
 		chull.setDimension(3);
@@ -265,6 +265,7 @@ void runStreamingDemo(char* ipAddress, unsigned short port)
 			// Calculate volume
 			std::tie(volume, dimensionX, dimensionY, dimensionZ) 							  = calculatevolume(pointCloud); 
 			std::tie(volumearray[counter], Xarray[counter], Yarray[counter], Zarray[counter]) = std::make_tuple(volume, dimensionX, dimensionY, dimensionZ);
+
 			volumemean = volumemean + volume;
 			X_mean     = X_mean + dimensionX;
 			Y_mean     = Y_mean + dimensionY;
@@ -292,9 +293,9 @@ void runStreamingDemo(char* ipAddress, unsigned short port)
 			pcl::io::savePLYFile ("outputcloud.ply", *cloud_concat);
 			
 			pass_remove.setInputCloud(cloud_concat);
-			pass_remove.setFilterFieldName ("x");
-			pass_remove.setFilterLimits (-5000, -4000);
-			pass_remove.filter (*cloud_concat);
+			pass_remove.setFilterFieldName("x");
+			pass_remove.setFilterLimits(-5000, -4000);
+			pass_remove.filter(*cloud_concat);
 			
 			printf("---------------------\n\n");
 			printf("volume:\n");
