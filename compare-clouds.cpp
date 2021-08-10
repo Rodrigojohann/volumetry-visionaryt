@@ -12,6 +12,7 @@
 #include <pcl/filters/statistical_outlier_removal.h>
 #include <pcl/common/common.h>
 #include <pcl/io/pcd_io.h>
+#include <pcl/io/ply_io.h>
 #include <pcl/common/io.h>
 #include <pcl/point_cloud.h>
 #include <pcl/visualization/pcl_visualizer.h>
@@ -24,7 +25,7 @@ pcl::StatisticalOutlierRemoval<pcl::PointXYZ> sor;
 int main()
 {
 	pcl::io::loadPCDFile<pcl::PointXYZ> ("volumetry-background/backgroundcloud.pcd", *cloud_original);
-	pcl::io::loadPCDFile<pcl::PointXYZ> ("volumetry-background/cloud_nobackground.pcd", *cloud_filtered);
+	pcl::io::loadPLYFile<pcl::PointXYZ> ("volumetry-background/outputcloud.pcd", *cloud_filtered);
 
 	sor.setInputCloud (cloud_filtered);
 	sor.setMeanK (50);
