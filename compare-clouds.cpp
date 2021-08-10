@@ -25,7 +25,7 @@ pcl::StatisticalOutlierRemoval<pcl::PointXYZ> sor;
 int main()
 {
 	pcl::io::loadPCDFile<pcl::PointXYZ> ("volumetry-background/backgroundcloud.pcd", *cloud_original);
-	pcl::io::loadPLYFile<pcl::PointXYZ> ("volumetry-background/outputcloud.pcd", *cloud_filtered);
+	pcl::io::loadPLYFile<pcl::PointXYZ> ("volumetry-background/outputcloud.ply", *cloud_filtered);
 
 	sor.setInputCloud (cloud_filtered);
 	sor.setMeanK (50);
