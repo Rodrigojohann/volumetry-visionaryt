@@ -23,6 +23,7 @@
 #include <pcl/common/common.h>
 #include <pcl/point_types.h>
 #include <pcl/io/pcd_io.h>
+#include <pcl/io/ply_io.h>
 #include <pcl/common/io.h>
 #include <pcl/point_cloud.h>
 #include <pcl/octree/octree_pointcloud_changedetector.h>
@@ -183,7 +184,7 @@ std::tuple<double, double, double, double> calculatevolume(std::vector<PointXYZ>
 	cloud_nobackground = erasebackground(cloud_filtered);
 	cloud_size         = cloud_nobackground->size();
 	
-	//pcl::io::savePCDFile ("outputcloud.pcd", *cloud_nobackground);
+	pcl::io::savePLYFile ("outputcloud.ply", *cloud_nobackground);
 	
 	if (cloud_size > 10)
 	{
@@ -257,7 +258,7 @@ void runStreamingDemo(char* ipAddress, unsigned short port)
 			volumemean = volumemean + volume;
 			X_mean     = X_mean + dimensionX;
 			Y_mean     = Y_mean + dimensionY;
-			Z_mean     = Z_mean + dimensionZ;			
+			Z_mean     = Z_mean + dimensionZ;
 		}
 
 		if (counter==9)
@@ -271,7 +272,7 @@ void runStreamingDemo(char* ipAddress, unsigned short port)
 			volumestd = volumemean/10;
 			X_std     = X_mean/10;
 			Y_std     = Y_mean/10;
-			Z_std     = Z_mean/10;			
+			Z_std     = Z_mean/10;
 			
 			
 			volumemean_new = calculate_new_mean(volumearray, volumemean, volumestd);
@@ -292,7 +293,7 @@ void runStreamingDemo(char* ipAddress, unsigned short port)
 			volumemean = 0.0;
 			X_mean 	   = 0.0;
 			Y_mean     = 0.0;
-			Z_mean     = 0.0;			
+			Z_mean     = 0.0;
 		}
 	}
 	control.stopAcquisition();
