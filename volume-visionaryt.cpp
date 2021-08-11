@@ -186,8 +186,6 @@ std::tuple<double, double, double, double> calculatevolume(std::vector<PointXYZ>
 	cloud_nobackground = erasebackground(cloud_filtered);
 	cloud_size         = cloud_nobackground->size();
 	
-	*cloud_concat = (*cloud_concat) + (*cloud_nobackground);
-	
 	if (cloud_size > 10)
 	{
 		pcl::getMinMax3D(*cloud_nobackground, minPt, maxPt);
@@ -204,6 +202,7 @@ std::tuple<double, double, double, double> calculatevolume(std::vector<PointXYZ>
 		
 		//volume = chull.getTotalVolume();
 		
+		*cloud_concat = (*cloud_concat) + (*cloud_nobackground);
 		pcl::getMinMax3D(*cloud_nobackground, minPt, maxPt);
 		
 		dimensionX = maxPt.x - minPt.x;
