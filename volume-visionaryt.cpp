@@ -205,14 +205,14 @@ std::tuple<double, double, double, double> calculatevolume(std::vector<PointXYZ>
 		
 		max_z = maxPt.z;
 		mean_z = 0.0;
-		double z_array[cloud_nobackground.size()];
-		for (size_t i=0; i<cloud_nobackground.size(); ++i)
+		double z_array[cloud_nobackground->size()];
+		for (size_t i=0; i<cloud_nobackground->size(); ++i)
 		{
 			z_array[i] = cloud_nobackground->points[i].z;
 			mean_z += cloud_nobackground->points[i].z;
 		}
 		
-		mean_z = mean_z/(cloud_nobackground.size());
+		mean_z = mean_z/(cloud_nobackground->size());
 		std_z  = calculate_std(z_array, mean_z);
 		mean_z_new = calculate_new_mean(z_array, mean_z, std_z);
 		
