@@ -222,7 +222,7 @@ std::tuple<double, double, double, double> calculatevolume(std::vector<PointXYZ>
 		pcl::getMinMax3D(*cloud_nobackground, minPt, maxPt);
 		
 		printf("min z: %f \n", min_z);
-		printf("mean z mean: %f \n", mean_z_new);
+		printf("mean z mean: %f \n", mean_z);
 		
 		dimensionX = maxPt.x - minPt.x;
 		dimensionY = maxPt.y - minPt.y;
