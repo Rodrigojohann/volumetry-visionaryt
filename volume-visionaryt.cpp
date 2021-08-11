@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
@@ -87,6 +88,18 @@ double calculate_std (double data[], double mean)
 	return std;
 }
 
+double findMedian(int a[], int n)
+{
+    // First we sort the array
+    std::sort(a, a + n);
+ 
+    // check for even case
+    if (n % 2 != 0)
+        return (double)a[n / 2];
+ 
+    return (double)(a[(n - 1) / 2] + a[n / 2]) / 2.0;
+}
+
 pcl::PointCloud<pcl::PointXYZ>::Ptr erasebackground(pcl::PointCloud<pcl::PointXYZ>::Ptr inputcloud)
 {
 //var
@@ -171,7 +184,7 @@ std::tuple<double, double, double, double> calculatevolume(std::vector<PointXYZ>
 	pcl::PointXYZ                       minPt, maxPt;
 	double 						        cutvalue;
 	pcl::PassThrough<pcl::PointXYZ>     pass_groundnoise;
-	double mean_z, std_z, mean_z_new, max_z, min_z;
+	double mean_z, std_z, mean_z_new, max_z, min_z, median_z;
 ////
 	cutvalue = 0.15;
 	cloud_raw->points.resize(inputcloud.size());
@@ -217,6 +230,7 @@ std::tuple<double, double, double, double> calculatevolume(std::vector<PointXYZ>
 		mean_z = mean_z/(cloud_nobackground->size());
 		std_z  = calculate_std(z_array, mean_z);
 		mean_z_new = calculate_new_mean(z_array, mean_z, std_z);
+		median_z = findMedian(z_array, cloud_nobackground->size());
 		
 		*cloud_concat = (*cloud_concat) + (*cloud_nobackground);
 		pcl::getMinMax3D(*cloud_nobackground, minPt, maxPt);
@@ -226,7 +240,7 @@ std::tuple<double, double, double, double> calculatevolume(std::vector<PointXYZ>
 		
 		dimensionX = maxPt.x - minPt.x;
 		dimensionY = maxPt.y - minPt.y;
-		dimensionZ = max_z - min_z;
+		dimensionZ = median_z - min_z;
 		
 		volume = dimensionX*dimensionY*dimensionZ;
 	}
