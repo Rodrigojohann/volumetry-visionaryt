@@ -260,7 +260,7 @@ void runStreamingDemo(char* ipAddress, unsigned short port)
 	while (!kbhit())
 	{
 		counter = counter + 1; 
-		if (dataStream.getNextFrame())-+
+		if (dataStream.getNextFrame())
 		{
 			// Convert data to a point cloud
 			pDataHandler->generatePointCloud(pointCloud);
