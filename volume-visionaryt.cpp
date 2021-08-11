@@ -172,7 +172,7 @@ std::tuple<double, double, double, double> calculatevolume(std::vector<PointXYZ>
 	double 						        cutvalue;
 	pcl::PassThrough<pcl::PointXYZ>     pass_groundnoise;
 ////
-	cutvalue = 0.1;
+	cutvalue = 0.15;
 	cloud_raw->points.resize(inputcloud.size());
 	
 	for(size_t i=0; i<cloud_raw->points.size(); ++i)
@@ -197,17 +197,20 @@ std::tuple<double, double, double, double> calculatevolume(std::vector<PointXYZ>
 		pass_groundnoise.setFilterLimits(0, (maxPt.z - cutvalue));
 		pass_groundnoise.filter(*cloud_nobackground);		
 		
-		chull.setInputCloud(cloud_nobackground);
-		chull.setDimension(3);
-		chull.setComputeAreaVolume(true);
-		chull.reconstruct(*surface_hull, polygons);
+		//chull.setInputCloud(cloud_nobackground);
+		//chull.setDimension(3);
+		//chull.setComputeAreaVolume(true);
+		//chull.reconstruct(*surface_hull, polygons);
 		
-		volume = chull.getTotalVolume();
-		pcl::getMinMax3D(*surface_hull, minPt, maxPt);
+		//volume = chull.getTotalVolume();
+		
+		pcl::getMinMax3D(*cloud_nobackground, minPt, maxPt);
 		
 		dimensionX = maxPt.x - minPt.x;
 		dimensionY = maxPt.y - minPt.y;
 		dimensionZ = maxPt.z - minPt.z + cutvalue;
+		
+		volume = dimensionX*dimensionY*dimensionZ;
 	}
 	else
 	{
