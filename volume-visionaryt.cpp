@@ -307,7 +307,7 @@ void runStreamingDemo(char* ipAddress, unsigned short port)
 			Y_std	  = calculate_std(Yarray, Y_mean);
 			Z_std 	  = calculate_std(Zarray, Z_mean);
 			
-			volumemean_new = calculate_new_mean(volumearray, volumemean, volumestd);
+			//volumemean_new = calculate_new_mean(volumearray, volumemean, volumestd);
 			X_mean_new 	   = calculate_new_mean(Xarray, X_mean, X_std);
 			Y_mean_new     = calculate_new_mean(Yarray, Y_mean, Y_std);
 			Z_mean_new     = calculate_new_mean(Zarray, Z_mean, Z_std);
@@ -321,12 +321,12 @@ void runStreamingDemo(char* ipAddress, unsigned short port)
 			
 			printf("---------------------\n\n");
 			printf("volume:\n");
-			printf("%f cm³\n\n", volumemean_new*1000000);
+			printf("%f cm³\n\n", (X_mean_new*Y_mean_new*Z_mean_new)*1000000);
 			
 			printf("dimensions:\n");
-			printf("%f cm (x)\n", X_mean_new*100);
-			printf("%f cm (y)\n", Y_mean_new*100);
-			printf("%f cm (z)\n\n", Z_mean_new*100);
+			printf("%f cm (x)\n", X_mean*100);
+			printf("%f cm (y)\n", Y_mean*100);
+			printf("%f cm (z)\n\n", Z_mean*100);
 			volumemean = 0.0;
 			X_mean 	   = 0.0;
 			Y_mean     = 0.0;
