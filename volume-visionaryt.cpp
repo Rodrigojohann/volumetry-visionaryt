@@ -171,6 +171,7 @@ std::tuple<double, double, double, double> calculatevolume(std::vector<PointXYZ>
 	pcl::PointXYZ                       minPt, maxPt;
 	double 						        cutvalue;
 	pcl::PassThrough<pcl::PointXYZ>     pass_groundnoise;
+	double mean_z, std_z, mean_z_new, max_z;
 ////
 	cutvalue = 0.15;
 	cloud_raw->points.resize(inputcloud.size());
@@ -202,12 +203,25 @@ std::tuple<double, double, double, double> calculatevolume(std::vector<PointXYZ>
 		
 		//volume = chull.getTotalVolume();
 		
+		max_z = maxPt.z;
+		mean_z = 0.0;
+		double z_array[cloud_nobackground.size()];
+		for (size_t i=0; i<cloud_nobackground.size(); ++i)
+		{
+			z_array[i] = cloud_nobackground->points[i].z;
+			mean_z += cloud_nobackground->points[i].z;
+		}
+		
+		mean_z = mean_z/(cloud_nobackground.size());
+		std_z  = calculate_std(z_array, mean_z);
+		mean_z_new = calculate_new_mean(z_array, mean_z, std_z);
+		
 		*cloud_concat = (*cloud_concat) + (*cloud_nobackground);
 		pcl::getMinMax3D(*cloud_nobackground, minPt, maxPt);
 		
 		dimensionX = maxPt.x - minPt.x;
 		dimensionY = maxPt.y - minPt.y;
-		dimensionZ = maxPt.z - minPt.z + 2*cutvalue;
+		dimensionZ = max_z - mean_z_new;
 		
 		volume = dimensionX*dimensionY*dimensionZ;
 	}
