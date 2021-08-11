@@ -94,7 +94,7 @@ pcl::PointCloud<pcl::PointXYZ>::Ptr erasebackground(pcl::PointCloud<pcl::PointXY
 	float 								resolution;
 	pcl::PointCloud<pcl::PointXYZ>::Ptr outputcloud (new pcl::PointCloud<pcl::PointXYZ>);
 ////
-	resolution = 0.1;
+	resolution = 0.15;
 	pcl::octree::OctreePointCloudChangeDetector<pcl::PointXYZ> octree(resolution);
 
 	if ((inputcloud->size()) > 10)
@@ -134,12 +134,12 @@ pcl::PointCloud<pcl::PointXYZ>::Ptr filtercloud(pcl::PointCloud<pcl::PointXYZ>::
 ////
 	pass_x.setInputCloud(inputcloud);
 	pass_x.setFilterFieldName("x");
-	pass_x.setFilterLimits(-0.6, 0.6);
+	pass_x.setFilterLimits(-0.5, 0.5);
 	pass_x.filter(*outputcloud);
 	
 	pass_y.setInputCloud(outputcloud);
 	pass_y.setFilterFieldName("y");
-	pass_y.setFilterLimits(-0.6, 0.6);
+	pass_y.setFilterLimits(-0.4, 0.4);
 	pass_y.filter(*outputcloud);
 	
 	pass_z.setInputCloud(outputcloud);
@@ -172,7 +172,7 @@ std::tuple<double, double, double, double> calculatevolume(std::vector<PointXYZ>
 	double 						        cutvalue;
 	pcl::PassThrough<pcl::PointXYZ>     pass_groundnoise;
 ////
-	cutvalue = 0.05;
+	cutvalue = 0.1;
 	cloud_raw->points.resize(inputcloud.size());
 	
 	for(size_t i=0; i<cloud_raw->points.size(); ++i)
