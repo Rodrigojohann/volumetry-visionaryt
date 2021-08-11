@@ -182,7 +182,7 @@ std::tuple<double, double, double, double> calculatevolume(std::vector<PointXYZ>
 		cloud_raw->points[i].z = inputcloud[i].z;
 	}
 
-	cloud_filtered     = filtercloud(cloud_raw);
+ 	cloud_filtered     = filtercloud(cloud_raw);
 	cloud_nobackground = erasebackground(cloud_filtered);
 	cloud_size         = cloud_nobackground->size();
 	
@@ -229,7 +229,6 @@ void runStreamingDemo(char* ipAddress, unsigned short port)
 	double 							  volumemean_new, X_mean_new, Y_mean_new, Z_mean_new;
 	std::vector<PointXYZ>			  pointCloud;
 	boost::shared_ptr<VisionaryTData> pDataHandler;
-	double 							  volume, dimensionX, dimensionY, dimensionZ;
 	double 							  volumearray[10], Xarray[10], Yarray[10], Zarray[10];
 	pcl::PassThrough<pcl::PointXYZ>   pass_remove;
 ////
@@ -254,28 +253,26 @@ void runStreamingDemo(char* ipAddress, unsigned short port)
 	control.startAcquisition();
 	
 	volumemean = 0.0;
+	X_mean     = 0.0;
+	Y_mean     = 0.0;
+	Z_mean     = 0.0;
 	counter    = 0;
 	while (!kbhit())
 	{
 		counter = counter + 1; 
-		if (dataStream.getNextFrame())
+		if (dataStream.getNextFrame())-+
 		{
 			// Convert data to a point cloud
 			pDataHandler->generatePointCloud(pointCloud);
-			// Calculate volume
-			std::tie(volume, dimensionX, dimensionY, dimensionZ) = calculatevolume(pointCloud); 
-
-			volumearray[counter] = volume;
-			Xarray[counter]		 = dimensionX;
-			Yarray[counter]		 = dimensionY;
-			Zarray[counter]		 = dimensionZ;
-
-			volumemean = volumemean + volume;
-			X_mean     = X_mean + dimensionX;
-			Y_mean     = Y_mean + dimensionY;
-			Z_mean     = Z_mean + dimensionZ;
 		}
+		// Calculate volume
+		std::tie(volumearray[counter], Xarray[counter], Yarray[counter], Zarray[counter]) = calculatevolume(pointCloud); 
 
+		volumemean = volumemean + volumearray[counter];
+		X_mean     = X_mean + Xarray[counter];
+		Y_mean     = Y_mean + Yarray[counter];
+		Z_mean     = Z_mean + Zarray[counter];
+		
 		if (counter==9)
 		{
 			counter    = 0;
