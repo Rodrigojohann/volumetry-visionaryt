@@ -221,12 +221,12 @@ std::tuple<double, double, double, double> calculatevolume(std::vector<PointXYZ>
 		*cloud_concat = (*cloud_concat) + (*cloud_nobackground);
 		pcl::getMinMax3D(*cloud_nobackground, minPt, maxPt);
 		
-		printf("min z: %f \n", min_z);
-		printf("mean z mean: %f \n", mean_z);
+		//printf("min z: %f \n", min_z);
+		//printf("mean z mean: %f \n", mean_z);
 		
 		dimensionX = maxPt.x - minPt.x;
 		dimensionY = maxPt.y - minPt.y;
-		dimensionZ = max_z - mean_z_new;
+		dimensionZ = max_z - mean_z;
 		
 		volume = dimensionX*dimensionY*dimensionZ;
 	}
@@ -319,14 +319,14 @@ void runStreamingDemo(char* ipAddress, unsigned short port)
 			pass_remove.setFilterLimits(-5000, -4000);
 			pass_remove.filter(*cloud_concat);
 			
-			//printf("---------------------\n\n");
-			//printf("volume:\n");
-			//printf("%f cm³\n\n", volumemean_new*1000000);
+			printf("---------------------\n\n");
+			printf("volume:\n");
+			printf("%f cm³\n\n", volumemean_new*1000000);
 			
-			//printf("dimensions:\n");
-			//printf("%f cm (x)\n", X_mean_new*100);
-			//printf("%f cm (y)\n", Y_mean_new*100);
-			//printf("%f cm (z)\n\n", Z_mean_new*100);
+			printf("dimensions:\n");
+			printf("%f cm (x)\n", X_mean_new*100);
+			printf("%f cm (y)\n", Y_mean_new*100);
+			printf("%f cm (z)\n\n", Z_mean_new*100);
 			volumemean = 0.0;
 			X_mean 	   = 0.0;
 			Y_mean     = 0.0;
