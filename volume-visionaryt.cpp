@@ -88,16 +88,16 @@ double calculate_std (double data[], double mean)
 	return std;
 }
 
-double findMedian(int a[], int n)
+double findMedian(double a[], int n)
 {
     // First we sort the array
     std::sort(a, a + n);
  
     // check for even case
     if (n % 2 != 0)
-        return (double)a[n / 2];
+        return a[n/2];
  
-    return (double)(a[(n - 1) / 2] + a[n / 2]) / 2.0;
+    return ((a[(n - 1) / 2] + a[n / 2])/2.0);
 }
 
 pcl::PointCloud<pcl::PointXYZ>::Ptr erasebackground(pcl::PointCloud<pcl::PointXYZ>::Ptr inputcloud)
@@ -240,7 +240,7 @@ std::tuple<double, double, double, double> calculatevolume(std::vector<PointXYZ>
 		
 		dimensionX = maxPt.x - minPt.x;
 		dimensionY = maxPt.y - minPt.y;
-		dimensionZ = median_z - min_z;
+		dimensionZ = max_z - median_z;
 		
 		volume = dimensionX*dimensionY*dimensionZ;
 	}
