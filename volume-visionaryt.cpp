@@ -207,7 +207,7 @@ std::tuple<double, double, double, double> calculatevolume(std::vector<PointXYZ>
 		
 		dimensionX = maxPt.x - minPt.x;
 		dimensionY = maxPt.y - minPt.y;
-		dimensionZ = maxPt.z - minPt.z + cutvalue;
+		dimensionZ = maxPt.z - minPt.z + 2*cutvalue;
 		
 		volume = dimensionX*dimensionY*dimensionZ;
 	}
