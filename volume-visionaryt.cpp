@@ -184,13 +184,15 @@ std::tuple<double, double, double, double> calculatevolume(std::vector<PointXYZ>
 	}
 
  	cloud_filtered     = filtercloud(cloud_raw);
+ 	pcl::getMinMax3D(*cloud_nobackground, minPt, maxPt);
+	max_z = maxPt.z;
 	cloud_nobackground = erasebackground(cloud_filtered);
 	cloud_size         = cloud_nobackground->size();
 	
 	if (cloud_size > 10)
 	{
 		pcl::getMinMax3D(*cloud_nobackground, minPt, maxPt);
-		max_z = maxPt.z;
+		
 		min_z = minPt.z;
 		
 		pass_groundnoise.setInputCloud(cloud_nobackground);
@@ -226,7 +228,7 @@ std::tuple<double, double, double, double> calculatevolume(std::vector<PointXYZ>
 		
 		dimensionX = maxPt.x - minPt.x;
 		dimensionY = maxPt.y - minPt.y;
-		dimensionZ = max_z - mean_z;
+		dimensionZ = max_z - min_z;
 		
 		volume = dimensionX*dimensionY*dimensionZ;
 	}
