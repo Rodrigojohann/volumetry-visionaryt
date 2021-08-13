@@ -20,7 +20,7 @@
 #include <pcl/visualization/cloud_viewer.h>
 #include <pcl/filters/passthrough.h>
 #include <pcl/segmentation/region_growing.h>
-
+#include <pcl/features/integral_image_normal.h>
 
 using namespace cv;
 pcl::PassThrough<pcl::PointXYZ> passx;
@@ -32,6 +32,7 @@ int main (int argc, char** argv)
 	pcl::io::loadPCDFile <pcl::PointXYZ> ("volumetry-background/backgroundcloud4.pcd", *cloud);
 	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_filtered (new pcl::PointCloud<pcl::PointXYZ>);
 	pcl::PointCloud<pcl::PointXYZ>::Ptr outputcloud (new pcl::PointCloud<pcl::PointXYZ>);
+	pcl::PointCloud<pcl::PointXYZ>::Ptr segmented_cloud (new pcl::PointCloud<pcl::PointXYZ>);
 
 	//std::cerr << "PointCloud before filtering: " << cloud->width * cloud->height 
 	   //<< " data points (" << pcl::getFieldsList (*cloud) << ")." << std::endl;
@@ -71,16 +72,12 @@ int main (int argc, char** argv)
 	std::vector <pcl::PointIndices> clusters;
 	reg.extract (clusters);
 
-	//std::cout << "Number of clusters is equal to " << clusters.size () << std::endl;
-	//std::cout << "First cluster has " << clusters[0].indices.size () << " points." << std::endl;
-	//std::cout << "These are the indices of the points of the initial" <<
-	//std::endl << "cloud that belong to the first cluster:" << std::endl;
-	int counter = 0;
-	//while (counter < clusters[0].indices.size ())
+	//int counter = 0;
+	//while (counter < clusters[1].indices.size ())
 	//{
-	//std::cout << clusters[0].indices[counter] << ", ";
+	//std::cout << clusters[1].indices[counter] << ", ";
 	//counter++;
-	//if (counter % 10 == 0)
+	//if (counter % 10 == 0)make
 	  //std::cout << std::endl;
 	//}
 	//std::cout << std::endl;
@@ -90,41 +87,46 @@ int main (int argc, char** argv)
 	std::cout << "These are the indices of the points of the initial" <<
 	std::endl << "cloud that belong to the first cluster:" << std::endl;
 	
-	pcl::PointCloud <pcl::PointXYZRGB>::Ptr colored_cloud = reg.getColoredCloud ();
-	pcl::visualization::CloudViewer viewer ("Cluster viewer");
-	viewer.showCloud(colored_cloud);
-	while (!viewer.wasStopped ())
-	{
-	}
-
-	return (0);
-
-
-
-	//std::cerr << "PointCloud after filtering: " << cloud_filtered->width * cloud_filtered->height 
-	   //<< " data points (" << pcl::getFieldsList (*cloud_filtered) << ")." << std::endl;
-
-
-	//cv::projectPoints(objectPoints, rvecR, T, K, distCoeffs, projectedPoints);
-
-
-    
-    //Mat image;
-    //image = imread("download.jpeg",0);
-
-    //namedWindow("Display Image", WINDOW_AUTOSIZE );
-    //imshow("Display Image", image);
-    //waitKey(0);
-    //return 0;
-
-
-
- 
+	//pcl::PointCloud <pcl::PointXYZRGB>::Ptr colored_cloud = reg.getColoredCloud ();
 	//pcl::visualization::CloudViewer viewer ("Cluster viewer");
-	//viewer.showCloud(outputcloud);
+	//viewer.showCloud(colored_cloud);
 	//while (!viewer.wasStopped ())
 	//{
 	//}
-	//return (0);	  
+
+	//return (0);
+
+	pcl::PointCloud <pcl::PointXYZRGB>::Ptr colored_cloud = reg.getColoredCloud ();
+	
+	//for(size_t i=0; i<clusters[0].indices.size(); ++i)
+	//{
+		
+		//segmented_cloud->points[i].x = (*colored_cloud)[i].x;
+		//segmented_cloud->points[i].y = (*colored_cloud)[i].y;
+		//segmented_cloud->points[i].z = (*colored_cloud)[i].z;
+	//}
+
+	pcl::io::savePCDFile("outputcloud.pcd", *colored_cloud);
+
+    //// estimate normals
+    //pcl::PointCloud<pcl::Normal>::Ptr newnormals (new pcl::PointCloud<pcl::Normal>);
+
+    //pcl::IntegralImageNormalEstimation<pcl::PointXYZ, pcl::Normal> ne;
+    //ne.setNormalEstimationMethod (ne.AVERAGE_3D_GRADIENT);
+    //ne.setMaxDepthChangeFactor(0.02f);
+    //ne.setNormalSmoothingSize(10.0f);
+    //ne.setInputCloud(segmented_cloud);
+    //ne.compute(*newnormals);
+
+    //// visualize normals
+    //pcl::visualization::PCLVisualizer viewer("PCL Viewer");
+    //viewer.setBackgroundColor (0.0, 0.0, 0.5);
+    //viewer.addPointCloudNormals<pcl::PointXYZ,pcl::Normal>(segmented_cloud, newnormals);
+    
+    //while (!viewer.wasStopped ())
+    //{
+      //viewer.spinOnce ();
+    //}
+    //return 0;
   	
 }

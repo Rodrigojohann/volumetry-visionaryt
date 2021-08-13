@@ -177,6 +177,7 @@ std::tuple<double, double, double, double> calculatevolume(std::vector<PointXYZ>
 	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_filtered     (new pcl::PointCloud<pcl::PointXYZ>);
 	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_nobackground (new pcl::PointCloud<pcl::PointXYZ>);
    	pcl::PointCloud<pcl::PointXYZ>::Ptr surface_hull       (new pcl::PointCloud<pcl::PointXYZ>);
+   	pcl::VoxelGrid<pcl::PointXYZ> 		sor;
 	size_t                              cloud_size;
 	pcl::ConvexHull<pcl::PointXYZ>      chull;
 	std::vector<pcl::Vertices>          polygons;
@@ -196,6 +197,10 @@ std::tuple<double, double, double, double> calculatevolume(std::vector<PointXYZ>
 		cloud_raw->points[i].z = inputcloud[i].z;
 	}
 
+	sor.setInputCloud (cloud_raw);
+	sor.setLeafSize (0.01f, 0.01f, 0.01f);
+	sor.filter (*cloud_raw);
+	
  	cloud_filtered     = filtercloud(cloud_raw);
 	cloud_nobackground = erasebackground(cloud_filtered);
 	cloud_size         = cloud_nobackground->size();
@@ -266,12 +271,18 @@ void runStreamingDemo(char* ipAddress, unsigned short port)
 	boost::shared_ptr<VisionaryTData> pDataHandler;
 	double 							  volumearray[10], Xarray[10], Yarray[10], Zarray[10];
 	pcl::PassThrough<pcl::PointXYZ>   pass_remove;
+	pcl::VoxelGrid<pcl::PointXYZ>	  sor;
 ////
-	pcl::io::loadPCDFile<pcl::PointXYZ> ("volumetry-background/backgroundcloud.pcd", *cloud_background);
 	// Generate Visionary instance
 	pDataHandler = boost::make_shared<VisionaryTData>();
 	VisionaryDataStream dataStream(pDataHandler, inet_addr(ipAddress), htons(port));
 	VisionaryControl control(inet_addr(ipAddress), htons(2112));
+	
+	pcl::io::loadPCDFile<pcl::PointXYZ> ("volumetry-background/backgroundcloud.pcd", *cloud_background);
+	sor.setInputCloud (cloud_background);
+	sor.setLeafSize (0.01f, 0.01f, 0.01f);
+	sor.filter (*cloud_background);
+	
 	//-----------------------------------------------
 	// Connect to devices data stream 
 	if (!dataStream.openConnection())
