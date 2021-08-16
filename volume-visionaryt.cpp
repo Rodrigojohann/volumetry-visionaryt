@@ -34,6 +34,7 @@
 #include <pcl/visualization/cloud_viewer.h>
 #include <pcl/segmentation/region_growing.h>
 #include <pcl/features/moment_of_inertia_estimation.h>
+#include <pcl/filters/voxel_grid.h>
 
 pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_background (new pcl::PointCloud<pcl::PointXYZ>);
 ////////////////////////////////////////////////////
