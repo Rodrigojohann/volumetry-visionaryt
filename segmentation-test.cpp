@@ -20,16 +20,29 @@
 #include <pcl/visualization/cloud_viewer.h>
 #include <pcl/filters/passthrough.h>
 #include <pcl/segmentation/region_growing.h>
-#include <pcl/features/integral_image_normal.h>
+#include <pcl/features/moment_of_inertia_estimation.h>
 
 using namespace cv;
-pcl::PassThrough<pcl::PointXYZ> passx;
 
+pcl::PointXYZ                       minPt, maxPt;
+
+
+double findMedian(double a[], int n)
+{
+    // First we sort the array
+    std::sort(a, a + n);
+ 
+    // check for even case
+    if (n % 2 != 0)
+        return a[n/2];
+ 
+    return ((a[(n - 1) / 2] + a[n / 2])/2.0);
+}
 
 int main (int argc, char** argv)
 {
 	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud (new pcl::PointCloud<pcl::PointXYZ>);
-	pcl::io::loadPCDFile <pcl::PointXYZ> ("volumetry-background/backgroundcloud4.pcd", *cloud);
+	pcl::io::loadPCDFile <pcl::PointXYZ> ("volumetry-background/backgroundcloud5.pcd", *cloud);
 	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_filtered (new pcl::PointCloud<pcl::PointXYZ>);
 	pcl::PointCloud<pcl::PointXYZ>::Ptr outputcloud (new pcl::PointCloud<pcl::PointXYZ>);
 	pcl::PointCloud<pcl::PointXYZ>::Ptr segmented_cloud (new pcl::PointCloud<pcl::PointXYZ>);
@@ -42,6 +55,11 @@ int main (int argc, char** argv)
 	sor.setInputCloud (cloud);
 	sor.setLeafSize (0.01f, 0.01f, 0.01f);
 	sor.filter (*cloud_filtered);
+
+	float max_z, min_z;
+	pcl::getMinMax3D(*cloud_filtered, minPt, maxPt);
+	max_z = maxPt.z;
+	min_z = minPt.z;
 
 	pcl::search::Search<pcl::PointXYZ>::Ptr tree (new pcl::search::KdTree<pcl::PointXYZ>);
 	pcl::PointCloud <pcl::Normal>::Ptr normals (new pcl::PointCloud <pcl::Normal>);
@@ -72,15 +90,6 @@ int main (int argc, char** argv)
 	std::vector <pcl::PointIndices> clusters;
 	reg.extract (clusters);
 
-	//int counter = 0;
-	//while (counter < clusters[1].indices.size ())
-	//{
-	//std::cout << clusters[1].indices[counter] << ", ";
-	//counter++;
-	//if (counter % 10 == 0)make
-	  //std::cout << std::endl;
-	//}
-	//std::cout << std::endl;
 	
 	std::cout << "Number of clusters is equal to " << clusters.size () << std::endl;
 	std::cout << "First cluster has " << clusters[1].indices.size () << " points." << std::endl;
@@ -96,37 +105,76 @@ int main (int argc, char** argv)
 
 	//return (0);
 
-	pcl::PointCloud <pcl::PointXYZRGB>::Ptr colored_cloud = reg.getColoredCloud ();
+	int number = 4;
+	segmented_cloud->points.resize(clusters[number].indices.size());
 	
-	//for(size_t i=0; i<clusters[0].indices.size(); ++i)
-	//{
+	double z_array[clusters[number].indices.size()];
+	for(size_t i=0; i<clusters[number].indices.size(); ++i)
+	{
 		
-		//segmented_cloud->points[i].x = (*colored_cloud)[i].x;
-		//segmented_cloud->points[i].y = (*colored_cloud)[i].y;
-		//segmented_cloud->points[i].z = (*colored_cloud)[i].z;
-	//}
+		//printf("\n\n %d", clusters[1].indices[i]);
+		
+		segmented_cloud->points[i].x = (*cloud_filtered)[clusters[number].indices[i]].x;
+		segmented_cloud->points[i].y = (*cloud_filtered)[clusters[number].indices[i]].y;
+		segmented_cloud->points[i].z = (*cloud_filtered)[clusters[number].indices[i]].z;
+		z_array[i] = segmented_cloud->points[i].z;
+	}
 
-	pcl::io::savePCDFile("outputcloud.pcd", *colored_cloud);
+	pcl::getMinMax3D(*segmented_cloud, minPt, maxPt);
+	
+	pcl::PassThrough<pcl::PointXYZ> passz;
+	passz.setInputCloud (segmented_cloud);
+	passz.setFilterFieldName ("z");
+	passz.setFilterLimits ((minPt.z-0.1), (minPt.z+0.1));
+	passz.filter (*segmented_cloud);
+	
+	pcl::MomentOfInertiaEstimation <pcl::PointXYZ> feature_extractor;
+	feature_extractor.setInputCloud (segmented_cloud);
+	feature_extractor.compute ();
+	
+	pcl::PointXYZ min_point_OBB;
+	pcl::PointXYZ max_point_OBB;
+	pcl::PointXYZ position_OBB;
+	Eigen::Matrix3f rotational_matrix_OBB;	
 
-    //// estimate normals
-    //pcl::PointCloud<pcl::Normal>::Ptr newnormals (new pcl::PointCloud<pcl::Normal>);
+	feature_extractor.getOBB (min_point_OBB, max_point_OBB, position_OBB, rotational_matrix_OBB);
+	
+	printf("x: %f \n", (max_point_OBB.x - min_point_OBB.x));
+	printf("y: %f \n", (max_point_OBB.y - min_point_OBB.y));
+	
+	pcl::getMinMax3D(*segmented_cloud, minPt, maxPt);
+	
+	double median_z;
+	median_z = findMedian(z_array,clusters[number].indices.size());
+	printf("z: %f \n", (2.02 - median_z));
+	
+	
+	//pcl::io::savePCDFile("outputcloud.pcd", *segmented_cloud);
 
-    //pcl::IntegralImageNormalEstimation<pcl::PointXYZ, pcl::Normal> ne;
-    //ne.setNormalEstimationMethod (ne.AVERAGE_3D_GRADIENT);
-    //ne.setMaxDepthChangeFactor(0.02f);
-    //ne.setNormalSmoothingSize(10.0f);
-    //ne.setInputCloud(segmented_cloud);
-    //ne.compute(*newnormals);
+    //normal_estimator.setSearchMethod (tree);
+	//normal_estimator.setInputCloud (segmented_cloud);
+	//normal_estimator.setKSearch (segmented_cloud->points.size());
+	//normal_estimator.compute (*normals);
+	
+	//std::cout << normals;
+	
+	// ---------------------- Visualizer -------------------------------------------
+	boost::shared_ptr<pcl::visualization::PCLVisualizer> viewer(new pcl::visualization::PCLVisualizer);
+	viewer->setBackgroundColor(0, 0, 0);
 
-    //// visualize normals
-    //pcl::visualization::PCLVisualizer viewer("PCL Viewer");
-    //viewer.setBackgroundColor (0.0, 0.0, 0.5);
-    //viewer.addPointCloudNormals<pcl::PointXYZ,pcl::Normal>(segmented_cloud, newnormals);
-    
-    //while (!viewer.wasStopped ())
-    //{
-      //viewer.spinOnce ();
-    //}
-    //return 0;
+	pcl::visualization::PointCloudColorHandlerCustom<pcl::PointXYZ> color_handler1(cloud, 255, 0, 0);
+	viewer->addPointCloud(cloud_filtered, color_handler1, "sample cloud1");
+	pcl::visualization::PointCloudColorHandlerCustom<pcl::PointXYZ> color_handler2(cloud, 0, 0, 255);
+	viewer->addPointCloud(segmented_cloud, color_handler2, "sample cloud2");
+	viewer->setPointCloudRenderingProperties(pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 6, "sample cloud1");
+	viewer->setPointCloudRenderingProperties(pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 6, "sample cloud2");
+	Eigen::Vector3f position (position_OBB.x, position_OBB.y, position_OBB.z);
+	Eigen::Quaternionf quat (rotational_matrix_OBB);
+	viewer->addCube (position, quat, max_point_OBB.x - min_point_OBB.x, max_point_OBB.y - min_point_OBB.y, max_point_OBB.z - min_point_OBB.z, "OBB");
+	viewer->setShapeRenderingProperties(pcl::visualization::PCL_VISUALIZER_REPRESENTATION, pcl::visualization::PCL_VISUALIZER_REPRESENTATION_WIREFRAME, "OBB");
+	while (!viewer->wasStopped())
+		{
+			viewer->spinOnce(100);
+		}
   	
 }

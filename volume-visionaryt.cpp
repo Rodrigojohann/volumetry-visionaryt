@@ -30,7 +30,6 @@
 #include <pcl/octree/octree_pointcloud_changedetector.h>
 
 pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_background (new pcl::PointCloud<pcl::PointXYZ>);
-pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_concat     (new pcl::PointCloud<pcl::PointXYZ>);
 ////////////////////////////////////////////////////
 
 bool kbhit(void)
@@ -52,52 +51,16 @@ bool kbhit(void)
     return pressed;
 }
 
-double calculate_new_mean (double data[], double meanvalue, double stdvalue)
-{
-//var	
-	double sum     = 0.0;
-	int    counter = 1;
-	double mean;
-////	
-	for (int i = 0; i < 10; i++)
-	{
-		if ((data[i] <= meanvalue+stdvalue) and (data[i] >= meanvalue-stdvalue))
-		{
-			sum     += data[i];
-			counter += 1;
-		}
-	}
-	mean = sum/counter;
-	
-	return mean;	
-}
-
-double calculate_std (double data[], double mean)
-{
-//var	
-	double sum = 0.0;
-	double std;
-////
-	for(int i = 0; i < 10; ++i)
-	{
-		sum += pow(data[i] - mean, 2);
-	}
-	
-	std = sqrt(sum/10);
-	
-	return std;
-}
-
-double findMedian(double a[], int n)
+double findMedian(double inputarray[], int size)
 {
     // First we sort the array
-    std::sort(a, a + n);
+    std::sort(inputarray, inputarray + size);
  
     // check for even case
-    if (n % 2 != 0)
-        return a[n/2];
+    if (size % 2 != 0)
+        return inputarray[size/2];
  
-    return ((a[(n - 1) / 2] + a[n / 2])/2.0);
+    return ((inputarray[(size - 1) / 2] + inputarray[size / 2])/2.0);
 }
 
 pcl::PointCloud<pcl::PointXYZ>::Ptr erasebackground(pcl::PointCloud<pcl::PointXYZ>::Ptr inputcloud)
@@ -170,24 +133,30 @@ pcl::PointCloud<pcl::PointXYZ>::Ptr filtercloud(pcl::PointCloud<pcl::PointXYZ>::
 	return outputcloud;
 }
 
-std::tuple<double, double, double, double> calculatevolume(std::vector<PointXYZ> inputcloud)
+void calculatevolume(std::vector<PointXYZ> inputcloud)
 {
 // var
-	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_raw          (new pcl::PointCloud<pcl::PointXYZ>);
-	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_filtered     (new pcl::PointCloud<pcl::PointXYZ>);
-	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_nobackground (new pcl::PointCloud<pcl::PointXYZ>);
-   	pcl::PointCloud<pcl::PointXYZ>::Ptr surface_hull       (new pcl::PointCloud<pcl::PointXYZ>);
-   	pcl::VoxelGrid<pcl::PointXYZ> 		sor;
-	size_t                              cloud_size;
-	pcl::ConvexHull<pcl::PointXYZ>      chull;
-	std::vector<pcl::Vertices>          polygons;
-	double                              volume, dimensionX, dimensionY, dimensionZ;	
-	pcl::PointXYZ                       minPt, maxPt;
-	double 						        cutvalue;
-	pcl::PassThrough<pcl::PointXYZ>     pass_groundnoise;
-	double mean_z, std_z, mean_z_new, max_z, min_z, median_z;
+	pcl::PointCloud<pcl::PointXYZ>::Ptr     		  cloud_raw          (new pcl::PointCloud<pcl::PointXYZ>);
+   	pcl::VoxelGrid<pcl::PointXYZ> 		    		  sor;
+	pcl::PointCloud<pcl::PointXYZ>::Ptr     		  cloud_filtered     (new pcl::PointCloud<pcl::PointXYZ>);
+	pcl::PointCloud<pcl::PointXYZ>::Ptr     		  cloud_nobackground (new pcl::PointCloud<pcl::PointXYZ>);
+	size_t                               			  cloud_size;
+	pcl::PointXYZ                        		      minPt, maxPt;
+   	double 									  		  max_z;
+   	pcl::NormalEstimation<pcl::PointXYZ, pcl::Normal> normal_estimator;
+   	pcl::search::Search<pcl::PointXYZ>::Ptr 		  tree (new pcl::search::KdTree<pcl::PointXYZ>);
+   	pcl::PointCloud <pcl::Normal>::Ptr      		  normals (new pcl::PointCloud <pcl::Normal>);
+   	pcl::RegionGrowing<pcl::PointXYZ, pcl::Normal>    reg;
+   	std::vector <pcl::PointIndices> 				  clusters;
+   	pcl::PointCloud<pcl::PointXYZ>::Ptr     		  segmented_cloud (new pcl::PointCloud<pcl::PointXYZ>);
+	double 									  		  median_z;   	
+	pcl::PassThrough<pcl::PointXYZ> 				  passz;
+	pcl::MomentOfInertiaEstimation <pcl::PointXYZ> 	  feature_extractor;
+	pcl::PointXYZ 									  min_point_OBB;
+	pcl::PointXYZ									  max_point_OBB;
+	pcl::PointXYZ 									  position_OBB;
+	Eigen::Matrix3f 								  rotational_matrix_OBB;
 ////
-	cutvalue = 0.15;
 	cloud_raw->points.resize(inputcloud.size());
 	
 	for(size_t i=0; i<cloud_raw->points.size(); ++i)
@@ -209,68 +178,64 @@ std::tuple<double, double, double, double> calculatevolume(std::vector<PointXYZ>
 	{
 		pcl::getMinMax3D(*cloud_nobackground, minPt, maxPt);
 		max_z = maxPt.z;
-		min_z = minPt.z;
 		
-		pass_groundnoise.setInputCloud(cloud_nobackground);
-		pass_groundnoise.setFilterFieldName("z");
-		pass_groundnoise.setFilterLimits(0, (max_z - cutvalue));
-		pass_groundnoise.filter(*cloud_nobackground);		
+		normal_estimator.setSearchMethod (tree);
+		normal_estimator.setInputCloud (cloud_nobackground);
+		normal_estimator.setKSearch (50);
+		normal_estimator.compute (*normals);
 		
-		//chull.setInputCloud(cloud_nobackground);
-		//chull.setDimension(3);
-		//chull.setComputeAreaVolume(true);
-		//chull.reconstruct(*surface_hull, polygons);
+		reg.setMinClusterSize (500);
+		reg.setMaxClusterSize (1000000);
+		reg.setSearchMethod (tree);
+		reg.setNumberOfNeighbours (50);
+		reg.setInputCloud (cloud_nobackground);
+		reg.setIndices (indices);
+		reg.setInputNormals (normals);
+		reg.setSmoothnessThreshold (5.0 / 180.0*M_PI);
+		reg.setCurvatureThreshold (50.0);
+
+		reg.extract (clusters);		
 		
-		//volume = chull.getTotalVolume();
-		
-		
-		mean_z = 0.0;
-		double z_array[cloud_nobackground->size()];
-		for (size_t i=0; i<cloud_nobackground->size(); ++i)
+		for (int number=0; number<clusters.size(); ++number)
 		{
-			z_array[i] = cloud_nobackground->points[i].z;
-			mean_z += cloud_nobackground->points[i].z;
+			segmented_cloud->points.resize(clusters[number].indices.size());
+			double z_array[segmented_cloud->size()];
+			for(size_t i=0; i<clusters[number].indices.size(); ++i)
+			{
+				segmented_cloud->points[i].x = (*cloud_nobackground)[clusters[number].indices[i]].x;
+				segmented_cloud->points[i].y = (*cloud_nobackground)[clusters[number].indices[i]].y;
+				segmented_cloud->points[i].z = (*cloud_nobackground)[clusters[number].indices[i]].z;
+				z_array[i] = segmented_cloud->points[i].z;
+			}
+			median_z = findMedian(z_array, clusters[number].indices.size());
+			
+			pcl::getMinMax3D(*segmented_cloud, minPt, maxPt);
+
+			passz.setInputCloud(segmented_cloud);
+			passz.setFilterFieldName ("z");
+			passz.setFilterLimits ((minPt.z-0.1), (minPt.z+0.1));
+			passz.filter(*segmented_cloud);
+
+			feature_extractor.setInputCloud(segmented_cloud);
+			feature_extractor.compute();
+
+			feature_extractor.getOBB(min_point_OBB, max_point_OBB, position_OBB, rotational_matrix_OBB);		
+
+			printf("Box %d:  \n\n", number);
+			printf("x: %f cm \n", (max_point_OBB.x - min_point_OBB.x));
+			printf("y: %f cn \n", (max_point_OBB.y - min_point_OBB.y));
+			printf("z: %f cm \n", (max_z - median_z));	
 		}
-		
-		mean_z = mean_z/(cloud_nobackground->size());
-		std_z  = calculate_std(z_array, mean_z);
-		mean_z_new = calculate_new_mean(z_array, mean_z, std_z);
-		median_z = findMedian(z_array, cloud_nobackground->size());
-		
-		*cloud_concat = (*cloud_concat) + (*cloud_nobackground);
-		pcl::getMinMax3D(*cloud_nobackground, minPt, maxPt);
-		
-		//printf("min z: %f \n", min_z);
-		//printf("mean z mean: %f \n", mean_z);
-		
-		dimensionX = maxPt.x - minPt.x;
-		dimensionY = maxPt.y - minPt.y;
-		dimensionZ = max_z - median_z;
-		
-		volume = dimensionX*dimensionY*dimensionZ;
 	}
-	else
-	{
-		volume     = 0.0;
-		dimensionX = 0.0;
-		dimensionY = 0.0;
-		dimensionZ = 0.0;
-	}
-	
-	return std::make_tuple(volume, dimensionX, dimensionY, dimensionZ);
 }
 
 void runStreamingDemo(char* ipAddress, unsigned short port)
 {
 // var
 	int 							  counter;
-	double 							  volumemean, X_mean, Y_mean, Z_mean;
-	double 							  volumestd, X_std, Y_std, Z_std;	
-	double 							  volumemean_new, X_mean_new, Y_mean_new, Z_mean_new;
 	std::vector<PointXYZ>			  pointCloud;
 	boost::shared_ptr<VisionaryTData> pDataHandler;
 	double 							  volumearray[10], Xarray[10], Yarray[10], Zarray[10];
-	pcl::PassThrough<pcl::PointXYZ>   pass_remove;
 	pcl::VoxelGrid<pcl::PointXYZ>	  sor;
 ////
 	// Generate Visionary instance
@@ -298,71 +263,20 @@ void runStreamingDemo(char* ipAddress, unsigned short port)
 	control.stopAcquisition();
 	control.startAcquisition();
 	
-	volumemean = 0.0;
-	X_mean     = 0.0;
-	Y_mean     = 0.0;
-	Z_mean     = 0.0;
-	counter    = 0;
 	while (!kbhit())
 	{
-		counter = counter + 1; 
 		if (dataStream.getNextFrame())
 		{
 			// Convert data to a point cloud
 			pDataHandler->generatePointCloud(pointCloud);
 		}
 		// Calculate volume
-		std::tie(volumearray[counter], Xarray[counter], Yarray[counter], Zarray[counter]) = calculatevolume(pointCloud); 
-
-		volumemean = volumemean + volumearray[counter];
-		X_mean     = X_mean + Xarray[counter];
-		Y_mean     = Y_mean + Yarray[counter];
-		Z_mean     = Z_mean + Zarray[counter];
-		
-		if (counter==9)
-		{
-			counter    = 0;
-			volumemean = volumemean/10;
-			X_mean     = X_mean/10;
-			Y_mean     = Y_mean/10;
-			Z_mean     = Z_mean/10;
-			
-			volumestd = calculate_std(volumearray, volumemean);
-			X_std	  = calculate_std(Xarray, X_mean);
-			Y_std	  = calculate_std(Yarray, Y_mean);
-			Z_std 	  = calculate_std(Zarray, Z_mean);
-			
-			//volumemean_new = calculate_new_mean(volumearray, volumemean, volumestd);
-			X_mean_new 	   = calculate_new_mean(Xarray, X_mean, X_std);
-			Y_mean_new     = calculate_new_mean(Yarray, Y_mean, Y_std);
-			Z_mean_new     = calculate_new_mean(Zarray, Z_mean, Z_std);
-			
-			//pcl::io::savePLYFile("outputcloud.ply", *cloud_concat);
-			
-			pass_remove.setInputCloud(cloud_concat);
-			pass_remove.setFilterFieldName("x");
-			pass_remove.setFilterLimits(-5000, -4000);
-			pass_remove.filter(*cloud_concat);
-			
-			printf("---------------------\n\n");
-			printf("volume:\n");
-			printf("%f cm³\n\n", (X_mean_new*Y_mean_new*Z_mean_new)*1000000);
-			
-			printf("dimensions:\n");
-			printf("%f cm (x)\n", X_mean*100);
-			printf("%f cm (y)\n", Y_mean*100);
-			printf("%f cm (z)\n\n", Z_mean*100);
-			volumemean = 0.0;
-			X_mean 	   = 0.0;
-			Y_mean     = 0.0;
-			Z_mean     = 0.0;
-		}
+		calculatevolume(pointCloud); 
 	}
 	control.stopAcquisition();
 	control.closeConnection();
 	dataStream.closeConnection();
 }
-
 
 int main()
 {
