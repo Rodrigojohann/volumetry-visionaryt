@@ -195,7 +195,7 @@ void calculatevolume(std::vector<PointXYZ> inputcloud)
 		reg.setCurvatureThreshold (50.0);
 
 		reg.extract (clusters);		
-		
+		printf("-------------\n\n");
 		for (int number=0; number<clusters.size(); ++number)
 		{
 			segmented_cloud->points.resize(clusters[number].indices.size());
@@ -220,12 +220,14 @@ void calculatevolume(std::vector<PointXYZ> inputcloud)
 			feature_extractor.compute();
 
 			feature_extractor.getOBB(min_point_OBB, max_point_OBB, position_OBB, rotational_matrix_OBB);		
-
+			
+			
 			printf("Box %d:  \n\n", number);
 			printf("x: %f cm \n", (max_point_OBB.x - min_point_OBB.x));
 			printf("y: %f cn \n", (max_point_OBB.y - min_point_OBB.y));
-			printf("z: %f cm \n", (max_z - median_z));	
+			printf("z: %f cm \n\n", (max_z - median_z));
 		}
+		printf("----------\n");
 	}
 }
 
