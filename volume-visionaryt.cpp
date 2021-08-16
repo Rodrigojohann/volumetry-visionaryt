@@ -154,6 +154,7 @@ void calculatevolume(std::vector<PointXYZ> inputcloud)
    	pcl::search::Search<pcl::PointXYZ>::Ptr 		  tree (new pcl::search::KdTree<pcl::PointXYZ>);
    	pcl::PointCloud <pcl::Normal>::Ptr      		  normals (new pcl::PointCloud <pcl::Normal>);
    	pcl::RegionGrowing<pcl::PointXYZ, pcl::Normal>    reg;
+   	pcl::IndicesPtr 								  indices (new std::vector <int>);
    	std::vector <pcl::PointIndices> 				  clusters;
    	pcl::PointCloud<pcl::PointXYZ>::Ptr     		  segmented_cloud (new pcl::PointCloud<pcl::PointXYZ>);
 	double 									  		  median_z;   	
