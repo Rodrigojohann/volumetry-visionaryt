@@ -151,9 +151,9 @@ void calculatevolume(std::vector<PointXYZ> inputcloud)
 	size_t                               			  cloud_size;
 	pcl::PointXYZ                        		      minPt, maxPt;
    	double 									  		  max_z;
-   	pcl::NormalEstimation<pcl::PointXYZ, pcl::Normal> normal_estimator;
    	pcl::search::Search<pcl::PointXYZ>::Ptr 		  tree (new pcl::search::KdTree<pcl::PointXYZ>);
    	pcl::PointCloud <pcl::Normal>::Ptr      		  normals (new pcl::PointCloud <pcl::Normal>);
+   	pcl::NormalEstimation<pcl::PointXYZ, pcl::Normal> normal_estimator;
    	pcl::RegionGrowing<pcl::PointXYZ, pcl::Normal>    reg;
    	pcl::IndicesPtr 								  indices (new std::vector <int>);
    	std::vector <pcl::PointIndices> 				  clusters;
@@ -189,7 +189,7 @@ void calculatevolume(std::vector<PointXYZ> inputcloud)
 		max_z = maxPt.z;
 		
 		normal_estimator.setSearchMethod (tree);
-		normal_estimator.setInputCloud (cloud_nobackground);
+		normal_estimator.setInputCloud (cloud_filtered);
 		normal_estimator.setKSearch (50);
 		normal_estimator.compute (*normals);
 		
@@ -203,7 +203,7 @@ void calculatevolume(std::vector<PointXYZ> inputcloud)
 		reg.setMaxClusterSize (1000000);
 		reg.setSearchMethod (tree);
 		reg.setNumberOfNeighbours (50);
-		reg.setInputCloud (cloud_nobackground);
+		reg.setInputCloud (cloud_filtered);
 		reg.setIndices (indices);
 		reg.setInputNormals (normals);
 		reg.setSmoothnessThreshold (5.0 / 180.0*M_PI);
@@ -217,9 +217,9 @@ void calculatevolume(std::vector<PointXYZ> inputcloud)
 			double z_array[segmented_cloud->size()];
 			for(size_t i=0; i<clusters[number].indices.size(); ++i)
 			{
-				segmented_cloud->points[i].x = (*cloud_nobackground)[clusters[number].indices[i]].x;
-				segmented_cloud->points[i].y = (*cloud_nobackground)[clusters[number].indices[i]].y;
-				segmented_cloud->points[i].z = (*cloud_nobackground)[clusters[number].indices[i]].z;
+				segmented_cloud->points[i].x = (*cloud_filtered)[clusters[number].indices[i]].x;
+				segmented_cloud->points[i].y = (*cloud_filtered)[clusters[number].indices[i]].y;
+				segmented_cloud->points[i].z = (*cloud_filtered)[clusters[number].indices[i]].z;
 				z_array[i] = segmented_cloud->points[i].z;
 			}
 			median_z = findMedian(z_array, clusters[number].indices.size());
