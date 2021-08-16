@@ -144,10 +144,11 @@ void calculatevolume(std::vector<PointXYZ> inputcloud)
 {
 // var
 	pcl::PointCloud<pcl::PointXYZ>::Ptr     		  cloud_raw          (new pcl::PointCloud<pcl::PointXYZ>);
+	
    	pcl::VoxelGrid<pcl::PointXYZ> 		    		  sor;
 	pcl::PointCloud<pcl::PointXYZ>::Ptr     		  cloud_filtered     (new pcl::PointCloud<pcl::PointXYZ>);
 	pcl::PointCloud<pcl::PointXYZ>::Ptr     		  cloud_nobackground (new pcl::PointCloud<pcl::PointXYZ>);
-	size_t                               			  cloud_size;
+	siz                               			  cloud_size;
 	pcl::PointXYZ                        		      minPt, maxPt;
    	double 									  		  max_z;
    	pcl::NormalEstimation<pcl::PointXYZ, pcl::Normal> normal_estimator;
@@ -174,9 +175,9 @@ void calculatevolume(std::vector<PointXYZ> inputcloud)
 		cloud_raw->points[i].z = inputcloud[i].z;
 	}
 
-	sor.setInputCloud (cloud_raw);
-	sor.setLeafSize (0.01f, 0.01f, 0.01f);
-	sor.filter (*cloud_raw);
+	//sor.setInputCloud (cloud_raw);
+	//sor.setLeafSize (0.01f, 0.01f, 0.01f);
+	//sor.filter (*cloud_raw);
 	
  	cloud_filtered     = filtercloud(cloud_raw);
 	cloud_nobackground = erasebackground(cloud_filtered);
@@ -191,6 +192,12 @@ void calculatevolume(std::vector<PointXYZ> inputcloud)
 		normal_estimator.setInputCloud (cloud_nobackground);
 		normal_estimator.setKSearch (50);
 		normal_estimator.compute (*normals);
+		
+		pcl::PassThrough<pcl::PointXYZ> pass;
+		pass.setInputCloud (cloud_filtered);
+		pass.setFilterFieldName ("y");
+		pass.setFilterLimits (-0.35, 0.65);
+		pass.filter (*indices);
 		
 		reg.setMinClusterSize (500);
 		reg.setMaxClusterSize (1000000);
