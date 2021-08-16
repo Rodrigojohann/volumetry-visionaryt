@@ -22,5 +22,5 @@ add_definitions(${PCL_DEFINITIONS})
 
 ## Visionary-T sample ##
 add_executable(volume-visionaryt volume-visionaryt.cpp)
-target_link_libraries(volume-visionaryt  ${PCL_LIBRARIES})
+target_link_libraries(volume-visionaryt sick_visionary_common ${PCL_LIBRARIES})
 
