@@ -148,7 +148,7 @@ void calculatevolume(std::vector<PointXYZ> inputcloud)
    	pcl::VoxelGrid<pcl::PointXYZ> 		    		  sor;
 	pcl::PointCloud<pcl::PointXYZ>::Ptr     		  cloud_filtered     (new pcl::PointCloud<pcl::PointXYZ>);
 	pcl::PointCloud<pcl::PointXYZ>::Ptr     		  cloud_nobackground (new pcl::PointCloud<pcl::PointXYZ>);
-	siz                               			  cloud_size;
+	size_t                               			  cloud_size;
 	pcl::PointXYZ                        		      minPt, maxPt;
    	double 									  		  max_z;
    	pcl::NormalEstimation<pcl::PointXYZ, pcl::Normal> normal_estimator;
