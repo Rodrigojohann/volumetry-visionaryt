@@ -2,7 +2,6 @@
 project(CompareClouds)
 cmake_minimum_required(VERSION 2.8)
 find_package(PCL 1.2 REQUIRED)
-find_package(OpenCV REQUIRED)
 
 ### COMPILER FLAGS ###
 if(NOT CMAKE_BUILD_TYPE)
@@ -14,16 +13,14 @@ set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
 ### BUILD ###
 
+include_directories(VisionaryCommon VisionaryCommon/include)
+add_subdirectory(VisionaryCommon)
+
 include_directories(${PCL_INCLUDE_DIRS})
 link_directories(${PCL_LIBRARY_DIRS})
 add_definitions(${PCL_DEFINITIONS})
 
-include_directories(${OpenCV_INCLUDE_DIRS})
-
-
-## Visionary-S sample ##
-
 ## Visionary-T sample ##
-add_executable(segmentation-test segmentation-test.cpp)
-target_link_libraries(segmentation-test  ${PCL_LIBRARIES} ${OpenCV_LIBS})
+add_executable(volume-visionaryt volume-visionaryt.cpp)
+target_link_libraries(volume-visionaryt  ${PCL_LIBRARIES})
 

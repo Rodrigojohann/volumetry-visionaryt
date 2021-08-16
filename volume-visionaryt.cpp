@@ -28,6 +28,12 @@
 #include <pcl/common/io.h>
 #include <pcl/point_cloud.h>
 #include <pcl/octree/octree_pointcloud_changedetector.h>
+#include <pcl/search/search.h>
+#include <pcl/search/kdtree.h>
+#include <pcl/features/normal_3d.h>
+#include <pcl/visualization/cloud_viewer.h>
+#include <pcl/segmentation/region_growing.h>
+#include <pcl/features/moment_of_inertia_estimation.h>
 
 pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_background (new pcl::PointCloud<pcl::PointXYZ>);
 ////////////////////////////////////////////////////
