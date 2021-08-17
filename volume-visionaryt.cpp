@@ -102,7 +102,7 @@ pcl::PointCloud<pcl::PointXYZ>::Ptr erasebackground(pcl::PointCloud<pcl::PointXY
 	return outputcloud;
 }
 
-pcl::IndicesPtr filtercloud(pcl::PointCloud<pcl::PointXYZ>::Ptr inputcloud)
+pcl::PointCloud<pcl::PointXYZ>::Ptr filtercloud(pcl::PointCloud<pcl::PointXYZ>::Ptr inputcloud)
 {
 // var
 	pcl::PassThrough<pcl::PointXYZ> 			  pass_x;
@@ -110,22 +110,22 @@ pcl::IndicesPtr filtercloud(pcl::PointCloud<pcl::PointXYZ>::Ptr inputcloud)
 	pcl::PassThrough<pcl::PointXYZ> 			  pass_z;
 	pcl::StatisticalOutlierRemoval<pcl::PointXYZ> sor;
 	pcl::PointCloud<pcl::PointXYZ>::Ptr			  outputcloud (new pcl::PointCloud<pcl::PointXYZ>);
-	pcl::IndicesPtr 							  indices (new std::vector <int>);
+
 ////
 	pass_x.setInputCloud(inputcloud);
 	pass_x.setFilterFieldName("x");
 	pass_x.setFilterLimits(-0.5, 0.5);
-	pass_x.filter(*indices);
+	pass_x.filter(*outputcloud);
 	
 	pass_y.setInputCloud(outputcloud);
 	pass_y.setFilterFieldName("y");
 	pass_y.setFilterLimits(-0.35, 0.65);
-	pass_y.filter(*indices);
+	pass_y.filter(*outputcloud);
 	
 	pass_z.setInputCloud(outputcloud);
 	pass_z.setFilterFieldName("z");
 	pass_z.setFilterLimits(0, 2.2);
-	pass_z.filter(*indices);
+	pass_z.filter(*outputcloud);
 	
 	//if (outputcloud->size() > 10)
 	//{
@@ -134,7 +134,7 @@ pcl::IndicesPtr filtercloud(pcl::PointCloud<pcl::PointXYZ>::Ptr inputcloud)
 		//sor.setStddevMulThresh(3.5);
 		//sor.filter(*outputcloud);
 	//}
-	return indices;
+	return outputcloud;
 }
 
 void calculatevolume(pcl::PointCloud<pcl::PointXYZ>::Ptr inputcloud)
@@ -159,8 +159,8 @@ void calculatevolume(pcl::PointCloud<pcl::PointXYZ>::Ptr inputcloud)
 	pcl::PointXYZ 									  position_OBB;
 	Eigen::Matrix3f 								  rotational_matrix_OBB;
 ////
- 	//cloud_filtered = filtercloud(inputcloud);
-	cloud_size     = inputcloud->size();
+ 	cloud_filtered = filtercloud(inputcloud);
+	cloud_size     = cloud_filtered->size();
 	
 	if (cloud_size > 10)
 	{
@@ -169,7 +169,7 @@ void calculatevolume(pcl::PointCloud<pcl::PointXYZ>::Ptr inputcloud)
 		max_z = maxPt.z;
 		
 		normal_estimator.setSearchMethod (tree);
-		normal_estimator.setInputCloud (inputcloud);
+		normal_estimator.setInputCloud (cloud_filtered);
 		normal_estimator.setKSearch (50);
 		normal_estimator.compute (*normals);
 		
@@ -179,14 +179,14 @@ void calculatevolume(pcl::PointCloud<pcl::PointXYZ>::Ptr inputcloud)
 		//pass.setFilterLimits (-0.35, 0.65);
 		//pass.filter (*indices);
 		
-		indices = filtercloud(inputcloud);
+		indices = filtercloud(cloud_filtered);
 		
 		reg.setMinClusterSize (200);
 		reg.setMaxClusterSize (1000000);
 		reg.setSearchMethod (tree);
 		reg.setNumberOfNeighbours (50);
-		reg.setInputCloud (inputcloud);
-		reg.setIndices (indices);
+		reg.setInputCloud (cloud_filtered);
+		//reg.setIndices (indices);
 		reg.setInputNormals (normals);
 		reg.setSmoothnessThreshold (5.0 / 180.0*M_PI);
 		reg.setCurvatureThreshold (50.0);
@@ -199,9 +199,9 @@ void calculatevolume(pcl::PointCloud<pcl::PointXYZ>::Ptr inputcloud)
 			double z_array[segmented_cloud->size()];
 			for(size_t i=0; i<clusters[number].indices.size(); ++i)
 			{
-				segmented_cloud->points[i].x = (*inputcloud)[clusters[number].indices[i]].x;
-				segmented_cloud->points[i].y = (*inputcloud)[clusters[number].indices[i]].y;
-				segmented_cloud->points[i].z = (*inputcloud)[clusters[number].indices[i]].z;
+				segmented_cloud->points[i].x = (*cloud_filtered)[clusters[number].indices[i]].x;
+				segmented_cloud->points[i].y = (*cloud_filtered)[clusters[number].indices[i]].y;
+				segmented_cloud->points[i].z = (*cloud_filtered)[clusters[number].indices[i]].z;
 				z_array[i] = segmented_cloud->points[i].z;
 			}
 			median_z = findMedian(z_array, clusters[number].indices.size());
