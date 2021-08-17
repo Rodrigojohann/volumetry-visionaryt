@@ -110,30 +110,31 @@ pcl::PointCloud<pcl::PointXYZ>::Ptr filtercloud(pcl::PointCloud<pcl::PointXYZ>::
 	pcl::PassThrough<pcl::PointXYZ> 			  pass_z;
 	pcl::StatisticalOutlierRemoval<pcl::PointXYZ> sor;
 	pcl::PointCloud<pcl::PointXYZ>::Ptr			  outputcloud (new pcl::PointCloud<pcl::PointXYZ>);
+	pcl::IndicesPtr 							  indices (new std::vector <int>);
 ////
 	pass_x.setInputCloud(inputcloud);
 	pass_x.setFilterFieldName("x");
 	pass_x.setFilterLimits(-0.5, 0.5);
-	pass_x.filter(*outputcloud);
+	pass_x.filter(*indices);
 	
 	pass_y.setInputCloud(outputcloud);
 	pass_y.setFilterFieldName("y");
-	pass_y.setFilterLimits(-0.4, 0.65);
-	pass_y.filter(*outputcloud);
+	pass_y.setFilterLimits(-0.35, 0.65);
+	pass_y.filter(*indices);
 	
 	pass_z.setInputCloud(outputcloud);
 	pass_z.setFilterFieldName("z");
 	pass_z.setFilterLimits(0, 2.2);
-	pass_z.filter(*outputcloud);
+	pass_z.filter(*indices);
 	
-	if (outputcloud->size() > 10)
-	{
-		sor.setInputCloud(outputcloud);
-		sor.setMeanK(5);
-		sor.setStddevMulThresh(3.5);
-		sor.filter(*outputcloud);
-	}
-	return outputcloud;
+	//if (outputcloud->size() > 10)
+	//{
+		//sor.setInputCloud(outputcloud);
+		//sor.setMeanK(5);
+		//sor.setStddevMulThresh(3.5);
+		//sor.filter(*outputcloud);
+	//}
+	return indices;
 }
 
 void calculatevolume(pcl::PointCloud<pcl::PointXYZ>::Ptr inputcloud)
@@ -158,8 +159,8 @@ void calculatevolume(pcl::PointCloud<pcl::PointXYZ>::Ptr inputcloud)
 	pcl::PointXYZ 									  position_OBB;
 	Eigen::Matrix3f 								  rotational_matrix_OBB;
 ////
- 	cloud_filtered = filtercloud(inputcloud);
-	cloud_size     = cloud_filtered->size();
+ 	//cloud_filtered = filtercloud(inputcloud);
+	cloud_size     = inputcloud->size();
 	
 	if (cloud_size > 10)
 	{
@@ -168,21 +169,23 @@ void calculatevolume(pcl::PointCloud<pcl::PointXYZ>::Ptr inputcloud)
 		max_z = maxPt.z;
 		
 		normal_estimator.setSearchMethod (tree);
-		normal_estimator.setInputCloud (cloud_filtered);
+		normal_estimator.setInputCloud (inputcloud);
 		normal_estimator.setKSearch (50);
 		normal_estimator.compute (*normals);
 		
-		pcl::PassThrough<pcl::PointXYZ> pass;
-		pass.setInputCloud (cloud_filtered);
-		pass.setFilterFieldName ("y");
-		pass.setFilterLimits (-0.35, 0.65);
-		pass.filter (*indices);
+		//pcl::PassThrough<pcl::PointXYZ> pass;
+		//pass.setInputCloud (inputcloud);
+		//pass.setFilterFieldName ("y");
+		//pass.setFilterLimits (-0.35, 0.65);
+		//pass.filter (*indices);
 		
-		reg.setMinClusterSize (500);
+		indices = filtercloud(inputcloud);
+		
+		reg.setMinClusterSize (200);
 		reg.setMaxClusterSize (1000000);
 		reg.setSearchMethod (tree);
 		reg.setNumberOfNeighbours (50);
-		reg.setInputCloud (cloud_filtered);
+		reg.setInputCloud (inputcloud);
 		reg.setIndices (indices);
 		reg.setInputNormals (normals);
 		reg.setSmoothnessThreshold (5.0 / 180.0*M_PI);
@@ -196,9 +199,9 @@ void calculatevolume(pcl::PointCloud<pcl::PointXYZ>::Ptr inputcloud)
 			double z_array[segmented_cloud->size()];
 			for(size_t i=0; i<clusters[number].indices.size(); ++i)
 			{
-				segmented_cloud->points[i].x = (*cloud_filtered)[clusters[number].indices[i]].x;
-				segmented_cloud->points[i].y = (*cloud_filtered)[clusters[number].indices[i]].y;
-				segmented_cloud->points[i].z = (*cloud_filtered)[clusters[number].indices[i]].z;
+				segmented_cloud->points[i].x = (*inputcloud)[clusters[number].indices[i]].x;
+				segmented_cloud->points[i].y = (*inputcloud)[clusters[number].indices[i]].y;
+				segmented_cloud->points[i].z = (*inputcloud)[clusters[number].indices[i]].z;
 				z_array[i] = segmented_cloud->points[i].z;
 			}
 			median_z = findMedian(z_array, clusters[number].indices.size());
@@ -289,9 +292,9 @@ void runStreamingDemo(char* ipAddress, unsigned short port)
 				sor.setLeafSize (0.01f, 0.01f, 0.01f);
 				sor.filter (*cloud_downsampled);
 				// Remove the background
-				cloud_nobackground = erasebackground(cloud_downsampled, cloud_background);
+				//cloud_nobackground = erasebackground(cloud_downsampled, cloud_background);
 				// Calculate volume
-				calculatevolume(cloud_nobackground);
+				calculatevolume(cloud_downsampled);
 				counter = 0;
 			}
 		} 
