@@ -179,8 +179,6 @@ void calculatevolume(pcl::PointCloud<pcl::PointXYZ>::Ptr inputcloud)
 		//pass.setFilterLimits (-0.35, 0.65);
 		//pass.filter (*indices);
 		
-		indices = filtercloud(cloud_filtered);
-		
 		reg.setMinClusterSize (200);
 		reg.setMaxClusterSize (1000000);
 		reg.setSearchMethod (tree);
