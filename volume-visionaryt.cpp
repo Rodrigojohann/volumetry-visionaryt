@@ -102,7 +102,7 @@ pcl::PointCloud<pcl::PointXYZ>::Ptr erasebackground(pcl::PointCloud<pcl::PointXY
 	return outputcloud;
 }
 
-pcl::PointCloud<pcl::PointXYZ>::Ptr filtercloud(pcl::PointCloud<pcl::PointXYZ>::Ptr inputcloud)
+pcl::IndicesPtr filtercloud(pcl::PointCloud<pcl::PointXYZ>::Ptr inputcloud)
 {
 // var
 	pcl::PassThrough<pcl::PointXYZ> 			  pass_x;
