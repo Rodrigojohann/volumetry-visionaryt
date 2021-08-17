@@ -36,9 +36,6 @@
 #include <pcl/features/moment_of_inertia_estimation.h>
 #include <pcl/filters/voxel_grid.h>
 
-pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_background (new pcl::PointCloud<pcl::PointXYZ>);
-////////////////////////////////////////////////////
-
 bool kbhit(void)
 {
 // var	
@@ -70,7 +67,7 @@ double findMedian(double inputarray[], int size)
     return ((inputarray[(size - 1) / 2] + inputarray[size / 2])/2.0);
 }
 
-pcl::PointCloud<pcl::PointXYZ>::Ptr erasebackground(pcl::PointCloud<pcl::PointXYZ>::Ptr inputcloud)
+pcl::PointCloud<pcl::PointXYZ>::Ptr erasebackground(pcl::PointCloud<pcl::PointXYZ>::Ptr inputcloud, pcl::PointCloud<pcl::PointXYZ>::Ptr backgroundcloud)
 {
 //var
 	std::vector<int>					newPointIdxVector;
@@ -82,7 +79,7 @@ pcl::PointCloud<pcl::PointXYZ>::Ptr erasebackground(pcl::PointCloud<pcl::PointXY
 
 	if ((inputcloud->size()) > 10)
 	{
-		octree.setInputCloud(cloud_background);
+		octree.setInputCloud(backgroundcloud);
 		octree.addPointsFromInputCloud();
 		octree.switchBuffers();
 
@@ -140,14 +137,10 @@ pcl::PointCloud<pcl::PointXYZ>::Ptr filtercloud(pcl::PointCloud<pcl::PointXYZ>::
 	return outputcloud;
 }
 
-void calculatevolume(std::vector<PointXYZ> inputcloud)
+void calculatevolume(pcl::PointCloud<pcl::PointXYZ>::Ptr inputcloud)
 {
 // var
-	pcl::PointCloud<pcl::PointXYZ>::Ptr     		  cloud_raw          (new pcl::PointCloud<pcl::PointXYZ>);
-	
-   	pcl::VoxelGrid<pcl::PointXYZ> 		    		  sor;
-	pcl::PointCloud<pcl::PointXYZ>::Ptr     		  cloud_filtered     (new pcl::PointCloud<pcl::PointXYZ>);
-	pcl::PointCloud<pcl::PointXYZ>::Ptr     		  cloud_nobackground (new pcl::PointCloud<pcl::PointXYZ>);
+	pcl::PointCloud<pcl::PointXYZ>::Ptr     		  cloud_filtered (new pcl::PointCloud<pcl::PointXYZ>);
 	size_t                               			  cloud_size;
 	pcl::PointXYZ                        		      minPt, maxPt;
    	double 									  		  max_z;
@@ -166,26 +159,12 @@ void calculatevolume(std::vector<PointXYZ> inputcloud)
 	pcl::PointXYZ 									  position_OBB;
 	Eigen::Matrix3f 								  rotational_matrix_OBB;
 ////
-	cloud_raw->points.resize(inputcloud.size());
-	
-	for(size_t i=0; i<cloud_raw->points.size(); ++i)
-	{
-		cloud_raw->points[i].x = inputcloud[i].x;
-		cloud_raw->points[i].y = inputcloud[i].y;
-		cloud_raw->points[i].z = inputcloud[i].z;
-	}
-
-	//sor.setInputCloud (cloud_raw);
-	//sor.setLeafSize (0.01f, 0.01f, 0.01f);
-	//sor.filter (*cloud_raw);
-	
- 	cloud_filtered     = filtercloud(cloud_raw);
-	cloud_nobackground = erasebackground(cloud_filtered);
-	cloud_size         = cloud_nobackground->size();
+ 	cloud_filtered     = filtercloud(inputcloud);
+	cloud_size         = cloud_filtered->size();
 	
 	if (cloud_size > 10)
 	{
-		pcl::getMinMax3D(*cloud_nobackground, minPt, maxPt);
+		pcl::getMinMax3D(*cloud_filtered, minPt, maxPt);
 		max_z = maxPt.z;
 		
 		normal_estimator.setSearchMethod (tree);
@@ -235,12 +214,11 @@ void calculatevolume(std::vector<PointXYZ> inputcloud)
 			feature_extractor.compute();
 
 			feature_extractor.getOBB(min_point_OBB, max_point_OBB, position_OBB, rotational_matrix_OBB);		
-			
-			
+					
 			printf("Box %d:  \n\n", number);
-			printf("x: %f cm \n", (max_point_OBB.x - min_point_OBB.x));
-			printf("y: %f cn \n", (max_point_OBB.y - min_point_OBB.y));
-			printf("z: %f cm \n\n", (max_z - median_z));
+			printf("x: %f cm \n", (max_point_OBB.x - min_point_OBB.x)*100);
+			printf("y: %f cn \n", (max_point_OBB.y - min_point_OBB.y)*100);
+			printf("z: %f cm \n\n", (max_z - median_z)*100);
 		}
 		printf("----------\n");
 	}
@@ -249,11 +227,16 @@ void calculatevolume(std::vector<PointXYZ> inputcloud)
 void runStreamingDemo(char* ipAddress, unsigned short port)
 {
 // var
-	int 							  counter;
-	std::vector<PointXYZ>			  pointCloud;
-	boost::shared_ptr<VisionaryTData> pDataHandler;
-	double 							  volumearray[10], Xarray[10], Yarray[10], Zarray[10];
-	pcl::VoxelGrid<pcl::PointXYZ>	  sor;
+	int 							    counter;
+	std::vector<PointXYZ>			    pointCloud;
+	boost::shared_ptr<VisionaryTData>   pDataHandler;
+	double 							    volumearray[10], Xarray[10], Yarray[10], Zarray[10];
+	pcl::VoxelGrid<pcl::PointXYZ>	    sor;
+	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_concat	 (new pcl::PointCloud<pcl::PointXYZ>);
+	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_raw    	 (new pcl::PointCloud<pcl::PointXYZ>);
+	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_background (new pcl::PointCloud<pcl::PointXYZ>);
+	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_nobackground (new pcl::PointCloud<pcl::PointXYZ>);
+	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_downsampled  (new pcl::PointCloud<pcl::PointXYZ>);
 ////
 	// Generate Visionary instance
 	pDataHandler = boost::make_shared<VisionaryTData>();
@@ -280,15 +263,38 @@ void runStreamingDemo(char* ipAddress, unsigned short port)
 	control.stopAcquisition();
 	control.startAcquisition();
 	
+	counter = 0;
 	while (!kbhit())
 	{
 		if (dataStream.getNextFrame())
 		{
+			counter += 1;
 			// Convert data to a point cloud
 			pDataHandler->generatePointCloud(pointCloud);
-		}
-		// Calculate volume
-		calculatevolume(pointCloud); 
+		
+			cloud_raw->points.resize(pointCloud.size());
+	
+			for(size_t i=0; i<cloud_raw->points.size(); ++i)
+			{
+				cloud_raw->points[i].x = pointCloud[i].x;
+				cloud_raw->points[i].y = pointCloud[i].y;
+				cloud_raw->points[i].z = pointCloud[i].z;
+			}
+		
+			*cloud_concat = (*cloud_concat) + (*cloud_raw);
+			if (counter == 9)
+			{
+				// Downsample
+				sor.setInputCloud (cloud_raw);
+				sor.setLeafSize (0.01f, 0.01f, 0.01f);
+				sor.filter (*cloud_downsampled);
+				// Remove the background
+				cloud_nobackground = erasebackground(cloud_downsampled, cloud_background);
+				// Calculate volume
+				calculatevolume(cloud_nobackground);
+				counter = 0;
+			}
+		} 
 	}
 	control.stopAcquisition();
 	control.closeConnection();
