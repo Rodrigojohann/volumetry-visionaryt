@@ -118,7 +118,7 @@ pcl::PointCloud<pcl::PointXYZ>::Ptr filtercloud(pcl::PointCloud<pcl::PointXYZ>::
 	
 	pass_y.setInputCloud(outputcloud);
 	pass_y.setFilterFieldName("y");
-	pass_y.setFilterLimits(-0.4, 0.4);
+	pass_y.setFilterLimits(-0.4, 0.65);
 	pass_y.filter(*outputcloud);
 	
 	pass_z.setInputCloud(outputcloud);
