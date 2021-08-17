@@ -158,11 +158,12 @@ void calculatevolume(pcl::PointCloud<pcl::PointXYZ>::Ptr inputcloud)
 	pcl::PointXYZ 									  position_OBB;
 	Eigen::Matrix3f 								  rotational_matrix_OBB;
 ////
- 	cloud_filtered     = filtercloud(inputcloud);
-	cloud_size         = cloud_filtered->size();
+ 	cloud_filtered = filtercloud(inputcloud);
+	cloud_size     = cloud_filtered->size();
 	
 	if (cloud_size > 10)
 	{
+		pcl::io::savePCDFileASCII ("volumetry-background/cloud-filtered.pcd", *cloud_filtered);
 		pcl::getMinMax3D(*cloud_filtered, minPt, maxPt);
 		max_z = maxPt.z;
 		
@@ -216,7 +217,7 @@ void calculatevolume(pcl::PointCloud<pcl::PointXYZ>::Ptr inputcloud)
 					
 			printf("Box %d:  \n\n", number);
 			printf("x: %f cm \n", (max_point_OBB.x - min_point_OBB.x)*100);
-			printf("y: %f cn \n", (max_point_OBB.y - min_point_OBB.y)*100);
+			printf("y: %f cm \n", (max_point_OBB.y - min_point_OBB.y)*100);
 			printf("z: %f cm \n\n", (max_z - median_z)*100);
 		}
 		printf("----------\n");
