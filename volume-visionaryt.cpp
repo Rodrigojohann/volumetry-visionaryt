@@ -31,7 +31,6 @@
 #include <pcl/search/search.h>
 #include <pcl/search/kdtree.h>
 #include <pcl/features/normal_3d.h>
-#include <pcl/visualization/cloud_viewer.h>
 #include <pcl/segmentation/region_growing.h>
 #include <pcl/features/moment_of_inertia_estimation.h>
 #include <pcl/filters/voxel_grid.h>
@@ -303,5 +302,5 @@ void runStreamingDemo(char* ipAddress, unsigned short port)
 
 int main()
 {
-	runStreamingDemo((char*)"192.168.140.34", 2114);
+	runStreamingDemo((char*)"192.168.140.4", 2114);
 }
